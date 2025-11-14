@@ -1,0 +1,11 @@
+title: "Fractal Notes"
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: default
