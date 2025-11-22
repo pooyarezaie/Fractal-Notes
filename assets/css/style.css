@@ -53,6 +53,31 @@ body {
     color: #555555;
 }
 
+.site-footer {
+    border-top: 1px solid #e0e0e0;
+    margin-top: 32px;
+    background: #fafafa;
+}
+
+.site-footer-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 12px 16px 20px 16px;
+    font-size: 14px;
+    color: #555555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-footer-label {
+    font-weight: 500;
+}
+
+.social-link {
+    color: #1565c0;
+}
+
 main.container {
     max-width: 800px;
     margin: 24px auto 40px auto;
