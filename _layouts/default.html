@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    <link rel="icon" type="image/png" href="{{ "/assets/img/logo.png" | relative_url }}">
 
     <!-- تنظیمات MathJax -->
     <script>
@@ -22,6 +23,18 @@
   </head>
 
   <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="{{ "/" | relative_url }}" class="site-logo-link" aria-label="یادداشت‌های فرکتالی - صفحهٔ اصلی">
+          <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="یادداشت‌های فرکتالی" class="site-logo">
+        </a>
+        <div class="site-title-group">
+          <a href="{{ "/" | relative_url }}" class="site-title">یادداشت‌های فرکتالی</a>
+          <div class="site-subtitle">گام‌های کوچک در دل ساختارهای بزرگ ریاضی</div>
+        </div>
+      </div>
+    </header>
+
     <main class="container">
       {{ content }}
     </main>

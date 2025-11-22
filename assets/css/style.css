@@ -11,9 +11,51 @@ body {
     background: #fdfdfd;
 }
 
+/* Header / logo */
+.site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.site-header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-logo-link {
+    display: inline-flex;
+}
+
+.site-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.site-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.site-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: #111111;
+}
+
+.site-subtitle {
+    font-size: 14px;
+    color: #555555;
+}
+
 main.container {
     max-width: 800px;
-    margin: 40px auto;
+    margin: 24px auto 40px auto;
     padding: 0 16px 40px 16px;
 }
 
