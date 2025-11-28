@@ -9,6 +9,7 @@ body {
     margin: 0;
     padding: 0;
     background: #fdfdfd;
+    color: #111111;
 }
 
 /* Header / logo */
@@ -21,6 +22,13 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.site-brand {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -51,6 +59,22 @@ body {
 .site-subtitle {
     font-size: 14px;
     color: #555555;
+}
+
+.theme-toggle {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #111827;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.theme-toggle:hover {
+    background: #e5e7eb;
 }
 
 .site-footer {
@@ -118,4 +142,54 @@ pre {
     padding: 10px 12px;
     border-radius: 6px;
     overflow-x: auto;
+}
+.theme-toggle {
+}
+
+/* Dark mode: manual toggle via .theme-dark on <html> */
+html.theme-dark body {
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+html.theme-dark .site-header {
+    background: #020617;
+    border-bottom-color: #1f2937;
+}
+
+html.theme-dark .site-title {
+    color: #f9fafb;
+}
+
+html.theme-dark .site-subtitle {
+    color: #9ca3af;
+}
+
+html.theme-dark .site-footer {
+    background: #020617;
+    border-top-color: #1f2937;
+}
+
+html.theme-dark .site-footer-inner {
+    color: #9ca3af;
+}
+
+html.theme-dark a,
+html.theme-dark .social-link {
+    color: #60a5fa;
+}
+
+html.theme-dark a:hover,
+html.theme-dark .social-link:hover {
+    color: #93c5fd;
+}
+
+html.theme-dark pre {
+    background: #111827;
+}
+
+html.theme-dark .theme-toggle {
+    background: #111827;
+    color: #e5e7eb;
+    border-color: #374151;
 }

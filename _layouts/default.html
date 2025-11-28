@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
     <link rel="icon" type="image/png" href="{{ "/assets/img/logo.png" | relative_url }}">
 
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'dark') {
+            document.documentElement.classList.add('theme-dark');
+          }
+        } catch (e) {
+          // localStorage may be unavailable; fail silently
+        }
+      })();
+    </script>
+
     <!-- تنظیمات MathJax -->
     <script>
       window.MathJax = {
@@ -25,13 +38,18 @@
   <body>
     <header class="site-header">
       <div class="site-header-inner">
-        <a href="{{ "/" | relative_url }}" class="site-logo-link" aria-label="یادداشت‌های فرکتالی - صفحهٔ اصلی">
-          <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="یادداشت‌های فرکتالی" class="site-logo">
-        </a>
-        <div class="site-title-group">
-          <a href="{{ "/" | relative_url }}" class="site-title">یادداشت‌های فرکتالی</a>
-          <div class="site-subtitle">گام‌های کوچک در دل ساختارهای بزرگ ریاضی</div>
+        <div class="site-brand">
+          <a href="{{ "/" | relative_url }}" class="site-logo-link" aria-label="یادداشت‌های فرکتالی - صفحهٔ اصلی">
+            <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="یادداشت‌های فرکتالی" class="site-logo">
+          </a>
+          <div class="site-title-group">
+            <a href="{{ "/" | relative_url }}" class="site-title">یادداشت‌های فرکتالی</a>
+            <div class="site-subtitle">گام‌های کوچک در دل ساختارهای بزرگ ریاضی</div>
+          </div>
         </div>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="تغییر حالت تیره/روشن">
+          حالت تیره
+        </button>
       </div>
     </header>
 
@@ -47,5 +65,37 @@
         </a>
       </div>
     </footer>
+
+    <script>
+      (function() {
+        var toggle = document.getElementById('theme-toggle');
+        if (!toggle) return;
+
+        function isDark() {
+          return document.documentElement.classList.contains('theme-dark');
+        }
+
+        function updateLabel() {
+          toggle.textContent = isDark() ? 'حالت روشن' : 'حالت تیره';
+        }
+
+        function setTheme(dark) {
+          document.documentElement.classList.toggle('theme-dark', dark);
+          try {
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+          } catch (e) {
+            // ignore if localStorage unavailable
+          }
+          updateLabel();
+        }
+
+        toggle.addEventListener('click', function() {
+          setTheme(!isDark());
+        });
+
+        // Initialize label based on current class (set in head script, if any)
+        updateLabel();
+      })();
+    </script>
   </body>
 </html>
