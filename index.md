@@ -17,9 +17,9 @@ title: "یادداشت‌های فرکتالی"
 
 ## فصل‌ها
 
-- [اعداد مختلط](complex-numbers/)
+- [اعداد مختلط](complex-numbers/introduction)
 
 ### روش‌های حل مسئله
 
-- [تقارن؛ مسئله‌ی قرص‌ها](problem-solving/symmetry/)
+- [تقارن؛ مسئله‌ی قرص‌ها](problem-solving/symmetry/pill-problem)
 - [تقارن؛ یک مسئله‌ی دستگاه معادلات](problem-solving/symmetry/systems-of-equations)
