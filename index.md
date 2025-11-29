@@ -15,11 +15,10 @@ title: "یادداشت‌های فرکتالی"
 
 ---
 
-## فصل‌ها
+## برگه‌ها
 
-- [اعداد مختلط](complex-numbers/introduction)
-
-### روش‌های حل مسئله
-
+- [آشنایی کوتاه با اعداد مختلط](complex-numbers/introduction)
 - [تقارن؛ مسئله‌ی قرص‌ها](problem-solving/symmetry/pill-problem)
 - [تقارن؛ یک مسئله‌ی دستگاه معادلات](problem-solving/symmetry/systems-of-equations)
+- [تقارن؛ یک بازی منصفانه روی دایره](problem-solving/symmetry/circle-game)
+- [تغییر نگاه به‌ مسئله؛ مسئله‌ی مجموع دو تاس‌](problem-solving/recasting/dice-problem)
