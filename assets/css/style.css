@@ -10,6 +10,42 @@ body {
     padding: 0;
     background: #fdfdfd;
     color: #111111;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Image zoom / lightbox */
+main img {
+    cursor: zoom-in;
+}
+
+.image-lightbox-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    box-sizing: border-box;
+    padding: 16px;
+}
+
+.image-lightbox-img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
 }
 
 /* Header / logo */
@@ -25,9 +61,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    justify-content: space-between;
 }
-
 .site-brand {
     display: flex;
     align-items: center;
@@ -61,22 +95,6 @@ body {
     color: #555555;
 }
 
-.theme-toggle {
-    font-family: inherit;
-    font-size: 14px;
-    padding: 6px 12px;
-    border-radius: 999px;
-    border: 1px solid #cbd5e1;
-    background: #f8fafc;
-    color: #111827;
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.theme-toggle:hover {
-    background: #e5e7eb;
-}
-
 .site-footer {
     border-top: 1px solid #e0e0e0;
     margin-top: 32px;
@@ -102,10 +120,28 @@ body {
     color: #1565c0;
 }
 
+@media (max-width: 600px) {
+    .site-header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .site-brand {
+        justify-content: center;
+    }
+
+    .site-footer-inner {
+        flex-wrap: wrap;
+    }
+}
+
 main.container {
     max-width: 800px;
     margin: 24px auto 40px auto;
     padding: 0 16px 40px 16px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4 {
@@ -143,53 +179,16 @@ pre {
     border-radius: 6px;
     overflow-x: auto;
 }
-.theme-toggle {
+
+/* Tables: keep them responsive so they don't force horizontal scrolling */
+table {
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    width: 100%;
+    max-width: 100%;
 }
 
-/* Dark mode: manual toggle via .theme-dark on <html> */
-html.theme-dark body {
-    background: #0f172a;
-    color: #e5e7eb;
-}
-
-html.theme-dark .site-header {
-    background: #020617;
-    border-bottom-color: #1f2937;
-}
-
-html.theme-dark .site-title {
-    color: #f9fafb;
-}
-
-html.theme-dark .site-subtitle {
-    color: #9ca3af;
-}
-
-html.theme-dark .site-footer {
-    background: #020617;
-    border-top-color: #1f2937;
-}
-
-html.theme-dark .site-footer-inner {
-    color: #9ca3af;
-}
-
-html.theme-dark a,
-html.theme-dark .social-link {
-    color: #60a5fa;
-}
-
-html.theme-dark a:hover,
-html.theme-dark .social-link:hover {
-    color: #93c5fd;
-}
-
-html.theme-dark pre {
-    background: #111827;
-}
-
-html.theme-dark .theme-toggle {
-    background: #111827;
-    color: #e5e7eb;
-    border-color: #374151;
+table th,
+table td {
+    padding: 4px 6px;
 }
