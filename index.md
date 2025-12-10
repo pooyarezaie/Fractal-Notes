@@ -22,3 +22,7 @@ title: "یادداشت‌های فرکتالی"
 - [تقارن؛ یک مسئله‌ی دستگاه معادلات](problem-solving/symmetry/systems-of-equations)
 - [تقارن؛ یک بازی منصفانه روی دایره](problem-solving/symmetry/circle-game)
 - [تغییر نگاه به‌ مسئله؛ مسئله‌ی مجموع دو تاس‌](problem-solving/recasting/dice-problem)
+- [تغییر نگاه به‌ مسئله؛ مسئله‌ی ساختمان روشنایی](problem-solving/recasting/lighting-building-problem)
+
+
+
