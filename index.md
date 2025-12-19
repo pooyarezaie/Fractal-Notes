@@ -23,6 +23,6 @@ title: "یادداشت‌های فرکتالی"
 - [تقارن؛ یک بازی منصفانه روی دایره](problem-solving/symmetry/circle-game)
 - [تغییر نگاه به‌ مسئله؛ مسئله‌ی مجموع دو تاس‌](problem-solving/recasting/dice-problem)
 - [تغییر نگاه به‌ مسئله؛ مسئله‌ی ساختمان روشنایی](problem-solving/recasting/lighting-building-problem)
-
-
+- [استقرای ریاضی؛ مسئله‌ی مثلث صفر در گراف کامل با وزن‌های دودویی](induction/zero-triangle-graph-problem)
+- [استقرای ریاضی؛ مسئله‌ی برچسب‌گذاری یال‌های گراف کامل](induction/graph-edge-labeling-problem)
 
