@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fractalnotes.com/sitemap.xml
+
+
