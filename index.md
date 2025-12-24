@@ -28,3 +28,5 @@ image: /assets/img/logo.png
 - [استقرای ریاضی؛ مسئله‌ی مثلث صفر در گراف کامل با وزن‌های دودویی](induction/zero-triangle-graph-problem)
 - [استقرای ریاضی؛ مسئله‌ی برچسب‌گذاری یال‌های گراف کامل](induction/graph-edge-labeling-problem)
 - [لانه‌ی کبوتر؛ مسئله‌ی اعداد روی دایره](pigeonhole-principle/a-circle-sum-puzzle)
+- [تغییر نگاه به‌ مسئله؛ نسبت‌های مثلثاتی برای دوبرابر یک زاویه](trigonometry/double-angle-formula-cosine)
+
