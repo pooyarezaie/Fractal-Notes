@@ -29,4 +29,4 @@ image: /assets/img/logo.png
 - [استقرای ریاضی؛ مسئله‌ی برچسب‌گذاری یال‌های گراف کامل](induction/graph-edge-labeling-problem)
 - [لانه‌ی کبوتر؛ مسئله‌ی اعداد روی دایره](pigeonhole-principle/a-circle-sum-puzzle)
 - [تغییر نگاه به‌ مسئله؛ نسبت‌های مثلثاتی برای دوبرابر یک زاویه](trigonometry/double-angle-formula-cosine)
-
+- [جبر خطی؛ مقدمه‌](linear-algebra/introduction)
