@@ -559,4 +559,12 @@ $$
 
 ---
 
+### منبع
+
+این یادداشت برگرفته و ترجمه‌ای آزاد از نوشته‌های بلاگ  
+ **[Abstract Linear Algebra](https://abstractlinearalgebra.quora.com)**
+ 
+نوشتهٔ Alon Amit است.
+
+---
 
