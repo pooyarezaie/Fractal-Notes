@@ -31,4 +31,5 @@ image: /assets/img/logo.png
 - [لانه‌ی کبوتر؛ مسئله‌ی اعداد روی دایره](pigeonhole-principle/a-circle-sum-puzzle)
 - [تغییر نگاه به‌ مسئله؛ نسبت‌های مثلثاتی برای دوبرابر یک زاویه](trigonometry/double-angle-formula-cosine)
 - [جبر خطی؛ مقدمه‌](linear-algebra/introduction)
+- [جبر خطی؛ میدان‌ها](linear-algebra/fields-introduction)
 - [مسئله: مساحت مثلث‌ها به‌صورت جمع خطی](problems/triangle-area-linear-sum)
