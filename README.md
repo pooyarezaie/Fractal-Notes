@@ -39,6 +39,16 @@ bundle exec jekyll serve
 
 The site will be available at `http://localhost:4000`
 
+## Docker (Static Build)
+
+Build and run the site using Docker and Nginx:
+
+```bash
+docker compose up --build -d
+```
+
+The site will be available at `http://localhost:8080`
+
 
 ## Contributing
 
