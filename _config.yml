@@ -4,7 +4,7 @@ url: "https://fractalnotes.com"
 lang: "fa"
 locale: "fa_IR"
 logo: "/assets/img/logo.png"
-image: "/assets/img/logo.png"
+image: "/assets/img/logo_small.png"
 
 author: "Pooya Rezaie"
 
@@ -33,3 +33,4 @@ defaults:
       path: ""
     values:
       layout: default
+      image: "/assets/img/logo_small.png"
