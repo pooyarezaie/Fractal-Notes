@@ -19,17 +19,6 @@ image: /assets/img/logo.png
 
 ## برگه‌ها
 
-- [آشنایی کوتاه با اعداد مختلط](complex-numbers/introduction)
-- [تقارن؛ مسئله‌ی قرص‌ها](problem-solving/symmetry/pill-problem)
-- [تقارن؛ یک مسئله‌ی دستگاه معادلات](problem-solving/symmetry/systems-of-equations)
-- [تقارن؛ یک بازی منصفانه روی دایره](problem-solving/symmetry/circle-game)
-- [تغییر نگاه به‌ مسئله؛ مسئله‌ی مجموع دو تاس‌](problem-solving/recasting/dice-problem)
-- [تغییر نگاه به‌ مسئله؛ مسئله‌ی ساختمان روشنایی](problem-solving/recasting/lighting-building-problem)
-- [استقرای ریاضی؛ مسئله‌ی مثلث صفر در گراف کامل با وزن‌های دودویی](induction/zero-triangle-graph-problem)
-- [استقرای ریاضی؛ مسئله‌ی برچسب‌گذاری یال‌های گراف کامل](induction/graph-edge-labeling-problem)
-- [استقرای ریاضی؛ مسئله‌ی اعداد طبیعی روی صفحهٔ شطرنجی نامتناهی](induction/infinite-chessboard-divisibility)
-- [لانه‌ی کبوتر؛ مسئله‌ی اعداد روی دایره](pigeonhole-principle/a-circle-sum-puzzle)
-- [تغییر نگاه به‌ مسئله؛ نسبت‌های مثلثاتی برای دوبرابر یک زاویه](trigonometry/double-angle-formula-cosine)
-- [جبر خطی؛ مقدمه‌](linear-algebra/introduction)
-- [جبر خطی؛ میدان‌ها](linear-algebra/fields-introduction)
-- [مسئله: مساحت مثلث‌ها به‌صورت جمع خطی](problems/triangle-area-linear-sum)
+{% for item in site.data.site_index %}
+- [{{ item.title }}]({{ item.path }})
+{% endfor %}

@@ -36,6 +36,9 @@
   <body>
     <header class="site-header">
       <div class="site-header-inner">
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="باز کردن فهرست مطالب" aria-expanded="false" aria-controls="side-nav">
+          <span class="nav-toggle-icon"></span>
+        </button>
         <div class="site-brand">
           <a href="{{ "/" | relative_url }}" class="site-logo-link" aria-label="یادداشت‌های فرکتالی - صفحهٔ اصلی">
             <img src="{{ "/assets/img/logo.png" | relative_url }}" alt="یادداشت‌های فرکتالی" class="site-logo">
@@ -48,9 +51,23 @@
       </div>
     </header>
 
-    <main class="container">
-      {{ content }}
-    </main>
+    <div class="site-body">
+      <aside class="side-nav" id="side-nav" aria-label="فهرست مطالب">
+        <button type="button" class="side-nav-close" id="side-nav-close" aria-label="بستن فهرست">×</button>
+        <nav class="side-nav-inner">
+          <span class="side-nav-title">برگه‌ها</span>
+          <ul class="side-nav-list">
+            {% for item in site.data.site_index %}
+            <li><a href="{{ item.path | relative_url }}"{% if page.url contains item.path %} class="active"{% endif %}>{{ item.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </aside>
+      <div class="side-nav-overlay" id="side-nav-overlay" aria-hidden="true"></div>
+      <main class="container">
+        {{ content }}
+      </main>
+    </div>
 
     <footer class="site-footer">
       <div class="site-footer-inner">
@@ -108,6 +125,33 @@
             closeOverlay();
           }
         });
+      })();
+
+      (function() {
+        var toggle = document.getElementById('nav-toggle');
+        var sideNav = document.getElementById('side-nav');
+        var closeBtn = document.getElementById('side-nav-close');
+        var overlay = document.getElementById('side-nav-overlay');
+
+        function openNav() {
+          if (!sideNav) return;
+          sideNav.classList.add('side-nav-open');
+          if (overlay) overlay.setAttribute('aria-hidden', 'false');
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+          document.body.classList.add('side-nav-active');
+        }
+
+        function closeNav() {
+          if (!sideNav) return;
+          sideNav.classList.remove('side-nav-open');
+          if (overlay) overlay.setAttribute('aria-hidden', 'true');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('side-nav-active');
+        }
+
+        if (toggle) toggle.addEventListener('click', openNav);
+        if (closeBtn) closeBtn.addEventListener('click', closeNav);
+        if (overlay) overlay.addEventListener('click', closeNav);
       })();
     </script>
   </body>
