@@ -132,7 +132,7 @@ main img {
 .side-nav {
     flex-shrink: 0;
     width: 260px;
-    padding: 24px 16px 24px 0;
+    padding: 20px 14px 20px 14px;
     position: sticky;
     top: 0;
     max-height: 100vh;
@@ -150,7 +150,7 @@ main img {
     font-weight: 600;
     font-size: 14px;
     color: #333;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .side-nav-list {
@@ -168,7 +168,7 @@ main img {
     display: block;
     padding: 6px 0;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.55;
     color: #444;
 }
 
