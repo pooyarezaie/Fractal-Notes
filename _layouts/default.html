@@ -31,6 +31,42 @@
     <script id="MathJax-script" async
             src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js">
     </script>
+    <script>
+      (function() {
+        /* Overflow container for long content: wrap wide HTML tables in .scroll-wrapper. Display math uses .mjx-container[display="true"] (CSS only). */
+        function wrapScrollable(el, className) {
+          if (el.closest('.scroll-wrapper')) return;
+          var wrapper = document.createElement('div');
+          wrapper.className = className || 'scroll-wrapper';
+          el.parentNode.insertBefore(wrapper, el);
+          wrapper.appendChild(el);
+        }
+        function wrapTables() {
+          var main = document.querySelector('main');
+          if (!main) return;
+          var mainWidth = main.getBoundingClientRect().width;
+          main.querySelectorAll('table').forEach(function(el) {
+            if (el.scrollWidth > mainWidth) wrapScrollable(el, 'scroll-wrapper');
+          });
+        }
+        function scrollMathToStart() {
+          document.querySelectorAll('mjx-container[display="true"], .mjx-container[display="true"]').forEach(function(el) {
+            el.scrollLeft = 0;
+          });
+        }
+        function init() {
+          wrapTables();
+          scrollMathToStart();
+          setTimeout(scrollMathToStart, 300);
+          setTimeout(scrollMathToStart, 1200);
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
   </head>
 
   <body>

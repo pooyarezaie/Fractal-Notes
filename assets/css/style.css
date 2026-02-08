@@ -309,6 +309,7 @@ main.container {
     padding: 0 16px 40px 16px;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -347,15 +348,101 @@ pre {
     overflow-x: auto;
 }
 
-/* Tables: keep them responsive so they don't force horizontal scrolling */
+/* Tables */
 table {
     border-collapse: collapse;
-    margin: 1.5em 0;
+    margin: 0;
     width: 100%;
-    max-width: 100%;
 }
 
 table th,
 table td {
     padding: 4px 6px;
+}
+
+/* Scrollable display math like Wikipedia – MathJax v3 (CHTML or SVG). No JS needed. */
+mjx-container[display="true"],
+.mjx-container[display="true"] {
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    background: #fdfdfd;
+    -webkit-overflow-scrolling: touch;
+    direction: ltr;
+    text-align: left;
+}
+
+/* CHTML: prevent formula from shrinking so horizontal scroll works */
+mjx-container[display="true"] > .mjx-chtml,
+.mjx-container[display="true"] > .mjx-chtml {
+    min-width: max-content;
+}
+
+/* SVG: prevent "fit" scaling so scroll is used instead */
+mjx-container[display="true"] > svg,
+.mjx-container[display="true"] > svg {
+    max-width: none !important;
+}
+
+/* Overflow container for long content (horizontal scroll): scrollbox with overflow-x; only this box scrolls, not the page */
+main .scroll-wrapper {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pinch-zoom;
+    padding: 10px 12px;
+    margin: 1em 0;
+    border-radius: 6px;
+    background: #f7f7f7;
+    border: 1px solid #e8e8e8;
+    direction: ltr;
+    text-align: left;
+    /* Prevent main's word-wrap from wrapping formula/table; let content overflow and scroll */
+    overflow-wrap: normal;
+    word-wrap: normal;
+}
+
+/* No wrapping anywhere inside the box so content overflows and scrolls */
+main .scroll-wrapper * {
+    overflow-wrap: normal;
+    word-wrap: normal;
+}
+
+/* Let content inside wrapper keep its natural width so the box can scroll horizontally */
+main .scroll-wrapper > * {
+    min-width: min-content;
+}
+
+/* MathJax output is often a span; needs block/inline-block so min-width works and box scrolls */
+main .scroll-wrapper > .mjx-chtml,
+main .scroll-wrapper > .MathJax_Display {
+    display: inline-block;
+}
+
+/* Tables inside wrapper */
+main .scroll-wrapper table {
+    margin: 0;
+    min-width: max-content;
+}
+
+/* Fallback: if no JS wrapper, any block containing mjx-chtml gets scroll (e.g. Kramdown .math) */
+main .math {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 12px;
+    margin: 1em 0;
+    border-radius: 6px;
+    background: #f7f7f7;
+    border: 1px solid #e8e8e8;
+    direction: ltr;
 }
