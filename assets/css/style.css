@@ -287,13 +287,43 @@ main img {
 
 @media (max-width: 600px) {
     .site-header-inner {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: row;
+        align-items: center;
         gap: 8px;
+        padding: 10px 12px;
+    }
+
+    /* RTL: menu on the right, logo/title immediately next to it (Wikipedia-style) */
+    .nav-toggle {
+        margin-left: 0;
+        margin-inline-start: 0;
     }
 
     .site-brand {
-        justify-content: center;
+        justify-content: flex-start;
+        min-width: 0;
+        flex: 1;
+        min-width: 0;
+    }
+
+    /* Compact logo, title, subtitle on mobile (best practice) */
+    .site-logo {
+        width: 28px;
+        height: 28px;
+    }
+
+    .site-title-group {
+        gap: 0;
+    }
+
+    .site-title {
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .site-subtitle {
+        font-size: 11px;
+        line-height: 1.35;
     }
 
     .site-footer-inner {
