@@ -27,3 +27,5 @@
   path: "linear-algebra/fields-introduction"
 - title: "مسئله: مساحت مثلث‌ها به‌صورت جمع خطی"
   path: "problems/triangle-area-linear-sum"
+- title: "مسئله: یک روش برای محاسبه‌ی مجموعِ توان‌ها"
+  path: "problems/sum_of_power_1"
