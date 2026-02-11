@@ -19,21 +19,13 @@
     
     <meta name="apple-mobile-web-app-title" content="یادداشت‌های فرکتالی">
 
-
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']]
-        }
-      };
-    </script>
-    <script id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js">
-    </script>
+    <!-- KaTeX: faster than MathJax, less first-load jank -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+            onload="renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}] }); if (window.initScrollAndWrap) window.initScrollAndWrap();"></script>
     <script>
       (function() {
-        /* Overflow container for long content: wrap wide HTML tables in .scroll-wrapper. Display math uses .mjx-container[display="true"] (CSS only). */
         function wrapScrollable(el, className) {
           if (el.closest('.scroll-wrapper')) return;
           var wrapper = document.createElement('div');
@@ -50,8 +42,8 @@
           });
         }
         function scrollMathToStart() {
-          document.querySelectorAll('mjx-container[display="true"], .mjx-container[display="true"]').forEach(function(el) {
-            el.scrollLeft = 0;
+          document.querySelectorAll('.katex-display').forEach(function(el) {
+            if (el.scrollWidth > el.clientWidth) el.scrollLeft = 0;
           });
         }
         function init() {
@@ -60,11 +52,7 @@
           setTimeout(scrollMathToStart, 300);
           setTimeout(scrollMathToStart, 1200);
         }
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', init);
-        } else {
-          init();
-        }
+        window.initScrollAndWrap = init;
       })();
     </script>
   </head>

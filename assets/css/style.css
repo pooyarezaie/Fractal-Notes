@@ -390,9 +390,15 @@ table td {
     padding: 4px 6px;
 }
 
-/* Scrollable display math like Wikipedia – MathJax v3 (CHTML or SVG). No JS needed. */
-mjx-container[display="true"],
-.mjx-container[display="true"] {
+/* KaTeX: always LTR and isolate from RTL so superscripts/indices (e.g. n^k) don't flip */
+.katex,
+.katex-display {
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+/* Scrollable display math – KaTeX (faster than MathJax, less first-load jank) */
+.katex-display {
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
@@ -403,20 +409,11 @@ mjx-container[display="true"],
     border-radius: 0.5rem;
     background: #fdfdfd;
     -webkit-overflow-scrolling: touch;
-    direction: ltr;
     text-align: left;
 }
 
-/* CHTML: prevent formula from shrinking so horizontal scroll works */
-mjx-container[display="true"] > .mjx-chtml,
-.mjx-container[display="true"] > .mjx-chtml {
+.katex-display > .katex {
     min-width: max-content;
-}
-
-/* SVG: prevent "fit" scaling so scroll is used instead */
-mjx-container[display="true"] > svg,
-.mjx-container[display="true"] > svg {
-    max-width: none !important;
 }
 
 /* Overflow container for long content (horizontal scroll): scrollbox with overflow-x; only this box scrolls, not the page */
@@ -452,9 +449,9 @@ main .scroll-wrapper > * {
     min-width: min-content;
 }
 
-/* MathJax output is often a span; needs block/inline-block so min-width works and box scrolls */
-main .scroll-wrapper > .mjx-chtml,
-main .scroll-wrapper > .MathJax_Display {
+/* KaTeX output in scroll-wrapper: block/inline-block so min-width works and box scrolls */
+main .scroll-wrapper > .katex,
+main .scroll-wrapper > .katex-display {
     display: inline-block;
 }
 
@@ -464,7 +461,7 @@ main .scroll-wrapper table {
     min-width: max-content;
 }
 
-/* Fallback: if no JS wrapper, any block containing mjx-chtml gets scroll (e.g. Kramdown .math) */
+/* Fallback: Kramdown .math block (raw LaTeX before KaTeX runs) */
 main .math {
     max-width: 100%;
     overflow-x: auto;

@@ -7,12 +7,10 @@
 ## Key Technical Details
 
 ### Jekyll Configuration
-- **Markdown Engine**: Kramdown with MathJax support
-- **Math Rendering**: MathJax 3 (via CDN)
+- **Markdown Engine**: Kramdown with math support (`math_engine: mathjax` outputs `\(...\)` / `\[...\]`)
+- **Math Rendering**: KaTeX (via CDN; faster than MathJax, less first-load jank)
 - **Layout**: Single default layout (`_layouts/default.html`)
-- **Math Delimiters**: 
-  - Inline: `$...$`
-  - Display: `$$...$$`
+- **Math in Markdown**: Inline `$...$`, display `$$...$$` (Kramdown converts to `\(...\)` / `\[...\]` for KaTeX)
 
 ### Styling
 - **Font**: Vazirmatn (Persian font from Google Fonts)
