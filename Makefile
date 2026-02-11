@@ -1,6 +1,9 @@
 SHELL := /bin/sh
 
-.PHONY: help install install-node install-deps dev build prerender build-prerender serve docker-build docker-up docker-down docker-logs
+SITE_URL ?= https://fractalnotes.com
+CHECK_PAGE ?= /complex-numbers/introduction
+
+.PHONY: help install install-node install-deps dev build prerender build-prerender serve check-prerender docker-build docker-up docker-down docker-logs
 
 help:
 	@echo "Dependencies:"
@@ -14,6 +17,7 @@ help:
 	@echo "  make prerender     # Prerender _site (KaTeX + JS); run after build"
 	@echo "  make build-prerender  # Build then prerender (full pipeline)"
 	@echo "  make serve         # Serve _site at http://localhost:4000 (test prerendered)"
+	@echo "  make check-prerender  # Check if live site serves prerendered HTML (curl + grep)"
 	@echo ""
 	@echo "Docker:"
 	@echo "  make docker-build  # Build Docker image"
@@ -43,6 +47,15 @@ build-prerender: build prerender
 
 serve:
 	npm run serve
+
+check-prerender:
+	@echo "Checking $(SITE_URL)$(CHECK_PAGE) ..."
+	@count=$$(curl -sL "$(SITE_URL)$(CHECK_PAGE)" | grep -c "katex" || true); \
+	if [ "$$count" -gt 10 ]; then \
+		echo "✓ Prerendered: HTML contains $$count 'katex' occurrences (math is in the page source)."; \
+	else \
+		echo "✗ Not prerendered: few or no 'katex' in HTML ($$count). Source may be 'Deploy from a branch' or prerender step skipped."; \
+	fi
 
 docker-build:
 	docker compose build

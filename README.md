@@ -49,6 +49,22 @@ The repo uses **GitHub Actions** to build and deploy:
 
 **Required:** In the repo **Settings → Pages**, set **Source** to **GitHub Actions**.
 
+### Switching between prerendered and default mode
+
+| Mode | Settings → Pages → Source | What you get |
+|------|---------------------------|--------------|
+| **Prerendered** | **GitHub Actions** | Build runs Jekyll + prerender; deployed HTML already has KaTeX and JS applied. No first-load delay. |
+| **Default (Jekyll only)** | **Deploy from a branch** → choose branch (e.g. `main`) and folder (e.g. `/ (root)`) | GitHub builds the site with Jekyll only (no prerender). KaTeX runs in the browser after load; you may see a short delay. |
+
+To switch: go to the repo **Settings → Pages**, then change **Source** to either **GitHub Actions** (prerendered) or **Deploy from a branch** (default). After saving, the next deploy will use the chosen mode.
+
+To check if the live site is prerendered, run:
+
+```bash
+make check-prerender
+# Or with a custom URL: make check-prerender SITE_URL=https://username.github.io/Fractal-Notes
+```
+
 To run the full pipeline locally (build + prerender):
 
 ```bash
