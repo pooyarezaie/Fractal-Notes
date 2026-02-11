@@ -1,0 +1,14 @@
+{
+  "name": "fractal-notes-prerender",
+  "private": true,
+  "description": "Prerender Jekyll _site with Playwright (KaTeX + JS) for instant first paint.",
+  "scripts": {
+    "prerender": "node scripts/prerender.js",
+    "serve": "npx serve _site -l 4000"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0",
+    "serve": "^14.2.4",
+    "serve-handler": "^6.1.5"
+  }
+}

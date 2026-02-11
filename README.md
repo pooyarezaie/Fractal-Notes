@@ -39,6 +39,26 @@ bundle exec jekyll serve
 
 The site will be available at `http://localhost:4000`
 
+## Build and deploy (GitHub Pages)
+
+The repo uses **GitHub Actions** to build and deploy:
+
+1. **Jekyll** builds the site into `_site`.
+2. A **prerender** step runs a headless browser (Playwright) on each page so KaTeX and inline JS (tables, nav, lightbox) are already applied in the HTML—no first-load delay.
+3. The resulting `_site` is deployed to GitHub Pages.
+
+**Required:** In the repo **Settings → Pages**, set **Source** to **GitHub Actions**.
+
+To run the full pipeline locally (build + prerender):
+
+```bash
+bundle exec jekyll build
+npm install
+npx playwright install --with-deps chromium
+npm run prerender
+# _site now contains prerendered HTML
+```
+
 ## Docker (Static Build)
 
 Build and run the site using Docker and Nginx:
