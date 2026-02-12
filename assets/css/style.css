@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+/* Vazirmatn – self-hosted (OFL-1.1, https://github.com/rastikerdar/vazirmatn) */
+@font-face {
+    font-family: "Vazirmatn";
+    src: url("../fonts/Vazirmatn-wght.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
 
 body {
     font-family: "Vazirmatn", sans-serif;
