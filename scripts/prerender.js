@@ -2,13 +2,13 @@
 /**
  * Prerender _site with a headless browser so KaTeX and inline JS are already
  * applied in the final HTML. Run after `jekyll build`. Overwrites HTML files in place.
+ * Only pages listed in scripts/prerender-whitelist.json are prerendered.
  *
  * Usage: SITE_DIR=_site PORT=3000 node scripts/prerender.js
  */
 
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
 const { createServer } = require('http');
 const handler = require('serve-handler');
 
@@ -16,22 +16,49 @@ const SITE_DIR = path.resolve(process.cwd(), process.env.SITE_DIR || '_site');
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const BASE = `http://127.0.0.1:${PORT}`;
 
-function collectHtmlFiles(dir, base = '') {
-  const entries = fs.readdirSync(path.join(dir, base), { withFileTypes: true });
+const WHITELIST_PATH = path.resolve(__dirname, 'prerender-whitelist.json');
+
+function loadWhitelist() {
+  const raw = fs.readFileSync(WHITELIST_PATH, 'utf8');
+  const list = JSON.parse(raw);
+  if (!Array.isArray(list)) throw new Error('prerender-whitelist.json must be a JSON array of path strings');
+  return list.map((p) => (typeof p === 'string' ? p.trim() : String(p)));
+}
+
+/** Collect all HTML pages under dir (relative to SITE_DIR), return { filePath, urlPath }[]. */
+function collectHtmlUnder(dirRel) {
+  const dir = path.join(SITE_DIR, dirRel);
+  if (!fs.existsSync(dir) || !fs.statSync(dir).isDirectory()) return [];
   const out = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const e of entries) {
-    const rel = base ? `${base}/${e.name}` : e.name;
-    const full = path.join(dir, rel);
+    const rel = dirRel ? `${dirRel}/${e.name}` : e.name;
+    const full = path.join(SITE_DIR, rel);
     if (e.isDirectory()) {
-      out.push(...collectHtmlFiles(dir, rel));
+      out.push(...collectHtmlUnder(rel));
     } else if (e.isFile() && e.name.endsWith('.html')) {
       const urlPath = e.name === 'index.html'
-        ? (base ? `/${base}/` : '/')
+        ? (dirRel ? `/${dirRel}/` : '/')
         : `/${rel}`;
-      out.push({ filePath: path.join(SITE_DIR, rel), urlPath });
+      out.push({ filePath: full, urlPath });
     }
   }
   return out;
+}
+
+/** Expand whitelist (directories + "" for root) into { filePath, urlPath }[]. */
+function pagesFromWhitelist(whitelist) {
+  const pages = [];
+  for (const p of whitelist) {
+    const norm = p.replace(/^\/|\/$/g, '');
+    if (norm === '') {
+      const indexPath = path.join(SITE_DIR, 'index.html');
+      if (fs.existsSync(indexPath)) pages.push({ filePath: indexPath, urlPath: '/' });
+    } else {
+      pages.push(...collectHtmlUnder(norm));
+    }
+  }
+  return pages;
 }
 
 async function main() {
@@ -40,8 +67,9 @@ async function main() {
     process.exit(1);
   }
 
-  const pages = collectHtmlFiles(SITE_DIR);
-  console.log('Prerendering', pages.length, 'page(s)...');
+  const whitelist = loadWhitelist();
+  const pages = pagesFromWhitelist(whitelist);
+  console.log('Prerendering', pages.length, 'page(s) (whitelist)...');
 
   const server = createServer((req, res) => {
     return handler(req, res, { public: SITE_DIR, cleanUrls: false });

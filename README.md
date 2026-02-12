@@ -75,6 +75,8 @@ npm run prerender
 # _site now contains prerendered HTML
 ```
 
+Only pages under the **directories** listed in **`scripts/prerender-whitelist.json`** are prerendered. Use `""` for the site root (homepage only) and directory paths like `"complex-numbers"` or `"problem-solving/symmetry"` to include every HTML page under that path. New markdown files under a whitelisted directory are prerendered automatically; add a new directory to the list to include a new section.
+
 ## Docker (Static Build)
 
 Build and run the site using Docker and Nginx:
