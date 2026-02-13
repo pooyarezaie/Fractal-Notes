@@ -1,6 +1,7 @@
 title: "یادداشت‌های فرکتالی"
 description: "یادداشت‌های کوتاه، شهودی و گاهی عمیق دربارهٔ ریاضی به زبان فارسی؛ از اعداد مختلط و استقرا تا اصل لانهٔ کبوتر، تقارن، مثلثات و ایده‌های حل مسئله."
 url: "https://fractalnotes.com"
+baseurl: ""
 repository: pooyarezaie/Fractal-Notes
 lang: "fa"
 locale: "fa_IR"
