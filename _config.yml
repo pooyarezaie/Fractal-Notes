@@ -34,3 +34,10 @@ defaults:
     values:
       layout: default
       image: "/assets/img/logo_small.png"
+  # Exclude internal project notes from sitemap and search
+  -
+    scope:
+      path: "PROJECT_NOTES.md"
+    values:
+      sitemap: false
+      robots: noindex, nofollow

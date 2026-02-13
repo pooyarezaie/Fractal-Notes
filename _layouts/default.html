@@ -3,8 +3,40 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a2e">
 
     {%- seo -%}
+    {%- if page.sitemap == false or page.robots -%}
+    <meta name="robots" content="{{ page.robots | default: 'noindex, nofollow' }}">
+    {%- endif -%}
+
+    {%- assign page_url_abs = site.url | append: page.url -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "{{ site.title | escape }}", "item": "{{ site.url }}/" }
+            {%- if page.url != '/' and page.url != '' -%}
+            ,{ "@type": "ListItem", "position": 2, "name": "{{ page.title | default: page.name | escape }}", "item": "{{ page_url_abs }}" }
+            {%- endif -%}
+          ]
+        }
+        {%- if page.url != '/' and page.url != '' and page.title -%}
+        ,{
+          "@type": "Article",
+          "headline": {{ page.title | jsonify }},
+          "description": {{ page.description | default: site.description | jsonify }},
+          "url": "{{ page_url_abs }}",
+          "author": { "@type": "Person", "name": {{ site.author | jsonify }} },
+          "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "logo": { "@type": "ImageObject", "url": "{{ site.url }}{{ site.logo }}" } }
+        }
+        {%- endif -%}
+      ]
+    }
+    </script>
 
     <!-- Preload main font for faster first paint; SW caches it for repeat visits -->
     <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -92,7 +124,13 @@
       </aside>
       <div class="side-nav-overlay" id="side-nav-overlay" aria-hidden="true"></div>
       <main class="container">
+        {%- if page.url != '/' and page.url != '' and page.title -%}
+        <article itemscope itemtype="https://schema.org/Article">
+          {{ content }}
+        </article>
+        {%- else -%}
         {{ content }}
+        {%- endif -%}
       </main>
     </div>
 
