@@ -110,7 +110,7 @@ $1,2,\dots,n^2$
 <p align="center">
   <img src="/assets/img/chessboard_divisibility _induction.png"
        alt="گسترش یک جدول به ضلع ۵"
-       width="260">
+       width="260" height="261">
 </p>
 
 در این بخش فقط خانه‌های غیرگوشهٔ نوار را پر می‌کنیم.

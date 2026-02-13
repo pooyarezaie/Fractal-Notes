@@ -26,7 +26,7 @@ z = (x_0, y_0)
 $$
 
 <p align="center">
-  <img src="/assets/img/complex_z_vector_black.png" alt="نمایش z به صورت (x0, y_0)" width="320">
+  <img src="/assets/img/complex_z_vector_black.png" alt="نمایش z به صورت (x0, y_0)" width="320" height="320">
 </p>
 
 در این برداشت، اعداد حقیقی نیز به‌طور طبیعی در میان اعداد مختلط جای می‌گیرند؛  
@@ -56,7 +56,7 @@ $$
 بردار دوم را از سرِ بردارِ اول آغاز می‌کنیم و نقطهٔ پایان، حاصل جمع است.
 
 <p align="center">
-  <img src="/assets/img/complex_addition_triangle_black.png" alt="نمایش برداری جمع دو عدد مختلط" width="320">
+  <img src="/assets/img/complex_addition_triangle_black.png" alt="نمایش برداری جمع دو عدد مختلط" width="320" height="320">
 </p>
 
 ---
@@ -85,8 +85,8 @@ $$
 این تعریف، هرچند در نگاه اول ساده نیست، اما با ضرب اعداد حقیقی کاملاً سازگار است و آن مفهوم را به‌طبیعتی‌ترین شکل به سراسر صفحه گسترش می‌دهد.
 
 <p align="center">
-  <img src="/assets/img/complex_multiplication_polar_black.png" 
-       alt="نمایش هندسی ضرب مختلط: جمع زاویه‌ها و ضرب طول‌ها" width="320">
+  <img src="/assets/img/complex_multiplication_polar_black.png"
+       alt="نمایش هندسی ضرب مختلط: جمع زاویه‌ها و ضرب طول‌ها" width="320" height="320">
 </p>
 
 
@@ -129,7 +129,7 @@ $$
 <p align="center">
   <img src="/assets/img/complex_i_with_angle_black.png"
        alt="نمایش بردار i = (0,1)"
-       width="260">
+       width="260" height="239">
 </p>
 
 تا این‌جا اعداد مختلط را به‌صورت نقطه یا بردار در صفحه دیدیم.  در این دستگاه، یکی از بنیادی‌ترین بردارها، بردار

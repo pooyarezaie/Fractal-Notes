@@ -69,7 +69,7 @@ $$
 <p align="center">
   <img src="/assets/img/sum_square_grid_mixed.png"
        alt="شکست مربع با ضلع بزرگ به مربع‌ها و مستطیل‌ها با ضلع کوچک"
-       width="520">
+       width="520" height="520">
 </p>
 
 
@@ -122,7 +122,7 @@ $$
 <p align="center">
   <img src="/assets/img/cubic_layer_build_layers.png"
        alt="مشخص کردن لایه‌ها روی مربع بزرگ"
-       width="520">
+       width="520" height="520">
 </p>
 
 

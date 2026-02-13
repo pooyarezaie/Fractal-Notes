@@ -48,7 +48,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/inscribed_central_angle_diagram_v1.png"
        alt="زاویه‌ی مرکزی و محاطی در یک دایره"
-       width="300">
+       width="300" height="300">
 </p>
 
 ---
@@ -61,7 +61,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/inscribed_central_angle_diagram_v2.png"
        alt="زاویه‌ی مرکزی و محاطی در یک دایره با ضلع مشترک"
-       width="300">
+       width="300" height="300">
 </p>
 
 
@@ -76,7 +76,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/inscribed_central_angle_diagram_v3.png"
        alt="زاویه‌ی مرکزی و محاطی در یک دایره با ضلع مشترک"
-       width="300">
+       width="300" height="300">
 </p>
 
 ---
@@ -142,7 +142,7 @@ $$
 <p align="center">
   <img src="/assets/img/inscribed_central_angle_diagram_v4.png"
        alt="زاویه‌ی مرکزی و محاطی در یک دایره با ضلع مشترک"
-       width="300">
+       width="300" height="300">
 </p>
 
 ---
@@ -164,7 +164,7 @@ $$
 <p align="center">
   <img src="/assets/img/inscribed_central_angle_diagram_v5.png"
        alt="زاویه‌ی مرکزی و محاطی در یک دایره با ضلع مشترک"
-       width="300">
+       width="300" height="300">
 </p>
 
 

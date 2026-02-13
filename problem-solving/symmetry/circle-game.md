@@ -37,7 +37,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/central_symmetry_circle.png"
        alt="تقارن مرکزی نقاط P و P' نسبت به مرکز دایره O"
-       width="260">
+       width="260" height="260">
 </p>
 
 
@@ -47,7 +47,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/symmetric_coins.png"
        alt="نمایش دو سکهٔ متقارن نسبت به مرکز میز"
-       width="260">
+       width="260" height="260">
 </p>
 
 

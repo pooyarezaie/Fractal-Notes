@@ -34,7 +34,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/bipartite_keys_lights.png"
        alt="گراف دوبخشیِ کلیدها و چراغ‌ها"
-       width="360">
+       width="360" height="243">
 </p>
 
 
@@ -110,7 +110,7 @@ image: "/assets/img/logo.png"
 <p align="center">
   <img src="/assets/img/step1_bipartite_induction.png"
        alt="گام اول استقرا: حذف کلید K و چراغ‌های متصل به آن"
-       width="420">
+       width="420" height="245">
 </p>
 
 
@@ -287,7 +287,7 @@ $$
 <p align="center">
   <img src="/assets/img/a-light-with-connected-keys.png"
        alt="یک چراغ و t کلید متصل به آن"
-       width="300">
+       width="300" height="300">
 </p>
 
 - پس $m - t$ کلید وجود دارند که هیچ تأثیری بر این چراغ ندارند؛  

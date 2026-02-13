@@ -81,7 +81,7 @@ $$
 حالت ممکن ایجاد می‌کنند. برای روشن‌تر شدن موضوع، کافی است جدول ۶×۶ حالت‌ها را رسم کنیم؛ در هر خانه مجموع دو عدد نوشته شده است:
 
 <p align="center">
-  <img src="/assets/img/dice_sum_grid_labeled.png" width="500">
+  <img src="/assets/img/dice_sum_grid_labeled.png" alt="جدول مجموع دو تاس با برچسب" width="500" height="483">
 </p>
 
 در این جدول:
@@ -501,13 +501,13 @@ $$
 <p align="center">
   <img src="/assets/img/sicherman_dice.png"
        alt="نمایش زوج تاس‌های Sicherman"
-       width="320">
+       width="320" height="166">
 </p>
 
 <p align="center">
   <img src="/assets/img/sicherman_sum_grid.png"
        alt="جدول مجموع دو تاس Sicherman"
-       width="500">
+       width="500" height="483">
 </p>
 
 

@@ -348,7 +348,7 @@ $$
 <p align="center">
   <img src="/assets/img/neighbors_partition_m1_m2_mn.png"
        alt="طبقه‌بندی همسایه‌های رأس v بر حسب برچسب یال‌ها: m1، m2، ...، mn"
-       width="780">
+       width="780" height="520">
 </p>
 
 
