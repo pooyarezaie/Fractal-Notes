@@ -6,6 +6,9 @@
 
     {%- seo -%}
 
+    <!-- Preload main font for faster first paint; SW caches it for repeat visits -->
+    <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
 
     <link rel="icon" href="/favicon.ico">
@@ -176,6 +179,11 @@
         if (toggle) toggle.addEventListener('click', openNav);
         if (closeBtn) closeBtn.addEventListener('click', closeNav);
         if (overlay) overlay.addEventListener('click', closeNav);
+      })();
+
+      (function() {
+        if (!('serviceWorker' in navigator) || location.protocol !== 'https:' && location.hostname !== 'localhost') return;
+        navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}', { scope: '{{ "/" | relative_url }}' }).catch(function() {});
       })();
     </script>
   </body>
