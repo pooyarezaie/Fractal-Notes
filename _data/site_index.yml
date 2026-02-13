@@ -31,3 +31,5 @@
   path: "problems/sum_of_power_1"
 - title: "مسئله: چرا جمعِ مکعب‌ها برابر مربعِ جمعِ عددهای طبیعی است؟"
   path: "problems/sum_of_power_2"
+- title: "مسئله: مجموع توان‌ها با یک نگاه ترکیبیاتی"
+  path: "problems/sum_of_power_3"
