@@ -16,8 +16,10 @@ The notes are not meant to replace textbooks, but rather serve as **small sheets
 
 ### Prerequisites
 
-- Ruby (with Bundler)
-- Git
+- **Ruby** (with Bundler) — required for Jekyll
+- **Node.js** (with npm) — required for the prerender step (local pipeline and Docker build)
+- **Git**
+- **Docker** (optional) — for building and running the prerendered site in a container
 
 ### Installation
 
@@ -29,15 +31,15 @@ cd Fractal-Notes
 
 2. Install dependencies:
 ```bash
-bundle install
+make install        # Ruby gems only
+make install-deps   # Ruby + Node (needed for prerender)
 ```
 
 3. Build and serve locally:
 ```bash
-bundle exec jekyll serve
+make dev            # Jekyll with livereload at http://localhost:4000
+# Or: bundle exec jekyll serve
 ```
-
-The site will be available at `http://localhost:4000`
 
 ## Build and deploy (GitHub Pages)
 
@@ -68,25 +70,35 @@ make check-prerender
 To run the full pipeline locally (build + prerender):
 
 ```bash
-bundle exec jekyll build
-npm install
-npx playwright install --with-deps chromium
-npm run prerender
+make build-prerender
+# Or step by step: make build && make prerender (after make install-node)
 # _site now contains prerendered HTML
 ```
 
 Only pages under the **directories** listed in **`scripts/prerender-whitelist.json`** are prerendered. Use `""` for the site root (homepage only) and directory paths like `"complex-numbers"` or `"problem-solving/symmetry"` to include every HTML page under that path. New markdown files under a whitelisted directory are prerendered automatically; add a new directory to the list to include a new section.
 
-## Docker (Static Build)
+## Docker (Prerendered + Nginx)
 
-Build and run the site using Docker and Nginx:
+The Docker image builds the same **prerendered** site as GitHub Actions (Jekyll → Playwright prerender), then serves it with **Nginx** as static HTML/CSS only—no first-load delay for math or JS.
+
+**Build and run:**
+
+```bash
+make docker-build    # Build the image
+make docker-up       # Run at http://localhost:8080 (detached)
+```
+
+Or with Compose directly:
 
 ```bash
 docker compose up --build -d
 ```
 
-The site will be available at `http://localhost:8080`
+**Other commands:** `make docker-down` (stop), `make docker-logs` (tail logs).
 
+The site will be available at **http://localhost:8080**.
+
+For all available commands (build, prerender, Docker, etc.), run **`make help`**.
 
 ## Contributing
 

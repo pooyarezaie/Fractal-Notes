@@ -27,7 +27,8 @@
 
 
 ### Dependencies
-- `github-pages` gem (includes Jekyll and all necessary plugins)
+- **Ruby**: `github-pages` gem (includes Jekyll and all necessary plugins)
+- **Node (for prerender)**: Playwright (Chromium), `serve-handler`; used by GitHub Actions and Docker build
 
 ## Content Themes
 
@@ -39,9 +40,15 @@
 
 2. **Problem Solving - Symmetry**: Demonstrates how adding ambiguity can create symmetry to solve problems, using the "pill problem" as an example.
 
+## Build and deploy
+
+- **GitHub Pages**: GitHub Actions runs Jekyll build → Playwright prerender → deploy `_site`. Set Pages source to **GitHub Actions** in repo Settings.
+- **Docker**: Multi-stage image (Jekyll → Node/Playwright prerender → Nginx). Serves the same prerendered HTML/CSS. `make docker-build` then `make docker-up`; site at http://localhost:8080.
+
 ## Development Workflow
 
 1. Edit markdown files in root or subdirectories
 2. Add images to `assets/img/`
-3. Test locally with `bundle exec jekyll serve`
-4. Push to GitHub (auto-deploys via GitHub Pages)
+3. Test locally with `bundle exec jekyll serve` (or `make dev`)
+4. Full pipeline (with prerender): `make build-prerender` then `make serve` to test
+5. Push to GitHub (auto-deploys via GitHub Pages when source is GitHub Actions)
