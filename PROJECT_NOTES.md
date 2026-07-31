@@ -8,12 +8,12 @@
 
 ### Jekyll Configuration
 - **Markdown Engine**: Kramdown with math support (`math_engine: mathjax` outputs `\(...\)` / `\[...\]`)
-- **Math Rendering**: KaTeX (via CDN; faster than MathJax, less first-load jank)
-- **Layout**: Single default layout (`_layouts/default.html`)
+- **Math Rendering**: KaTeX 0.16.9, **self-hosted** under `assets/katex/` (faster than MathJax, less first-load jank; no CDN)
+- **Layout**: Single default layout (`_layouts/default.html`, `<html lang="fa" dir="rtl">`)
 - **Math in Markdown**: Inline `$...$`, display `$$...$$` (Kramdown converts to `\(...\)` / `\[...\]` for KaTeX)
 
 ### Styling
-- **Font**: Vazirmatn (Persian font from Google Fonts)
+- **Font**: Vazirmatn (Persian font), **self-hosted** at `assets/fonts/Vazirmatn-wght.woff2` (preloaded; SW-cached)
 - **Direction**: RTL (right-to-left)
 - **Font Size**: 17px
 - **Line Height**: 1.9
@@ -21,9 +21,11 @@
 - **Background**: #fdfdfd
 
 ### Content Structure
-- Main page: `index.md` (Persian introduction)
-- Complex Numbers: `complex-numbers/index.md`
-- Problem Solving > Symmetry: `problem-solving/symmetry/index.md`
+- Main page: `index.md` (Persian intro) — the **only** index page; it loops over `_data/site_index.yml` to list every note.
+- Notes live as `.md` files inside topic directories: `complex-numbers/`, `induction/`, `trigonometry/`, `pigeonhole-principle/`, `linear-algebra/`, `problems/`, and `problem-solving/{symmetry,recasting}/`.
+- **`_data/site_index.yml` is the single source of truth** for the note list and side menu (title + path, no leading slash, no `.md`). A note must be listed there to be visible.
+- **`scripts/prerender-whitelist.json`** lists the directories that get prerendered; add a new topic directory there when you create one.
+- See `AGENTS.md` for the full step-by-step "add a new note" workflow and writing conventions.
 
 
 ### Dependencies

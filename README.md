@@ -100,9 +100,23 @@ The site will be available at **http://localhost:8080**.
 
 For all available commands (build, prerender, Docker, etc.), run **`make help`**.
 
+## Project docs
+
+- **[AGENTS.md](AGENTS.md)** — guide for AI assistants: repository map, the
+  step-by-step workflow for adding a note, and the writing/style conventions.
+  It's also the quickest orientation for a new human contributor.
+- **[CLAUDE.md](CLAUDE.md)** — Claude Code-specific reminders (points to AGENTS.md).
+- **[PROJECT_NOTES.md](PROJECT_NOTES.md)** — technical cheat-sheet (Jekyll, KaTeX, build).
+
 ## Contributing
 
 This is a personal educational project. Contributions, suggestions, and improvements are welcome!
+
+New note in a nutshell: create `<topic>/<name>.md` with `title` + `description`
+front matter, write it in the house style, then register it in
+`_data/site_index.yml` (and add the directory to
+`scripts/prerender-whitelist.json` if it's a new topic). Full checklist in
+[AGENTS.md](AGENTS.md).
 
 ## License
 
