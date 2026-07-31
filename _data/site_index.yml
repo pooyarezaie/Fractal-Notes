@@ -3,6 +3,8 @@
   path: "complex-numbers/introduction"
 - title: "اعداد مختلط؛ از هندسه تا جبر"
   path: "complex-numbers/from-geometry-to-algebra"
+- title: "اعداد مختلط؛ توان‌ها و ریشه‌های واحد"
+  path: "complex-numbers/roots-of-unity"
 - title: "تقارن؛ مسئله‌ی قرص‌ها"
   path: "problem-solving/symmetry/pill-problem"
 - title: "تقارن؛ یک مسئله‌ی دستگاه معادلات"
