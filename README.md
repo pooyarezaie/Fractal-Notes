@@ -113,10 +113,16 @@ For all available commands (build, prerender, Docker, etc.), run **`make help`**
 This is a personal educational project. Contributions, suggestions, and improvements are welcome!
 
 New note in a nutshell: create `<topic>/<name>.md` with `title` + `description`
-front matter, write it in the house style, then register it in
-`_data/site_index.yml` (and add the directory to
+front matter, write it in the house style, then register it under the right
+topic group in `_data/site_index.yml` (and add the directory to
 `scripts/prerender-whitelist.json` if it's a new topic). Full checklist in
 [AGENTS.md](AGENTS.md).
+
+Notes are organised into **topic groups**, and a group can be marked
+`series: true` — an ordered mini-course whose lessons are numbered and get
+automatic previous/next navigation plus a landing page (see
+[`/complex-numbers/`](https://fractalnotes.com/complex-numbers/)). See
+[AGENTS.md](AGENTS.md) §5.
 
 ## License
 

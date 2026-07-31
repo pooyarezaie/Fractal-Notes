@@ -1,43 +1,91 @@
-# Index links for side menu and homepage. Single source of truth.
-- title: "آشنایی کوتاه با اعداد مختلط"
-  path: "complex-numbers/introduction"
-- title: "اعداد مختلط؛ از هندسه تا جبر"
-  path: "complex-numbers/from-geometry-to-algebra"
-- title: "اعداد مختلط؛ توان‌ها و ریشه‌های واحد"
-  path: "complex-numbers/roots-of-unity"
-- title: "اعداد مختلط؛ ریشه‌های یک عدد دلخواه"
-  path: "complex-numbers/nth-roots"
-- title: "اعداد مختلط؛ مزدوج، قدر مطلق و تقسیم"
-  path: "complex-numbers/conjugate-and-division"
-- title: "تقارن؛ مسئله‌ی قرص‌ها"
-  path: "problem-solving/symmetry/pill-problem"
-- title: "تقارن؛ یک مسئله‌ی دستگاه معادلات"
-  path: "problem-solving/symmetry/systems-of-equations"
-- title: "تقارن؛ یک بازی منصفانه روی دایره"
-  path: "problem-solving/symmetry/circle-game"
-- title: "تغییر نگاه به مسئله؛ مسئله‌ی مجموع دو تاس"
-  path: "problem-solving/recasting/dice-problem"
-- title: "تغییر نگاه به مسئله؛ مسئله‌ی ساختمان روشنایی"
-  path: "problem-solving/recasting/lighting-building-problem"
-- title: "استقرای ریاضی؛ مسئله‌ی مثلث صفر در گراف کامل با وزن‌های دودویی"
-  path: "induction/zero-triangle-graph-problem"
-- title: "استقرای ریاضی؛ مسئله‌ی برچسب‌گذاری یال‌های گراف کامل"
-  path: "induction/graph-edge-labeling-problem"
-- title: "استقرای ریاضی؛ مسئله‌ی اعداد طبیعی روی صفحهٔ شطرنجی نامتناهی"
-  path: "induction/infinite-chessboard-divisibility"
-- title: "لانه‌ی کبوتر؛ مسئله‌ی اعداد روی دایره"
-  path: "pigeonhole-principle/a-circle-sum-puzzle"
-- title: "تغییر نگاه به مسئله؛ نسبت‌های مثلثاتی برای دوبرابر یک زاویه"
-  path: "trigonometry/double-angle-formula-cosine"
-- title: "جبر خطی؛ مقدمه"
-  path: "linear-algebra/introduction"
-- title: "جبر خطی؛ میدان‌ها"
-  path: "linear-algebra/fields-introduction"
-- title: "مسئله: مساحت مثلث‌ها به‌صورت جمع خطی"
-  path: "problems/triangle-area-linear-sum"
-- title: "مسئله: یک روش برای محاسبه‌ی مجموعِ توان‌ها"
-  path: "problems/sum_of_power_1"
-- title: "مسئله: چرا جمعِ مکعب‌ها برابر مربعِ جمعِ عددهای طبیعی است؟"
-  path: "problems/sum_of_power_2"
-- title: "مسئله: مجموع توان‌ها با یک نگاه ترکیبیاتی"
-  path: "problems/sum_of_power_3"
+# Grouped index for the homepage and the side menu. Single source of truth.
+#
+# Each top-level entry is a topic group:
+#   title    group heading (Persian)
+#   path     optional landing page for the group (no leading slash, no .md)
+#   series   optional; true = an ordered mini-course. Its notes are numbered and
+#            get automatic «previous lesson / next lesson» navigation.
+#   summary  optional one-line blurb shown on the homepage
+#   items    the notes of the group, in reading order:
+#              title    short title, WITHOUT the topic prefix (the group supplies it)
+#              path     no leading slash, no .md
+#              summary  optional one-line blurb (shown on the group landing page)
+#
+# A note that is not listed here is invisible on the site.
+
+- title: "اعداد مختلط"
+  path: "complex-numbers"
+  series: true
+  summary: "یک دورهٔ کوتاه در پنج درس: از این پرسش که «ضربِ دو بردار یعنی چه؟» تا حسابِ کاملِ اعداد مختلط — همه با یک تصویر هندسیِ واحد."
+  items:
+    - title: "آشنایی کوتاه با اعداد مختلط"
+      path: "complex-numbers/introduction"
+      summary: "عدد را از محور حقیقی بیرون می‌آوریم و به تمام صفحه می‌بریم: جمع یعنی جمعِ برداری، ضرب یعنی دوران و کشش — و از همین‌جا معنای عدد موهومی روشن می‌شود."
+    - title: "از هندسه تا جبر"
+      path: "complex-numbers/from-geometry-to-algebra"
+      summary: "پلی میان تصویر هندسی و نمادِ آشنای $x + yi$؛ قاعدهٔ جبریِ ضرب از دل هندسه بیرون می‌آید و اتحادهای جمعِ زاویه‌ها را رایگان به ما می‌دهد."
+    - title: "توان‌ها و ریشه‌های واحد"
+      path: "complex-numbers/roots-of-unity"
+      summary: "وقتی ضرب دوران است، توان‌رساندن یعنی قدم‌زدن روی دایره: فرمول دموآور، ریشه‌های واحد به‌شکل یک چندضلعی منتظم، و چراییِ صفر بودنِ جمعشان."
+    - title: "ریشه‌های یک عدد دلخواه"
+      path: "complex-numbers/nth-roots"
+      summary: "معادلهٔ $z^n = w$ را کامل حل می‌کنیم: هر عدد مختلط ناصفر دقیقاً $n$ ریشهٔ $n$-اُم دارد — همان چندضلعیِ ریشه‌های واحد، چرخیده و کش‌آمده."
+    - title: "مزدوج، قدر مطلق و تقسیم"
+      path: "complex-numbers/conjugate-and-division"
+      summary: "آخرین قطعهٔ حساب: مزدوج به‌عنوان بازتاب در آینهٔ محور حقیقی، معنای هندسیِ تقسیم، و دلیلِ واقعیِ ترفندِ «ضرب در مزدوجِ مخرج»."
+
+- title: "تقارن"
+  summary: "وقتی مسئله زیر یک تبدیل بی‌تغییر می‌ماند، همان تبدیل جواب را لو می‌دهد."
+  items:
+    - title: "مسئله‌ی قرص‌ها"
+      path: "problem-solving/symmetry/pill-problem"
+    - title: "یک مسئله‌ی دستگاه معادلات"
+      path: "problem-solving/symmetry/systems-of-equations"
+    - title: "یک بازی منصفانه روی دایره"
+      path: "problem-solving/symmetry/circle-game"
+
+- title: "تغییر نگاه به مسئله"
+  summary: "همان مسئله، در زبانی دیگر: گاهی تنها کاری که لازم است، عوض کردنِ جای ایستادن است."
+  items:
+    - title: "مسئله‌ی مجموع دو تاس"
+      path: "problem-solving/recasting/dice-problem"
+    - title: "مسئله‌ی ساختمان روشنایی"
+      path: "problem-solving/recasting/lighting-building-problem"
+    - title: "نسبت‌های مثلثاتی برای دوبرابر یک زاویه"
+      path: "trigonometry/double-angle-formula-cosine"
+
+- title: "استقرای ریاضی"
+  summary: "از یک گام به گامِ بعد؛ و ناگهان کلِ نردبان."
+  items:
+    - title: "مسئله‌ی مثلث صفر در گراف کامل با وزن‌های دودویی"
+      path: "induction/zero-triangle-graph-problem"
+    - title: "مسئله‌ی برچسب‌گذاری یال‌های گراف کامل"
+      path: "induction/graph-edge-labeling-problem"
+    - title: "مسئله‌ی اعداد طبیعی روی صفحهٔ شطرنجی نامتناهی"
+      path: "induction/infinite-chessboard-divisibility"
+
+- title: "اصل لانه‌ی کبوتر"
+  summary: "اگر کبوترها از لانه‌ها بیشتر باشند، لانه‌ای هست با دو کبوتر — و همین جملهٔ ساده شگفتی می‌آفریند."
+  items:
+    - title: "مسئله‌ی اعداد روی دایره"
+      path: "pigeonhole-principle/a-circle-sum-puzzle"
+
+- title: "جبر خطی"
+  summary: "زبانِ بردارها و تبدیل‌های خطی، از پایه."
+  items:
+    - title: "مقدمه"
+      path: "linear-algebra/introduction"
+    - title: "میدان‌ها"
+      path: "linear-algebra/fields-introduction"
+
+- title: "مسئله‌ها"
+  summary: "برگه‌هایی مستقل؛ هر کدام یک مسئله و یک ایدهٔ خوش‌ساخت."
+  items:
+    - title: "مساحت مثلث‌ها به‌صورت جمع خطی"
+      path: "problems/triangle-area-linear-sum"
+    - title: "یک روش برای محاسبه‌ی مجموعِ توان‌ها"
+      path: "problems/sum_of_power_1"
+    - title: "چرا جمعِ مکعب‌ها برابر مربعِ جمعِ عددهای طبیعی است؟"
+      path: "problems/sum_of_power_2"
+    - title: "مجموع توان‌ها با یک نگاه ترکیبیاتی"
+      path: "problems/sum_of_power_3"

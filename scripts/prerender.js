@@ -37,10 +37,11 @@ function collectHtmlUnder(dirRel) {
     if (e.isDirectory()) {
       out.push(...collectHtmlUnder(rel));
     } else if (e.isFile() && e.name.endsWith('.html')) {
-      const urlPath = e.name === 'index.html'
-        ? (dirRel ? `/${dirRel}/` : '/')
-        : `/${rel}`;
-      out.push({ filePath: full, urlPath });
+      // Always request the literal file path. The local server runs with
+      // cleanUrls:false, so asking for a directory ("/complex-numbers/") gets a
+      // generated directory listing instead of its index.html — which would then
+      // be written over the real page.
+      out.push({ filePath: full, urlPath: `/${rel}` });
     }
   }
   return out;
@@ -53,7 +54,7 @@ function pagesFromWhitelist(whitelist) {
     const norm = p.replace(/^\/|\/$/g, '');
     if (norm === '') {
       const indexPath = path.join(SITE_DIR, 'index.html');
-      if (fs.existsSync(indexPath)) pages.push({ filePath: indexPath, urlPath: '/' });
+      if (fs.existsSync(indexPath)) pages.push({ filePath: indexPath, urlPath: '/index.html' });
     } else {
       pages.push(...collectHtmlUnder(norm));
     }

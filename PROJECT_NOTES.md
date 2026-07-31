@@ -21,10 +21,12 @@
 - **Background**: #fdfdfd
 
 ### Content Structure
-- Main page: `index.md` (Persian intro) — the **only** index page; it loops over `_data/site_index.yml` to list every note.
+- Home page: `index.md` (Persian intro); it loops over `_data/site_index.yml` and renders one block per topic group.
 - Notes live as `.md` files inside topic directories: `complex-numbers/`, `induction/`, `trigonometry/`, `pigeonhole-principle/`, `linear-algebra/`, `problems/`, and `problem-solving/{symmetry,recasting}/`.
-- **`_data/site_index.yml` is the single source of truth** for the note list and side menu (title + path, no leading slash, no `.md`). A note must be listed there to be visible.
-- **`scripts/prerender-whitelist.json`** lists the directories that get prerendered; add a new topic directory there when you create one.
+- **`_data/site_index.yml` is the single source of truth** for the note list and side menu. It is a list of **topic groups**, each with `title`, optional `path`/`series`/`summary`, and an ordered `items` list (title + path, no leading slash, no `.md`). A note must be listed there to be visible.
+- **Series (mini-courses):** a group with `series: true` gets numbered lessons, a landing page at `<path>/index.md`, and automatic previous/next lesson navigation rendered by `_includes/series-nav.html`. `complex-numbers/` is the reference example.
+- `_includes/` holds two small partials: `series-nav.html` (course breadcrumb + prev/next) and `fa-number.html` (integer → Persian-Indic digits).
+- **`scripts/prerender-whitelist.json`** lists the directories that get prerendered; add a new topic directory there when you create one. Directory index pages (e.g. `complex-numbers/index.html` → `/complex-numbers/`) are picked up automatically.
 - See `AGENTS.md` for the full step-by-step "add a new note" workflow and writing conventions.
 
 

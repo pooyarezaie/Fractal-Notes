@@ -1,0 +1,65 @@
+{%- comment -%}
+  Navigation for a note that belongs to an ordered series (a mini-course).
+  Renders nothing at all for standalone notes.
+
+  Source of truth: _data/site_index.yml — any group with `series: true`.
+  Param: position = "top"    → small breadcrumb chip above the note title
+                    "bottom" → previous / next lesson links after the note
+{%- endcomment -%}
+{%- assign cur_path = page.url | replace: '.html', '' | remove_first: '/' -%}
+{%- assign found = false -%}
+{%- for group in site.data.site_index -%}
+  {%- if group.series -%}
+    {%- for item in group.items -%}
+      {%- if item.path == cur_path -%}
+        {%- assign found = true -%}
+        {%- assign s_group = group -%}
+        {%- assign s_pos = forloop.index -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  {%- if found -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
+{%- if found -%}
+{%- assign s_total = s_group.items | size -%}
+{%- if include.position == 'top' -%}
+<div class="series-crumb">
+  <a class="series-crumb-home" href="{{ s_group.path | append: '/' | relative_url }}">{{ s_group.title }}</a>
+  <span class="series-crumb-sep" aria-hidden="true">·</span>
+  <span class="series-crumb-pos">درس {% include fa-number.html n=s_pos %} از {% include fa-number.html n=s_total %}</span>
+</div>
+{%- else -%}
+<nav class="series-nav" aria-label="پیمایش دوره">
+  <p class="series-nav-head">
+    این یادداشت درسِ {% include fa-number.html n=s_pos %} از دورهٔ
+    <a href="{{ s_group.path | append: '/' | relative_url }}">{{ s_group.title }}</a>
+    است.
+  </p>
+  <div class="series-nav-links">
+    {%- if s_pos > 1 -%}
+    {%- assign prev_i = s_pos | minus: 2 -%}
+    {%- assign prev_item = s_group.items[prev_i] -%}
+    <a class="series-nav-link series-nav-prev" href="{{ prev_item.path | relative_url }}" rel="prev">
+      <span class="series-nav-dir"><span class="series-nav-arrow" aria-hidden="true">→</span> درس پیشین</span>
+      <span class="series-nav-name">{{ prev_item.title }}</span>
+    </a>
+    {%- else -%}
+    <span class="series-nav-link series-nav-empty" aria-hidden="true"></span>
+    {%- endif -%}
+    {%- if s_pos < s_total -%}
+    {%- assign next_item = s_group.items[s_pos] -%}
+    <a class="series-nav-link series-nav-next" href="{{ next_item.path | relative_url }}" rel="next">
+      <span class="series-nav-dir">درس بعدی <span class="series-nav-arrow" aria-hidden="true">←</span></span>
+      <span class="series-nav-name">{{ next_item.title }}</span>
+    </a>
+    {%- else -%}
+    <a class="series-nav-link series-nav-next series-nav-done" href="{{ s_group.path | append: '/' | relative_url }}">
+      <span class="series-nav-dir">پایان دوره <span class="series-nav-arrow" aria-hidden="true">←</span></span>
+      <span class="series-nav-name">بازگشت به فهرست درس‌ها</span>
+    </a>
+    {%- endif -%}
+  </div>
+</nav>
+{%- endif -%}
+{%- endif -%}

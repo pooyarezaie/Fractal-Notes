@@ -113,11 +113,24 @@
     <div class="site-body">
       <aside class="side-nav" id="side-nav" aria-label="فهرست مطالب">
         <button type="button" class="side-nav-close" id="side-nav-close" aria-label="بستن فهرست">×</button>
+        {%- assign cur_path = page.url | replace: '.html', '' | remove_first: '/' -%}
         <nav class="side-nav-inner">
           <span class="side-nav-title">برگه‌ها</span>
-          <ul class="side-nav-list">
-            {% for item in site.data.site_index %}
-            <li><a href="{{ item.path | relative_url }}"{% if page.url contains item.path %} class="active"{% endif %}>{{ item.title }}</a></li>
+          <ul class="side-nav-groups">
+            {% for group in site.data.site_index %}
+            <li class="side-nav-group">
+              {% if group.path %}
+              {%- assign group_home = group.path | append: '/' -%}
+              <a class="side-nav-group-title{% if cur_path == group_home %} active{% endif %}" href="{{ group_home | relative_url }}">{{ group.title }}{% if group.series %}<span class="series-badge">دوره</span>{% endif %}</a>
+              {% else %}
+              <span class="side-nav-group-title">{{ group.title }}</span>
+              {% endif %}
+              <ul class="side-nav-list">
+                {% for item in group.items %}
+                <li><a href="{{ item.path | relative_url }}"{% if cur_path == item.path %} class="active"{% endif %}>{% if group.series %}<span class="lesson-num">{% include fa-number.html n=forloop.index %}</span>{% endif %}{{ item.title }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
             {% endfor %}
           </ul>
         </nav>
@@ -126,7 +139,9 @@
       <main class="container">
         {%- if page.url != '/' and page.url != '' and page.title -%}
         <article itemscope itemtype="https://schema.org/Article">
+          {%- include series-nav.html position="top" -%}
           {{ content }}
+          {%- include series-nav.html position="bottom" -%}
         </article>
         {%- else -%}
         {{ content }}
