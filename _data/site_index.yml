@@ -1,6 +1,8 @@
 # Index links for side menu and homepage. Single source of truth.
 - title: "آشنایی کوتاه با اعداد مختلط"
   path: "complex-numbers/introduction"
+- title: "اعداد مختلط؛ از هندسه تا جبر"
+  path: "complex-numbers/from-geometry-to-algebra"
 - title: "تقارن؛ مسئله‌ی قرص‌ها"
   path: "problem-solving/symmetry/pill-problem"
 - title: "تقارن؛ یک مسئله‌ی دستگاه معادلات"
