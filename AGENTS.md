@@ -213,6 +213,38 @@ Study an existing note before writing — good models:
 - Use `>` blockquotes for a key principle, a quote (e.g. Pólya), or a punchline.
 - Keep paragraphs short. Intuition first, formalism second.
 
+**Purpose first**
+- Before adding any section or paragraph, name its job in one sentence — «هر
+  بخشی اضافه می‌کنیم اول بپرسیم هدفش چیست؟ بعد بنویسیم.» If the job is unclear,
+  or already done elsewhere, cut instead of polishing. A series landing page has
+  exactly one goal: get the reader into برگهٔ ۱ — end it on that link.
+
+**Complexity has a cost**
+- Every complex paragraph makes a note more complete, but it charges a price:
+  it takes the reader's focus and occupies their mind. Only pay that price with
+  a firm purpose. When a precise formulation or full proof mainly serves the
+  deeper reader, don't inline it: state the claim briefly (one precise remark,
+  perhaps with a hint), and leave the rest to the curious reader or a separate
+  note. The core idea of the برگه must stay visible and the prose fluent.
+- Corner cases come *after* the core, never in its path. Caveats and edge
+  cases (degenerate values, uniqueness fine print, …) go at the end of the
+  section — or in a short passage before the next one — not between the main
+  idea and its development. First let the reader see the principle; then
+  notify them of the fine print.
+
+**No spoilers in series copy**
+- Landing pages and TOC blurbs motivate with the question and the value; they
+  never reveal a note's punchline or mechanism — «پرسش و ارزش را بگو، جواب و
+  مکانیزم را نگه دار.» Naming a payoff («اتحادها خودشان بیرون می‌افتند») is
+  fine; showing *how* is not. Don't use «لو دادن» in reader-facing copy; prefer
+  phrasing like «باقی را باید سرِ راه دید».
+
+**Never cut the author's prose silently**
+- Trimming redundant copy is welcome, but every removed or replaced passage
+  must be listed explicitly when reporting the work, along with the job it was
+  doing (or failing to do). The notes are the product and the voice is the
+  author's — a change he can't see is a change he can't judge.
+
 **Math** (KaTeX via Kramdown)
 - Inline: `$ ... $`  ·  Display: `$$ ... $$` on their own lines.
 - Standard LaTeX. Persian text and LaTeX mix freely on a line.
