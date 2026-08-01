@@ -6,7 +6,8 @@
 
 This project is a Jekyll-based static website hosted on GitHub Pages. The site is written in Persian and features right-to-left (RTL) layout. It aims to collect ideas, definitions, exercises, and inspiring proofs in a simple and accessible format.
 
-The notes are not meant to replace textbooks, but rather serve as **small sheets of understanding** that each introduce you to a larger topic from a small perspective.
+The notes are not meant to replace textbooks. They are **sheets for seeing**
+(«برگه‌هایی برای دیدن»): one idea per sheet, made as visual and intuitive as it can be.
 
 ## Website
 

@@ -21,6 +21,11 @@ social:
     - "https://x.com/FractalNotes"
     - "https://t.me/FractalNotes"
 
+# The github-pages gem enables jekyll-theme-primer by default. This site has its
+# own layout and stylesheet and uses nothing from it, and the theme's
+# assets/css/style.scss fights our own stylesheet for the same output path.
+theme:
+
 markdown: kramdown
 kramdown:
   math_engine: mathjax

@@ -41,7 +41,11 @@
     <!-- Preload main font for faster first paint; SW caches it for repeat visits -->
     <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
-    <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+    <!-- ?v= build stamp: the service worker caches /assets/, so an unversioned URL
+         would keep serving the previous stylesheet to returning visitors.
+         Not named style.css: the github-pages default theme (primer) builds its own
+         /assets/css/style.css and the two clobber each other. -->
+    <link rel="stylesheet" href="{{ "/assets/css/fractal.css" | relative_url }}?v={{ site.time | date: '%s' }}">
 
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">

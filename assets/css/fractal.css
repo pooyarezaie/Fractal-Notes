@@ -7,6 +7,28 @@
     font-display: swap;
 }
 
+/* ---------------------------------------------------------------------------
+   Design tokens
+   The accent is the violet of the Sierpiński logo, so the page and the mark
+   belong to each other. Change --accent alone to re-tint the whole site.
+   --------------------------------------------------------------------------- */
+:root {
+    --brand: #3e2a62;          /* the logo's purple */
+    --accent: #4a3184;         /* links & interactive text (10:1 on white) */
+    --accent-deep: #2f2050;    /* headings that carry the brand */
+    --accent-tint: #f3f0fa;    /* filled surfaces */
+    --accent-tint-strong: #e7e1f6;
+
+    --ink: #14121c;
+    --ink-soft: #55516a;
+    --ink-faint: #6f6a86;
+
+    --paper: #ffffff;
+    --bg: #fcfbfe;
+    --line: #e6e3ef;
+    --line-strong: #d5cfe6;
+}
+
 body {
     font-family: "Vazirmatn", sans-serif;
     line-height: 1.9;
@@ -15,9 +37,18 @@ body {
     text-align: right;
     margin: 0;
     padding: 0;
-    background: #fdfdfd;
-    color: #111111;
+    background: var(--bg);
+    color: var(--ink);
     overflow-x: hidden;
+}
+
+/* Persian/Arabic script joins its letters — letter-spacing breaks the joins,
+   so type hierarchy here comes from size and weight only, never tracking. */
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
 }
 
 img {
@@ -58,7 +89,7 @@ main img {
 /* Header / logo */
 .site-header {
     background: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--line);
 }
 
 .site-header-inner {
@@ -103,9 +134,9 @@ main img {
 }
 
 .site-footer {
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--line);
     margin-top: 32px;
-    background: #fafafa;
+    background: var(--accent-tint);
 }
 
 .site-footer-inner {
@@ -124,7 +155,7 @@ main img {
 }
 
 .social-link {
-    color: #1565c0;
+    color: var(--accent);
 }
 
 /* Side menu / index nav */
@@ -144,7 +175,7 @@ main img {
     top: 0;
     max-height: 100vh;
     overflow-y: auto;
-    border-left: 1px solid #e0e0e0;
+    border-left: 1px solid var(--line);
 }
 
 .side-nav-inner {
@@ -180,11 +211,11 @@ main img {
 }
 
 .side-nav-list a:hover {
-    color: #1565c0;
+    color: var(--accent);
 }
 
 .side-nav-list a.active {
-    color: #1565c0;
+    color: var(--accent);
     font-weight: 500;
 }
 
@@ -198,7 +229,7 @@ main img {
 .side-nav-group + .side-nav-group {
     margin-top: 18px;
     padding-top: 14px;
-    border-top: 1px solid #eeeeee;
+    border-top: 1px solid var(--line);
 }
 
 .side-nav-group-title {
@@ -210,11 +241,11 @@ main img {
 }
 
 a.side-nav-group-title:hover {
-    color: #1565c0;
+    color: var(--accent);
 }
 
 a.side-nav-group-title.active {
-    color: #1565c0;
+    color: var(--accent);
 }
 
 .side-nav-group .side-nav-list a {
@@ -227,13 +258,13 @@ a.side-nav-group-title.active {
     display: inline-block;
     min-width: 1.35em;
     margin-inline-end: 6px;
-    color: #9aa0a6;
+    color: var(--ink-faint);
     font-size: 0.9em;
     font-weight: 500;
 }
 
 .side-nav-list a.active .lesson-num {
-    color: #1565c0;
+    color: var(--accent);
 }
 
 .side-nav-close,
@@ -258,7 +289,7 @@ a.side-nav-group-title.active {
         width: 44px;
         height: 44px;
         padding: 0;
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--line);
         border-radius: 8px;
         background: #fff;
         cursor: pointer;
@@ -286,7 +317,7 @@ a.side-nav-group-title.active {
         max-width: 85vw;
         max-height: none;
         background: #fff;
-        border-left: 1px solid #e0e0e0;
+        border-left: 1px solid var(--line);
         z-index: 1001;
         transform: translateX(100%);
         transition: transform 0.2s ease;
@@ -317,7 +348,7 @@ a.side-nav-group-title.active {
     }
 
     .side-nav-close:hover {
-        background: #e0e0e0;
+        background: var(--line);
     }
 
     .side-nav-overlay {
@@ -412,7 +443,7 @@ ul, ol {
 }
 
 a {
-    color: #1565c0;
+    color: var(--accent);
     text-decoration: none;
 }
 
@@ -462,7 +493,7 @@ table td {
     margin: 1rem 0;
     border: none;
     border-radius: 0.5rem;
-    background: #fdfdfd;
+    background: var(--bg);
     -webkit-overflow-scrolling: touch;
     text-align: left;
 }
@@ -517,55 +548,352 @@ main .scroll-wrapper table {
 }
 
 /* ---------------------------------------------------------------------------
-   Topic groups & series (mini-courses)
-   Markup comes from _data/site_index.yml via index.md, _layouts/default.html
-   and _includes/series-nav.html.
+   Homepage
+   Markup in index.md, generated from _data/site_index.yml.
    --------------------------------------------------------------------------- */
 
-/* Homepage: one block per topic group */
-.topic-list {
-    display: flex;
-    flex-direction: column;
-    gap: 26px;
-    margin-top: 20px;
+/* Hero. The Sierpiński gasket behind the type is the site's own logo mark
+   enlarged to texture — the page opens on the thing the name refers to. */
+.home-hero {
+    position: relative;
+    isolation: isolate;
+    padding: 18px 0 30px 0;
+    margin-bottom: 34px;
+    border-bottom: 1px solid var(--line);
 }
 
-.topic-title {
-    margin: 0 0 2px 0;
-    font-size: 19px;
+/* Sits inside the container's padding, not past it: main has overflow-x hidden,
+   so a wider bleed would get cut mid-triangle instead of reading as a bleed. */
+.home-hero-mark {
+    position: absolute;
+    z-index: -1;
+    top: -10px;
+    inset-inline-end: -10px;
+    width: 240px;
+    height: auto;
+    fill: var(--brand);
+    opacity: 0.08;
+    pointer-events: none;
 }
 
-.topic-summary {
-    margin: 0 0 8px 0;
-    font-size: 14.5px;
-    line-height: 1.75;
-    color: #555;
+.home-title {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 2.9rem);
+    font-weight: 800;
+    line-height: 1.45;
+    color: var(--accent-deep);
 }
 
-.topic-notes {
+.home-tagline {
+    margin: 2px 0 0 0;
+    font-size: clamp(1.05rem, 3vw, 1.3rem);
+    font-weight: 500;
+    line-height: 1.7;
+    color: var(--accent);
+}
+
+.home-lede {
+    max-width: 34em;
+    margin-top: 18px;
+    color: var(--ink-soft);
+}
+
+.home-lede p {
+    margin: 0;
+    line-height: 2;
+}
+
+.home-lede p + p {
+    margin-top: 10px;
+}
+
+.home-lede strong {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.home-stat {
+    margin: 16px 0 0 0;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+}
+
+.home-stat-n {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.home-stat-dot {
+    color: var(--line-strong);
+    padding: 0 2px;
+}
+
+/* A series sits on a small stack of sheets: the shape says "there are more of
+   these, in order" before the kicker has to. Nothing else on the page stacks. */
+.home-series {
+    position: relative;
+    padding: 22px 24px 20px 24px;
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    background: linear-gradient(170deg, var(--accent-tint), var(--paper) 55%);
+}
+
+.home-series::before,
+.home-series::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    height: 16px;
+    border: 1px solid var(--line-strong);
+    border-top: none;
+    border-radius: 0 0 13px 13px;
+    background: var(--paper);
+}
+
+.home-series::before {
+    inset-inline: 9px;
+    bottom: -7px;
+}
+
+.home-series::after {
+    inset-inline: 21px;
+    bottom: -14px;
+    opacity: 0.65;
+}
+
+.home-series-kicker {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.home-series-title {
+    margin: 2px 0 0 0;
+    font-size: clamp(1.4rem, 4vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.6;
+    color: var(--accent-deep);
+}
+
+.home-series-title a {
+    color: inherit;
+}
+
+.home-series-summary {
+    margin: 8px 0 0 0;
+    max-width: 42em;
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+}
+
+.home-series-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 18px 0 0 0;
+    display: grid;
+    gap: 2px;
 }
 
-.topic-notes li {
+.home-series-list li {
     margin: 0;
-    padding: 3px 0;
+    padding: 0;
 }
 
-.topic-start {
+.home-series-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 7px 10px;
+    margin-inline-start: -10px;
+    border-radius: 8px;
+    color: var(--accent);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.home-series-list a:hover,
+.home-series-list a:focus-visible {
+    text-decoration: none;
+    background: var(--accent-tint-strong);
+    color: var(--accent-deep);
+}
+
+.home-num {
+    flex-shrink: 0;
+    min-width: 1.5em;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.home-series-name {
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.home-series-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    margin: 20px 0 0 0;
+}
+
+.home-cta {
     display: inline-block;
-    margin-top: 8px;
-    font-size: 14px;
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--paper);
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.15s ease;
 }
 
-/* A series gets a quiet frame so it reads as one unit, not five loose notes */
-.topic-series {
-    padding: 16px 18px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    background: #fafafa;
+.home-cta:hover {
+    text-decoration: none;
+    background: var(--accent-deep);
 }
+
+.home-quiet-link {
+    font-size: 14px;
+    color: var(--ink-faint);
+}
+
+.home-quiet-link:hover {
+    color: var(--accent);
+}
+
+/* The standalone topics */
+.home-topics {
+    margin-top: 52px;
+}
+
+.home-section-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.home-card {
+    padding: 16px 18px 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--paper);
+    transition: border-color 0.15s ease;
+}
+
+.home-card:hover {
+    border-color: var(--line-strong);
+}
+
+.home-card-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--accent-deep);
+}
+
+.home-card-title a {
+    color: inherit;
+}
+
+.home-card-count {
+    flex-shrink: 0;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-faint);
+}
+
+.home-card-summary {
+    margin: 6px 0 0 0;
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+}
+
+.home-card-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0 0;
+    border-top: 1px solid var(--line);
+    padding-top: 6px;
+}
+
+.home-card-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.home-card-list a {
+    display: block;
+    padding: 6px 10px;
+    margin-inline: -10px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: var(--accent);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.home-card-list a:hover,
+.home-card-list a:focus-visible {
+    text-decoration: none;
+    background: var(--accent-tint);
+    color: var(--accent-deep);
+}
+
+@media (max-width: 600px) {
+    .home-hero {
+        padding-bottom: 24px;
+        margin-bottom: 26px;
+    }
+
+    .home-hero-mark {
+        width: 165px;
+        inset-inline-end: -34px;
+        opacity: 0.07;
+    }
+
+    .home-series {
+        padding: 18px 16px 16px 16px;
+    }
+
+    .home-cta {
+        text-align: center;
+    }
+
+    .home-topics {
+        margin-top: 40px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Series (mini-courses): landing page + note-page navigation
+   Markup from _includes/series-nav.html and <topic>/index.md.
+   --------------------------------------------------------------------------- */
 
 /* Course landing page: the lesson list */
 .course-toc {
@@ -587,7 +915,7 @@ main .scroll-wrapper table {
     align-items: flex-start;
     gap: 12px;
     padding: 12px 14px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--line);
     border-radius: 10px;
     background: #ffffff;
     color: inherit;
@@ -596,8 +924,8 @@ main .scroll-wrapper table {
 
 .course-toc-link:hover {
     text-decoration: none;
-    border-color: #1565c0;
-    background: #f7faff;
+    border-color: var(--accent);
+    background: var(--accent-tint);
 }
 
 .course-toc-num {
@@ -608,8 +936,8 @@ main .scroll-wrapper table {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #e8f0fb;
-    color: #1565c0;
+    background: var(--accent-tint-strong);
+    color: var(--accent);
     font-size: 14px;
     font-weight: 600;
     line-height: 1;
@@ -624,7 +952,7 @@ main .scroll-wrapper table {
 
 .course-toc-title {
     font-weight: 600;
-    color: #1565c0;
+    color: var(--accent);
     line-height: 1.7;
 }
 
@@ -661,7 +989,7 @@ main .scroll-wrapper table {
 .series-nav {
     margin-top: 40px;
     padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
+    border-top: 1px solid var(--line);
 }
 
 .series-nav-head {
@@ -681,17 +1009,17 @@ main .scroll-wrapper table {
     flex-direction: column;
     gap: 3px;
     padding: 12px 14px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--line);
     border-radius: 10px;
-    background: #fafafa;
+    background: var(--paper);
     color: inherit;
     transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .series-nav-link:hover {
     text-decoration: none;
-    border-color: #1565c0;
-    background: #f7faff;
+    border-color: var(--accent);
+    background: var(--accent-tint);
 }
 
 /* RTL: previous sits at the start (right), next at the end (left) */
@@ -709,13 +1037,13 @@ main .scroll-wrapper table {
 }
 
 .series-nav-arrow {
-    color: #1565c0;
+    color: var(--accent);
 }
 
 .series-nav-name {
     font-size: 15px;
     font-weight: 500;
-    color: #1565c0;
+    color: var(--accent);
     line-height: 1.7;
 }
 
@@ -737,10 +1065,6 @@ main .scroll-wrapper table {
 
     .series-nav-next {
         text-align: start;
-    }
-
-    .topic-series {
-        padding: 14px;
     }
 }
 
