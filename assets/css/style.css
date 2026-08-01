@@ -188,6 +188,54 @@ main img {
     font-weight: 500;
 }
 
+/* Side menu: topic groups */
+.side-nav-groups {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-nav-group + .side-nav-group {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid #eeeeee;
+}
+
+.side-nav-group-title {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+a.side-nav-group-title:hover {
+    color: #1565c0;
+}
+
+a.side-nav-group-title.active {
+    color: #1565c0;
+}
+
+.side-nav-group .side-nav-list a {
+    padding: 5px 0;
+    color: #555;
+}
+
+/* Ordered-series marker: the note's number in front of its title */
+.lesson-num {
+    display: inline-block;
+    min-width: 1.35em;
+    margin-inline-end: 6px;
+    color: #9aa0a6;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.side-nav-list a.active .lesson-num {
+    color: #1565c0;
+}
+
 .side-nav-close,
 .nav-toggle {
     display: none;
@@ -466,6 +514,234 @@ main .scroll-wrapper > .katex-display {
 main .scroll-wrapper table {
     margin: 0;
     min-width: max-content;
+}
+
+/* ---------------------------------------------------------------------------
+   Topic groups & series (mini-courses)
+   Markup comes from _data/site_index.yml via index.md, _layouts/default.html
+   and _includes/series-nav.html.
+   --------------------------------------------------------------------------- */
+
+/* Homepage: one block per topic group */
+.topic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    margin-top: 20px;
+}
+
+.topic-title {
+    margin: 0 0 2px 0;
+    font-size: 19px;
+}
+
+.topic-summary {
+    margin: 0 0 8px 0;
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #555;
+}
+
+.topic-notes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topic-notes li {
+    margin: 0;
+    padding: 3px 0;
+}
+
+.topic-start {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* A series gets a quiet frame so it reads as one unit, not five loose notes */
+.topic-series {
+    padding: 16px 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fafafa;
+}
+
+/* Course landing page: the lesson list */
+.course-toc {
+    list-style: none;
+    padding: 0;
+    margin: 18px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.course-toc-item {
+    margin: 0;
+    padding: 0;
+}
+
+.course-toc-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #ffffff;
+    color: inherit;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.course-toc-link:hover {
+    text-decoration: none;
+    border-color: #1565c0;
+    background: #f7faff;
+}
+
+.course-toc-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e8f0fb;
+    color: #1565c0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.course-toc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.course-toc-title {
+    font-weight: 600;
+    color: #1565c0;
+    line-height: 1.7;
+}
+
+.course-toc-summary {
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #444;
+}
+
+.course-start {
+    margin-top: 14px;
+    font-weight: 500;
+}
+
+/* Note page: breadcrumb chip above the title */
+.series-crumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 13.5px;
+    color: #777;
+}
+
+.series-crumb-sep {
+    color: #bbb;
+}
+
+.series-crumb + h1 {
+    margin-top: 0.35em;
+}
+
+/* Note page: previous / next lesson */
+.series-nav {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.series-nav-head {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.series-nav-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.series-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fafafa;
+    color: inherit;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.series-nav-link:hover {
+    text-decoration: none;
+    border-color: #1565c0;
+    background: #f7faff;
+}
+
+/* RTL: previous sits at the start (right), next at the end (left) */
+.series-nav-prev {
+    text-align: start;
+}
+
+.series-nav-next {
+    text-align: end;
+}
+
+.series-nav-dir {
+    font-size: 13px;
+    color: #777;
+}
+
+.series-nav-arrow {
+    color: #1565c0;
+}
+
+.series-nav-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1565c0;
+    line-height: 1.7;
+}
+
+/* Placeholder that keeps the first lesson's «next» card in the left column */
+.series-nav-empty {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+@media (max-width: 600px) {
+    .series-nav-links {
+        grid-template-columns: 1fr;
+    }
+
+    .series-nav-empty {
+        display: none;
+    }
+
+    .series-nav-next {
+        text-align: start;
+    }
+
+    .topic-series {
+        padding: 14px;
+    }
 }
 
 /* Fallback: Kramdown .math block (raw LaTeX before KaTeX runs) */

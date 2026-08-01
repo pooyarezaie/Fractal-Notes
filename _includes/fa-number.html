@@ -1,0 +1,9 @@
+{%- comment -%}
+  Render an integer (0–99) with Persian-Indic digits.
+  Usage: {% include fa-number.html n=3 %}  ->  ۳
+  Internal variables are underscore-prefixed because Liquid includes share the
+  caller's scope.
+{%- endcomment -%}
+{%- assign _fa = "۰,۱,۲,۳,۴,۵,۶,۷,۸,۹" | split: "," -%}
+{%- assign _n = include.n | plus: 0 -%}
+{%- if _n < 10 -%}{{ _fa[_n] }}{%- else -%}{%- assign _tens = _n | divided_by: 10 -%}{%- assign _ones = _n | modulo: 10 -%}{{ _fa[_tens] }}{{ _fa[_ones] }}{%- endif -%}

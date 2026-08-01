@@ -51,10 +51,12 @@ Single layout: `_layouts/default.html` (`<html lang="fa" dir="rtl">`).
 ## 3. Repository map
 
 ```
-index.md                     Homepage. Lists every note by looping over site_index.yml.
+index.md                     Homepage. Renders one block per topic group from site_index.yml.
 _config.yml                  Jekyll config (title, SEO, kramdown math, plugins).
 _data/site_index.yml         ★ SINGLE SOURCE OF TRUTH for the note list / menu.
 _layouts/default.html        The only layout (head, KaTeX loader, nav, SEO JSON-LD).
+_includes/series-nav.html    Course breadcrumb + previous/next lesson links.
+_includes/fa-number.html     Integer (0–99) → Persian-Indic digits.
 scripts/prerender.js         Playwright prerender script.
 scripts/prerender-whitelist.json  Directories that get prerendered.
 assets/
@@ -66,7 +68,7 @@ Makefile                     All dev/build/docker commands (`make help`).
 Dockerfile / compose.yml     Multi-stage prerendered image + Nginx.
 
 Content directories (each holds topic notes as .md files):
-  complex-numbers/           اعداد مختلط
+  complex-numbers/           اعداد مختلط — a SERIES; complex-numbers/index.md is its landing page
   induction/                 استقرای ریاضی
   trigonometry/              مثلثات
   pigeonhole-principle/      اصل لانهٔ کبوتر
@@ -77,8 +79,9 @@ Content directories (each holds topic notes as .md files):
     recasting/               تغییر نگاه به مسئله
 ```
 
-There is **only one `index.md`** (the site root). Sub-directories do **not** have
-their own index pages; all navigation flows through `_data/site_index.yml`.
+All navigation flows through `_data/site_index.yml`. Most topic directories have
+**no** index page of their own; the exception is a *series* (§5), which gets a
+landing page at `<topic-dir>/index.md` serving as the course cover.
 
 ---
 
@@ -103,16 +106,27 @@ This is the most common task. Follow every step or the note won't appear/render.
 
 3. **Write the body** following the note conventions in §5.
 
-4. **Register the note** in `_data/site_index.yml` so it shows on the homepage and
-   in the side menu. Add an entry **in the reading order you want**:
+4. **Register the note** in `_data/site_index.yml`, inside the right **topic
+   group**, so it shows on the homepage and in the side menu. Add it **in the
+   reading order you want**:
    ```yaml
-   - title: "عنوان یادداشت"                      # can match the front-matter title
-     path: "topic-dir/kebab-case-name"           # NO leading slash, NO .md
+   - title: "استقرای ریاضی"          # the group supplies the topic name
+     summary: "یک جملهٔ کوتاه دربارهٔ این موضوع."   # optional, homepage only
+     items:
+       - title: "عنوان یادداشت"                    # short title, NO topic prefix
+         path: "topic-dir/kebab-case-name"         # NO leading slash, NO .md
    ```
-   Titles here often carry a topic prefix, e.g. `"استقرای ریاضی؛ مسئلهٔ ..."`.
+   Item titles are **prefix-free** (`"مسئله‌ی قرص‌ها"`, not `"تقارن؛ مسئله‌ی قرص‌ها"`) —
+   the group heading already says the topic. The front-matter `title` may keep the
+   prefix; it feeds `<title>`/SEO, where the extra context helps.
    **A note not listed here is invisible on the site** (though the URL still works
    once built). Example of an existing unlisted draft:
    `problem-solving/recasting/putnam-icosahedron-problem.md`.
+
+   To start a brand-new group, add a top-level entry with `title` + `items`.
+   Grouping is presentational: a note's group does **not** have to match its
+   directory (e.g. `trigonometry/double-angle-formula-cosine` is listed under
+   «تغییر نگاه به مسئله»).
 
 5. **New topic directory?** Add its path to `scripts/prerender-whitelist.json`
    (e.g. `"number-theory"` or `"problem-solving/invariants"`), otherwise pages
@@ -121,11 +135,60 @@ This is the most common task. Follow every step or the note won't appear/render.
    automatically.
 
 6. **Verify locally:** `make dev`, open `http://localhost:4000`, confirm the note
-   appears in the list, the math renders, and RTL/images look right.
+   appears under the right group, the math renders, and RTL/images look right.
 
 ---
 
-## 5. Note writing conventions (match the house style)
+## 5. Series (mini-courses)
+
+Some topics are not a bag of independent notes but an **ordered sequence**. Mark
+the group `series: true` and give it a `path`, and the site does the rest: the
+notes are numbered, each one gets a breadcrumb («اعداد مختلط · برگهٔ ۳ از ۵») and
+previous/next links, and the homepage frames the group as one unit with a link to
+its landing page.
+
+**Wording rule:** the Persian UI never calls it a دوره (course) and never calls a
+note a درس (lesson) — the reader only ever sees numbered **برگه‌ها**. «Series» /
+«mini-course» is internal vocabulary for this guide and the code, not for the
+site. Keep new copy in that register.
+
+`complex-numbers/` is the reference implementation. To build another one:
+
+1. **Mark the group** in `_data/site_index.yml`. Give every item a `summary` —
+   one line, shown on the landing page:
+   ```yaml
+   - title: "اعداد مختلط"
+     path: "complex-numbers"      # the landing page, no leading slash
+     series: true
+     summary: "یک جملهٔ کوتاه دربارهٔ کل مجموعه."
+     items:
+       - title: "آشنایی کوتاه با اعداد مختلط"
+         path: "complex-numbers/introduction"
+         summary: "یک جملهٔ کوتاه دربارهٔ این برگه."
+   ```
+
+2. **Write the landing page** at `<topic-dir>/index.md` — the cover: the question
+   the sequence answers, the thread running through it, prerequisites, the
+   generated «فهرست برگه‌ها», and where it leads next. Copy the structure of
+   `complex-numbers/index.md`.
+
+3. **Drop the topic prefix from each note's H1.** The breadcrumb above the title
+   already names the topic, so `# توان‌ها و ریشه‌های واحد` — not
+   `# اعداد مختلط؛ توان‌ها و ریشه‌های واحد`. Leave the front-matter `title` alone.
+
+**Raw HTML inside a note is fragile.** The generated note list is an HTML block
+in a Markdown file, and Kramdown is picky: the opening tag must start at column 0
+on its own line, no line inside may be indented 4+ spaces (Kramdown turns it into
+a code block), and Liquid whitespace trimming (the hyphenated tag delimiters)
+must not glue the opening tag onto the previous line. If a block silently renders
+as escaped text, this is why.
+
+Note that `AGENTS.md`, `README.md` and `PROJECT_NOTES.md` are themselves rendered
+by Jekyll, so a literal Liquid tag written in their prose will break the build.
+
+---
+
+## 6. Note writing conventions (match the house style)
 
 Study an existing note before writing — good models:
 `complex-numbers/introduction.md`, `problems/sum_of_power_1.md`,
@@ -167,7 +230,7 @@ Study an existing note before writing — good models:
 
 ---
 
-## 6. Build & run commands
+## 7. Build & run commands
 
 Run `make help` for the full list. Most-used:
 
@@ -186,7 +249,7 @@ Deployment is automatic: pushing to `main` triggers GitHub Actions
 
 ---
 
-## 7. Guardrails for agents
+## 8. Guardrails for agents
 
 - **Prefer content work.** The default task is writing/editing notes. Touch
   `_layouts/`, `assets/css/`, `scripts/`, `Dockerfile`, or CI only when the task
@@ -196,7 +259,11 @@ Deployment is automatic: pushing to `main` triggers GitHub Actions
 - **Never hand-edit generated output** (`_site/`, `Gemfile.lock`,
   `node_modules/` — all gitignored).
 - **Two registries must agree with reality:** every visible note is in
-  `_data/site_index.yml`; every content directory is in the prerender whitelist.
+  `_data/site_index.yml` (inside a group); every content directory is in the
+  prerender whitelist.
+- **Don't hand-write course navigation.** Lesson numbers, breadcrumbs and
+  previous/next links are derived from `_data/site_index.yml`. Reorder the
+  `items` list; never type a "next lesson" link into a note.
 - **Don't add external CDNs.** KaTeX and the font are self-hosted on purpose
   (reliability + no first-load jank). Keep new assets local.
 - **Verify math renders** in a local preview before considering a note done —

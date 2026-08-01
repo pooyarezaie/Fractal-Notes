@@ -14,10 +14,14 @@ only adds a few Claude-Code-specific reminders on top of it.
   code just publishes them.
 - **Most tasks are writing or editing `.md` notes**, not changing infrastructure.
 - To add a note: create `<topic>/<name>.md` with `title` + `description` front
-  matter, write it in the house style, then register it in
-  `_data/site_index.yml` (and add the directory to
+  matter, write it in the house style, then register it under the right topic
+  group in `_data/site_index.yml` (and add the directory to
   `scripts/prerender-whitelist.json` if it's a new topic). Full checklist in
   `AGENTS.md` §4.
+- Notes are grouped by topic, and a group can be a **series** — an ordered
+  mini-course with a landing page and automatic previous/next navigation
+  (`complex-numbers/` is the example). Never hand-write those links; they come
+  from `_data/site_index.yml`. See `AGENTS.md` §5.
 
 ## Working here as Claude Code
 
