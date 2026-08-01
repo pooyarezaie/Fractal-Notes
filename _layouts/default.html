@@ -121,7 +121,7 @@
             <li class="side-nav-group">
               {% if group.path %}
               {%- assign group_home = group.path | append: '/' -%}
-              <a class="side-nav-group-title{% if cur_path == group_home %} active{% endif %}" href="{{ group_home | relative_url }}">{{ group.title }}{% if group.series %}<span class="series-badge">دوره</span>{% endif %}</a>
+              <a class="side-nav-group-title{% if cur_path == group_home %} active{% endif %}" href="{{ group_home | relative_url }}">{{ group.title }}</a>
               {% else %}
               <span class="side-nav-group-title">{{ group.title }}</span>
               {% endif %}

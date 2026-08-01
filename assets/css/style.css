@@ -222,7 +222,7 @@ a.side-nav-group-title.active {
     color: #555;
 }
 
-/* Ordered-series marker: the lesson number in front of a title */
+/* Ordered-series marker: the note's number in front of its title */
 .lesson-num {
     display: inline-block;
     min-width: 1.35em;
@@ -234,20 +234,6 @@ a.side-nav-group-title.active {
 
 .side-nav-list a.active .lesson-num {
     color: #1565c0;
-}
-
-/* «دوره» badge — marks a group that reads as an ordered mini-course */
-.series-badge {
-    display: inline-block;
-    margin-inline-start: 6px;
-    padding: 1px 7px;
-    border-radius: 999px;
-    background: #e8f0fb;
-    color: #1565c0;
-    font-size: 11px;
-    font-weight: 500;
-    line-height: 1.7;
-    vertical-align: middle;
 }
 
 .side-nav-close,

@@ -4,7 +4,8 @@
 #   title    group heading (Persian)
 #   path     optional landing page for the group (no leading slash, no .md)
 #   series   optional; true = an ordered mini-course. Its notes are numbered and
-#            get automatic «previous lesson / next lesson» navigation.
+#            get automatic «برگهٔ پیشین / برگهٔ بعدی» navigation. The Persian UI
+#            never says «دوره» or «درس» — the reader just sees numbered برگه‌ها.
 #   summary  optional one-line blurb shown on the homepage
 #   items    the notes of the group, in reading order:
 #              title    short title, WITHOUT the topic prefix (the group supplies it)
@@ -16,7 +17,7 @@
 - title: "اعداد مختلط"
   path: "complex-numbers"
   series: true
-  summary: "یک دورهٔ کوتاه در پنج درس: از این پرسش که «ضربِ دو بردار یعنی چه؟» تا حسابِ کاملِ اعداد مختلط — همه با یک تصویر هندسیِ واحد."
+  summary: "پنج برگهٔ پشت سر هم: از این پرسش که «ضربِ دو بردار یعنی چه؟» تا حسابِ کاملِ اعداد مختلط — همه با یک تصویر هندسیِ واحد."
   items:
     - title: "آشنایی کوتاه با اعداد مختلط"
       path: "complex-numbers/introduction"

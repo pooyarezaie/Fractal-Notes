@@ -141,11 +141,16 @@ This is the most common task. Follow every step or the note won't appear/render.
 
 ## 5. Series (mini-courses)
 
-Some topics are not a bag of independent notes but an **ordered course**. Mark
-the group `series: true` and give it a `path`, and the site does the rest:
-lessons are numbered, each lesson page gets a breadcrumb («اعداد مختلط · درس ۳ از ۵»)
-and previous/next links, and the homepage frames the group as one unit with a
-«دوره» badge.
+Some topics are not a bag of independent notes but an **ordered sequence**. Mark
+the group `series: true` and give it a `path`, and the site does the rest: the
+notes are numbered, each one gets a breadcrumb («اعداد مختلط · برگهٔ ۳ از ۵») and
+previous/next links, and the homepage frames the group as one unit with a link to
+its landing page.
+
+**Wording rule:** the Persian UI never calls it a دوره (course) and never calls a
+note a درس (lesson) — the reader only ever sees numbered **برگه‌ها**. «Series» /
+«mini-course» is internal vocabulary for this guide and the code, not for the
+site. Keep new copy in that register.
 
 `complex-numbers/` is the reference implementation. To build another one:
 
@@ -155,23 +160,23 @@ and previous/next links, and the homepage frames the group as one unit with a
    - title: "اعداد مختلط"
      path: "complex-numbers"      # the landing page, no leading slash
      series: true
-     summary: "یک جملهٔ کوتاه دربارهٔ کل دوره."
+     summary: "یک جملهٔ کوتاه دربارهٔ کل مجموعه."
      items:
        - title: "آشنایی کوتاه با اعداد مختلط"
          path: "complex-numbers/introduction"
-         summary: "یک جملهٔ کوتاه دربارهٔ این درس."
+         summary: "یک جملهٔ کوتاه دربارهٔ این برگه."
    ```
 
-2. **Write the landing page** at `<topic-dir>/index.md` — the course cover: the
-   question the course answers, the thread running through it, prerequisites, the
-   generated lesson list, and where it leads next. Copy the structure of
+2. **Write the landing page** at `<topic-dir>/index.md` — the cover: the question
+   the sequence answers, the thread running through it, prerequisites, the
+   generated «فهرست برگه‌ها», and where it leads next. Copy the structure of
    `complex-numbers/index.md`.
 
-3. **Drop the topic prefix from each lesson's H1.** The breadcrumb above the
-   title already names the course, so `# توان‌ها و ریشه‌های واحد` — not
+3. **Drop the topic prefix from each note's H1.** The breadcrumb above the title
+   already names the topic, so `# توان‌ها و ریشه‌های واحد` — not
    `# اعداد مختلط؛ توان‌ها و ریشه‌های واحد`. Leave the front-matter `title` alone.
 
-**Raw HTML inside a note is fragile.** The generated lesson list is an HTML block
+**Raw HTML inside a note is fragile.** The generated note list is an HTML block
 in a Markdown file, and Kramdown is picky: the opening tag must start at column 0
 on its own line, no line inside may be indented 4+ spaces (Kramdown turns it into
 a code block), and Liquid whitespace trimming (the hyphenated tag delimiters)

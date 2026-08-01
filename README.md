@@ -119,8 +119,9 @@ topic group in `_data/site_index.yml` (and add the directory to
 [AGENTS.md](AGENTS.md).
 
 Notes are organised into **topic groups**, and a group can be marked
-`series: true` — an ordered mini-course whose lessons are numbered and get
-automatic previous/next navigation plus a landing page (see
+`series: true` — an ordered mini-course whose notes are numbered and get
+automatic previous/next navigation plus a landing page (the Persian UI keeps this
+neutral: numbered برگه‌ها, never «دوره»/«درس»; see
 [`/complex-numbers/`](https://fractalnotes.com/complex-numbers/)). See
 [AGENTS.md](AGENTS.md) §5.
 

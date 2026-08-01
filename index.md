@@ -15,7 +15,7 @@ image: /assets/img/logo.png
 
 این یادداشت‌ها قرار نیست جایگزین کتاب باشند؛ بلکه **برگه‌های کوچک فهم**‌اند که هر کدام از زاویه‌ای کوچک شما را وارد موضوعی بزرگ می‌کنند.
 
-برخی برگه‌ها تک‌اند و هر جا که دوست داشتید می‌توانید بازشان کنید؛ اما بعضی‌ها با نشانِ **دوره** پشت سر هم چیده شده‌اند و مثل یک درسِ کوتاه از اول تا آخر خوانده می‌شوند.
+برخی برگه‌ها تک‌اند و هر جا که دوست داشتید می‌توانید بازشان کنید؛ اما بعضی‌ها **شماره‌دار**اند و پشت سر هم چیده شده‌اند تا از اول تا آخر خوانده شوند.
 
 ---
 
@@ -30,7 +30,6 @@ image: /assets/img/logo.png
       {%- else -%}
       {{ group.title }}
       {%- endif -%}
-      {%- if group.series %}<span class="series-badge">دوره</span>{% endif -%}
     </h3>
     {%- if group.summary %}<p class="topic-summary">{{ group.summary }}</p>{% endif -%}
     <ul class="topic-notes">
@@ -38,7 +37,7 @@ image: /assets/img/logo.png
       <li><a href="{{ item.path | relative_url }}">{% if group.series %}<span class="lesson-num">{% include fa-number.html n=forloop.index %}</span>{% endif %}{{ item.title }}</a></li>
       {%- endfor -%}
     </ul>
-    {%- if group.series and group.path %}<a class="topic-start" href="{{ group.path | append: '/' | relative_url }}">دربارهٔ این دوره و فهرست کاملش <span aria-hidden="true">←</span></a>{% endif -%}
+    {%- if group.series and group.path %}<a class="topic-start" href="{{ group.path | append: '/' | relative_url }}">دربارهٔ این برگه‌ها و فهرست کاملشان <span aria-hidden="true">←</span></a>{% endif -%}
   </section>
 {%- endfor -%}
 </div>
