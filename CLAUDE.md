@@ -50,4 +50,4 @@ make help             # All commands
 
 Key files: `_data/site_index.yml` (note list), `scripts/prerender-whitelist.json`
 (prerendered dirs), `_layouts/default.html` (only layout),
-`assets/css/style.css` (all styling).
+`assets/css/fractal.css` (all styling).

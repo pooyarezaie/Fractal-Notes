@@ -13,15 +13,33 @@
 - **Math in Markdown**: Inline `$...$`, display `$$...$$` (Kramdown converts to `\(...\)` / `\[...\]` for KaTeX)
 
 ### Styling
+- **Stylesheet**: `assets/css/fractal.css` — the only one. **Not** `style.css`: the
+  `github-pages` gem enables `jekyll-theme-primer` by default, and the theme's
+  `assets/css/style.scss` builds to `/assets/css/style.css`. Two files, one output
+  path — whichever won the race got shipped. `_config.yml` now sets an empty
+  `theme:` so no theme is loaded at all.
+- **Colors**: CSS custom properties in `:root`. The accent (`--accent: #4a3184`) is the
+  violet of the Sierpiński logo; change that one token to re-tint the whole site.
 - **Font**: Vazirmatn (Persian font), **self-hosted** at `assets/fonts/Vazirmatn-wght.woff2` (preloaded; SW-cached)
-- **Direction**: RTL (right-to-left)
+- **Direction**: RTL (right-to-left). Never use `letter-spacing` on Persian text — the
+  script joins its letters and tracking breaks the joins. Hierarchy comes from size and weight.
 - **Font Size**: 17px
 - **Line Height**: 1.9
 - **Max Width**: 800px
-- **Background**: #fdfdfd
+
+### Asset caching (`sw.js`)
+The service worker caches everything under `/assets/`. Fonts and KaTeX are cache-first
+forever (their content never changes without the filename changing); the stylesheet is
+stale-while-revalidate, and the layout requests it with a `?v={{ site.time }}` build
+stamp so the first load after a deploy is already fresh. Without both, a returning
+visitor keeps the stylesheet they cached on their first visit — indefinitely. Bump
+`CACHE_VERSION` in `sw.js` to force every client to drop its cache.
 
 ### Content Structure
-- Home page: `index.md` (Persian intro); it loops over `_data/site_index.yml` and renders one block per topic group.
+- Home page: `index.md`. A short hero, then every `series: true` group as a large card
+  (kicker, summary, numbered notes, "start here" button), then the remaining groups as a
+  responsive grid of topic cards. All of it is generated from `_data/site_index.yml` — the
+  topic and note counts included — so adding a note to that file is the only step needed.
 - Notes live as `.md` files inside topic directories: `complex-numbers/`, `induction/`, `trigonometry/`, `pigeonhole-principle/`, `linear-algebra/`, `problems/`, and `problem-solving/{symmetry,recasting}/`.
 - **`_data/site_index.yml` is the single source of truth** for the note list and side menu. It is a list of **topic groups**, each with `title`, optional `path`/`series`/`summary`, and an ordered `items` list (title + path, no leading slash, no `.md`). A note must be listed there to be visible.
 - **Series (mini-courses):** a group with `series: true` gets numbered notes, a landing page at `<path>/index.md`, and automatic previous/next navigation rendered by `_includes/series-nav.html`. `complex-numbers/` is the reference example. The Persian wording stays neutral — numbered **برگه‌ها**, never «دوره» or «درس»; "series"/"mini-course" is internal vocabulary only.

@@ -15,10 +15,13 @@ existing voice and render correctly.
 
 **Fractal Notes** ([fractalnotes.com](https://fractalnotes.com)) is a
 **Persian-language (Farsi), right-to-left** math education website. It is a
-collection of short, intuitive notes — "small sheets of understanding" — that
-each open a window onto a bigger idea. The author's method: to learn (or
-re-learn) something, write about it so simply that anyone would understand it,
-and share the excitement.
+collection of short, intuitive notes — «برگه‌هایی برای دیدن», *sheets for seeing* —
+each carrying one idea and opening a window onto a bigger one. The author's method:
+to learn (or re-learn) something, write about it so simply that anyone would
+understand it, and share the excitement.
+
+That phrase is the site's own description of itself, so keep new copy faithful to it:
+a note's job is to make an idea **visible**, not to be memorised.
 
 **The content is the product.** The code (Jekyll, prerender, Docker) exists only
 to publish the notes cleanly. Most work here is **writing and editing `.md`
@@ -51,7 +54,8 @@ Single layout: `_layouts/default.html` (`<html lang="fa" dir="rtl">`).
 ## 3. Repository map
 
 ```
-index.md                     Homepage. Renders one block per topic group from site_index.yml.
+index.md                     Homepage. Hero, then each series as a card, then the other
+                             topic groups as a grid — all from site_index.yml.
 _config.yml                  Jekyll config (title, SEO, kramdown math, plugins).
 _data/site_index.yml         ★ SINGLE SOURCE OF TRUTH for the note list / menu.
 _layouts/default.html        The only layout (head, KaTeX loader, nav, SEO JSON-LD).
@@ -60,7 +64,9 @@ _includes/fa-number.html     Integer (0–99) → Persian-Indic digits.
 scripts/prerender.js         Playwright prerender script.
 scripts/prerender-whitelist.json  Directories that get prerendered.
 assets/
-  css/style.css              All styling (RTL, typography, image/table handling).
+  css/fractal.css            All styling (RTL, typography, image/table handling).
+                             NOT style.css — that path collides with the github-pages
+                             default theme (primer), which silently overwrites it.
   katex/                     Self-hosted KaTeX (js, css, fonts).
   fonts/                     Self-hosted Vazirmatn.
   img/                       All note images (PNG diagrams).
@@ -266,6 +272,11 @@ Deployment is automatic: pushing to `main` triggers GitHub Actions
   `items` list; never type a "next lesson" link into a note.
 - **Don't add external CDNs.** KaTeX and the font are self-hosted on purpose
   (reliability + no first-load jank). Keep new assets local.
+- **Style with the tokens, not raw hex.** `assets/css/fractal.css` defines the palette
+  as custom properties in `:root`; new rules should use them. And never put
+  `letter-spacing` on Persian text — it breaks the letter joins.
+- **Don't create `assets/css/style.css`.** That path belongs to the github-pages
+  default theme and silently overwrites (or gets overwritten by) your file.
 - **Verify math renders** in a local preview before considering a note done —
   it's the single most common silent failure.
 - **This is a personal learning project.** When the author is "learning something
