@@ -266,6 +266,34 @@ Study an existing note before writing — good models:
   where Persian requires it (e.g. «می‌شود», «یادداشت‌ها»).
 - Do not translate standard math terms awkwardly — keep the note readable.
 
+**Active learning (the series template)**
+Every series برگه follows this pattern (see any `complex-numbers/*.md`):
+- One guess-first box mid-note:
+  `<div class="pause" markdown="1">` containing
+  `**پیش از ادامه، حدس بزنید.** …` and (optionally) a collapsible answer.
+- A `## تمرین‌ها` section before جمع‌بندی: two short exercises plus one
+  transfer problem labelled `**یک قدم فراتر.**` — deliberately *not*
+  isomorphic to the worked examples. Answers always fold away:
+  ```html
+  <details class="exercise" markdown="1">
+  <summary>پاسخ</summary>
+
+  …markdown + math…
+
+  </details>
+  ```
+- After the جمع‌بندی bullets, a one-paragraph `**اکنون باید بتوانید…**`
+  can-do list (skills, not topics).
+- Figures get a one-line caption right after the image block:
+  `<p class="fig-caption">…</p>`. Diagrams label their axes Re/Im.
+- Interactive labs are `.lab` divs (`data-lab="multiply" | "roots" | "orbit"`)
+  powered by self-hosted `assets/js/complex-labs.js` + one
+  `<script defer>` tag per page. The prerender bakes post-JS DOM and canvas
+  pixels are not serialized, so lab code must re-initialize on every load
+  and must not persist state in DOM attributes.
+Remember the column-0 rule for all this raw HTML (§5), and that complexity
+has a cost — keep every box short.
+
 ---
 
 ## 7. Build & run commands

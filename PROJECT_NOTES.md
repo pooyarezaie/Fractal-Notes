@@ -20,6 +20,12 @@
   `theme:` so no theme is loaded at all.
 - **Colors**: CSS custom properties in `:root`. The accent (`--accent: #4a3184`) is the
   violet of the Sierpiński logo; change that one token to re-tint the whole site.
+- **Active-learning components**: `fractal.css` also styles `.pause` (guess-first
+  boxes), `details.exercise` (collapsible answers), `.fig-caption`, and `.lab`
+  (canvas widgets). The lab logic lives in self-hosted `assets/js/complex-labs.js`
+  (multiply / roots / orbit widgets, selected via `data-lab`); it re-initializes
+  on every page load because the prerender bakes DOM but not canvas pixels.
+  Markup conventions are documented in `AGENTS.md` §6.
 - **Font**: Vazirmatn (Persian font), **self-hosted** at `assets/fonts/Vazirmatn-wght.woff2` (preloaded; SW-cached)
 - **Direction**: RTL (right-to-left). Never use `letter-spacing` on Persian text — the
   script joins its letters and tracking breaks the joins. Hierarchy comes from size and weight.
