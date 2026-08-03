@@ -248,6 +248,11 @@ Study an existing note before writing — good models:
 **Math** (KaTeX via Kramdown)
 - Inline: `$ ... $`  ·  Display: `$$ ... $$` on their own lines.
 - Standard LaTeX. Persian text and LaTeX mix freely on a line.
+- **Never put Persian inside a formula** (e.g. `\text{ثابت}`): KaTeX has no
+  metrics for Persian glyphs and renders broken gray boxes. Keep the Persian
+  words outside the math (`$y < m$ و $z < m$`) or use a symbol (`= c`).
+- Avoid escaping `*` as `\*` inside math — Kramdown leaves it as `\*` in
+  `$$ ... $$` blocks and KaTeX fails on it. Write `z^{\ast}` instead.
 - Test every formula in the local preview — a broken delimiter silently fails to
   render.
 
