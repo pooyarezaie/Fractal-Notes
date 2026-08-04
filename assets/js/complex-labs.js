@@ -278,12 +278,16 @@
       var key = mode() + (mode() === 'j' ? ':' + fmt(c.re) + ',' + fmt(c.im) : '');
       if (key === backdropKey && backdrop) return;
       backdropKey = key;
-      var N = 240, maxIt = 60, esc = 4;
+      var isJ = mode() === 'j';
+      // The certain-escape test is |z| > 2 AND |z| >= |c|, so the bailout radius
+      // is max(2, |c|). In Mandelbrot mode z0 = 0, and any |c| > 2 already
+      // escapes on the first step, so radius 2 is exact there.
+      var R = isJ ? Math.max(2, cabs(c)) : 2;
+      var N = 240, maxIt = 60, esc = R * R;
       var off = document.createElement('canvas');
       off.width = N; off.height = N;
       var octx = off.getContext('2d');
       var img = octx.createImageData(N, N);
-      var isJ = mode() === 'j';
       for (var py = 0; py < N; py++) {
         for (var px = 0; px < N; px++) {
           var re = (px / N) * 4.4 - 2.2;
@@ -299,7 +303,7 @@
             it++;
           }
           var o = 4 * (py * N + px);
-          if (it >= maxIt) { // bounded: light violet
+          if (it >= maxIt) { // no escape within maxIt (NOT proof of boundedness)
             img.data[o] = 231; img.data[o + 1] = 225; img.data[o + 2] = 246; img.data[o + 3] = 255;
           } else {
             img.data[o] = 255; img.data[o + 1] = 255; img.data[o + 2] = 255; img.data[o + 3] = 255;
@@ -338,14 +342,14 @@
         ctx.arc(p[0], p[1], 2.5, 0, 2 * Math.PI);
         ctx.fill();
         prev = p;
-        if (cabs(z) > 2 && cabs(z) > cabs(c)) { escaped = k; break; }
+        if (cabs(z) > 2 && cabs(z) >= cabs(c)) { escaped = k; break; }
       }
       handle(v, c, '#4a3184', 'c');
       if (isJ) handle(v, z0, '#a0623a', 'z₀');
       if (readout) {
         readout.textContent =
           'c = ' + fmtZ(c) + (isJ ? '   z₀ = ' + fmtZ(z0) : '   z₀ = 0') +
-          '   →   ' + (escaped < 0 ? '✓ bounded (60 steps)' : 'escaped at step ' + escaped);
+          '   →   ' + (escaped < 0 ? 'no escape in 60 steps' : 'escaped at step ' + escaped);
       }
     }
 
