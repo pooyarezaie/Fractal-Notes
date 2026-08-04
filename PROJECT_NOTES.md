@@ -54,6 +54,28 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
 - See `AGENTS.md` for the full step-by-step "add a new note" workflow and writing conventions.
 
 
+### SEO
+- **Meta/OG tags**: `jekyll-seo-tag` (title, description, canonical, Open Graph,
+  Twitter cards) + `jekyll-sitemap`. `robots.txt` points at `/sitemap.xml`.
+- **Dates**: every note carries `date:` (publish) and `last_modified_at:` front
+  matter. This makes `jekyll-seo-tag` emit `og:type=article` + a `BlogPosting`
+  JSON-LD with real dates, and feeds the layout's own `Article` JSON-LD
+  (`datePublished`/`dateModified`) and the Atom feed. Bump `last_modified_at`
+  on substantial edits.
+- **Structured data**: `_layouts/default.html` emits a JSON-LD `@graph` with
+  `WebSite` (incl. `alternateName: "Fractal Notes"` so Google shows the right
+  site name), `BreadcrumbList`, and an enriched `Article` per note.
+- **Feed**: `feed.xml` is a hand-rolled Atom template (notes are Jekyll *pages*,
+  not posts, so `jekyll-feed` can't see them); it lists every note registered in
+  `_data/site_index.yml`, newest first, with an autodiscovery `<link>` in the layout.
+- **404**: `404.html` (GitHub Pages picks it up automatically; `noindex`).
+- **Excludes**: `_config.yml` `exclude:` keeps internal docs (`AGENTS.md`,
+  `CLAUDE.md`, `README.md`, `PROJECT_NOTES.md`), build tooling and configs out of
+  `_site` — the `github-pages` optional-front-matter plugin would otherwise
+  publish every `.md` in the repo (AGENTS/CLAUDE used to end up in the sitemap).
+- Local builds show `http://localhost:4000` URLs — the `github-pages` gem
+  overrides `site.url` outside `JEKYLL_ENV=production`; deploys are unaffected.
+
 ### Dependencies
 - **Ruby**: `github-pages` gem (includes Jekyll and all necessary plugins)
 - **Node (for prerender)**: Playwright (Chromium), `serve-handler`; used by GitHub Actions and Docker build

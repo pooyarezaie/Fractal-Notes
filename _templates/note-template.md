@@ -2,6 +2,8 @@
 title: "عنوان یادداشت"
 description: "یک جملهٔ کوتاه توصیفی برای موتور جست‌وجو و کارت‌های اشتراک‌گذاری."
 image: "/assets/img/logo.png"
+date: 2026-01-01            # publish date (YYYY-MM-DD) — set when the note goes live
+last_modified_at: 2026-01-01  # bump on substantial edits
 ---
 
 <!--
