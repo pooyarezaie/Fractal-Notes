@@ -131,7 +131,7 @@ $$
 <div class="lab" data-lab="multiply">
 <p class="lab-hint">آزمایشگاه: دو نقطهٔ $z_1$ و $z_2$ را با موس یا انگشت بکشید و ببینید حاصل‌ضرب چگونه می‌چرخد و کش می‌آید — طول‌ها ضرب می‌شوند و زاویه‌ها جمع.</p>
 <canvas width="480" height="480" aria-label="آزمایشگاه ضرب اعداد مختلط"></canvas>
-<p class="lab-readout"></p>
+<p class="lab-readout" aria-live="polite" aria-atomic="true"></p>
 <noscript><p class="lab-hint">برای این آزمایش تعاملی، جاوااسکریپت لازم است.</p></noscript>
 </div>
 <script defer src="/assets/js/complex-labs.js"></script>

@@ -322,27 +322,44 @@
       v.ctx.drawImage(backdrop, 0, 0, v.w, v.h);
       drawAxes(v, true);
       circle(v, 2, true);
-      // orbit
+      // Orbit: iterate first, draw second, so the whole path can be coloured by
+      // the outcome. The two outcomes are not symmetric — escape is certain,
+      // while "still here after 60 steps" only means we stopped looking — so
+      // they must not look alike.
       var isJ = mode() === 'j';
       var z = isJ ? { re: z0.re, im: z0.im } : { re: 0, im: 0 };
-      var ctx = v.ctx;
-      var prev = v.toPx(z);
+      var pts = [z];
       var escaped = -1;
-      ctx.strokeStyle = '#a0623a';
-      ctx.fillStyle = '#a0623a';
-      ctx.lineWidth = 1.5;
       for (var k = 1; k <= 60; k++) {
         z = { re: z.re * z.re - z.im * z.im + c.re, im: 2 * z.re * z.im + c.im };
-        var p = v.toPx(z);
+        pts.push(z);
+        if (cabs(z) > 2 && cabs(z) >= cabs(c)) { escaped = k; break; }
+      }
+      var ctx = v.ctx;
+      // violet = has not escaped yet (matches the violet backdrop);
+      // orange = escape is certain.
+      var orbitColor = escaped < 0 ? '#4a3184' : '#a0623a';
+      ctx.strokeStyle = orbitColor;
+      ctx.fillStyle = orbitColor;
+      ctx.lineWidth = 1.5;
+      for (var i = 1; i < pts.length; i++) {
+        var a = v.toPx(pts[i - 1]);
+        var b = v.toPx(pts[i]);
         ctx.beginPath();
-        ctx.moveTo(prev[0], prev[1]);
-        ctx.lineTo(p[0], p[1]);
+        ctx.moveTo(a[0], a[1]);
+        ctx.lineTo(b[0], b[1]);
         ctx.stroke();
         ctx.beginPath();
-        ctx.arc(p[0], p[1], 2.5, 0, 2 * Math.PI);
+        ctx.arc(b[0], b[1], 2.5, 0, 2 * Math.PI);
         ctx.fill();
-        prev = p;
-        if (cabs(z) > 2 && cabs(z) >= cabs(c)) { escaped = k; break; }
+      }
+      if (escaped >= 0) {
+        // ring the step at which escape became certain
+        var e = v.toPx(pts[pts.length - 1]);
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(e[0], e[1], 7, 0, 2 * Math.PI);
+        ctx.stroke();
       }
       handle(v, c, '#4a3184', 'c');
       if (isJ) handle(v, z0, '#a0623a', 'z₀');

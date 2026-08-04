@@ -73,7 +73,7 @@ $$
 <p class="lab-hint">آزمایشگاه: نقطهٔ $w$ را بکشید و $n$ را تغییر دهید؛ چندضلعیِ ریشه‌ها همراهش می‌چرخد و کش می‌آید.</p>
 <canvas width="480" height="480" aria-label="آزمایشگاه ریشه‌های n-ام"></canvas>
 <div class="lab-controls"><label>n = <span class="lab-n">5</span></label><input type="range" min="2" max="12" value="5" step="1" aria-label="انتخاب n"></div>
-<p class="lab-readout"></p>
+<p class="lab-readout" aria-live="polite" aria-atomic="true"></p>
 <noscript><p class="lab-hint">برای این آزمایش تعاملی، جاوااسکریپت لازم است.</p></noscript>
 </div>
 <script defer src="/assets/js/complex-labs.js"></script>
