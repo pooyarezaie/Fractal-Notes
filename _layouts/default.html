@@ -16,6 +16,13 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "WebSite",
+          "name": {{ site.title | jsonify }},
+          "alternateName": ["Fractal Notes", "fractalnotes"],
+          "url": "{{ site.url }}/",
+          "inLanguage": "fa"
+        },
+        {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "{{ site.title | escape }}", "item": "{{ site.url }}/" }
@@ -30,13 +37,24 @@
           "headline": {{ page.title | jsonify }},
           "description": {{ page.description | default: site.description | jsonify }},
           "url": "{{ page_url_abs }}",
-          "author": { "@type": "Person", "name": {{ site.author | jsonify }} },
+          "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page_url_abs }}" },
+          "inLanguage": "fa",
+          {%- if page.image %}
+          "image": "{{ site.url }}{{ page.image }}",
+          {%- endif %}
+          {%- if page.date %}
+          "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
+          "dateModified": "{{ page.last_modified_at | default: page.date | date: '%Y-%m-%d' }}",
+          {%- endif %}
+          "author": { "@type": "Person", "name": {{ site.author.name | jsonify }}, "url": "{{ site.url }}/" },
           "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "logo": { "@type": "ImageObject", "url": "{{ site.url }}{{ site.logo }}" } }
         }
         {%- endif -%}
       ]
     }
     </script>
+
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 
     <!-- Preload main font for faster first paint; SW caches it for repeat visits -->
     <link rel="preload" href="{{ '/assets/fonts/Vazirmatn-wght.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>

@@ -101,12 +101,17 @@ This is the most common task. Follow every step or the note won't appear/render.
    copy the ready-made skeleton at `_templates/note-template.md`.
 
 2. **Write the front matter** (YAML). `title` and `description` are required;
-   `image` is optional (used for social/SEO cards):
+   `image` is optional (used for social/SEO cards); `date` is the publish date
+   and feeds structured data (`article` metadata, dates in search results) and
+   the Atom feed — set it when the note first goes live, and bump
+   `last_modified_at` on substantial edits:
    ```yaml
    ---
    title: "عنوان یادداشت"          # short Persian title (no "# " here)
    description: "یک جملهٔ توصیفی برای SEO و کارت‌های اشتراک‌گذاری."
    image: "/assets/img/logo.png"   # optional; a relevant diagram is better
+   date: 2026-08-05                # publish date (YYYY-MM-DD)
+   last_modified_at: 2026-08-05    # bump on substantial edits
    ---
    ```
 
