@@ -469,11 +469,14 @@ table {
     border-collapse: collapse;
     margin: 0;
     width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--line);
 }
 
 table th,
 table td {
-    padding: 4px 6px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
 }
 
 /* KaTeX: always LTR and isolate from RTL so superscripts/indices (e.g. n^k) don't flip */
