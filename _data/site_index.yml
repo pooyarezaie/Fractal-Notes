@@ -51,6 +51,8 @@
       path: "problem-solving/roots-of-unity/tiling-with-roots-of-unity"
     - title: "مسئلهٔ ششم المپیاد جهانی ۱۹۹۵"
       path: "problem-solving/roots-of-unity/imo-1995-subset-sums"
+    - title: "مسئلهٔ افراز چندضلعی منتظم"
+      path: "problem-solving/roots-of-unity/regular-polygon-partition"
 
 - title: "تقارن"
   summary: "تقارن فقط زیباییِ شکل‌ها نیست؛ ابزار حل است — گاهی باید آن را در مسئله دید، و گاهی، عجیب‌تر، باید خودمان بسازیمش."
