@@ -281,17 +281,36 @@ Every series برگه follows this pattern (see any `complex-numbers/*.md`):
 - One guess-first box mid-note:
   `<div class="pause" markdown="1">` containing
   `**پیش از ادامه، حدس بزنید.** …` and (optionally) a collapsible answer.
-- A `## تمرین‌ها` section before جمع‌بندی: two short exercises plus one
-  transfer problem labelled `**یک قدم فراتر.**` — deliberately *not*
-  isomorphic to the worked examples. Answers always fold away:
+- A `## تمرین‌ها` section before جمع‌بندی: a ramp from consolidation to
+  one transfer problem deliberately *not* isomorphic to the worked
+  examples. Each exercise carries a role label after its number
+  (`**تمرین ۱ — تثبیتِ ایده.**`, …, `**تمرین ۶ — پیشرفته، مناسبِ
+  دانشجویان.**`) and unfolds in three staged boxes — small hint, main
+  idea, full solution. The `reveal-step` class hides each later box until
+  the previous one has been opened once (wired in `_layouts/default.html`;
+  without JS all boxes simply show):
   ```html
-  <details class="exercise" markdown="1">
-  <summary>پاسخ</summary>
+  <details class="exercise reveal-step" markdown="1">
+  <summary>راهنمای کوچک</summary>
+
+  …
+  </details>
+
+  <details class="exercise reveal-step" markdown="1">
+  <summary>ایدهٔ اصلی</summary>
+
+  …
+  </details>
+
+  <details class="exercise reveal-step" markdown="1">
+  <summary>راه‌حلِ کامل</summary>
 
   …markdown + math…
 
   </details>
   ```
+  Standalone answer boxes (the guess box, optional asides) keep a single
+  `<details class="exercise" markdown="1">` with `<summary>پاسخ</summary>`.
 - After the جمع‌بندی bullets, a one-paragraph `**اکنون باید بتوانید…**`
   can-do list (skills, not topics).
 - Figures get a one-line caption right after the image block:

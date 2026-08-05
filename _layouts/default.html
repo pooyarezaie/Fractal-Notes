@@ -257,6 +257,23 @@
       })();
 
       (function() {
+        var steps = document.querySelectorAll('details.reveal-step');
+        Array.prototype.forEach.call(steps, function(step) {
+          var prev = step.previousElementSibling;
+          if (prev && prev.matches('details.reveal-step')) {
+            step.classList.add('reveal-locked');
+          }
+          step.addEventListener('toggle', function() {
+            if (!step.open) return;
+            var next = step.nextElementSibling;
+            if (next && next.matches('details.reveal-step')) {
+              next.classList.remove('reveal-locked');
+            }
+          });
+        });
+      })();
+
+      (function() {
         if (!('serviceWorker' in navigator) || location.protocol !== 'https:' && location.hostname !== 'localhost') return;
         navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}', { scope: '{{ "/" | relative_url }}' }).catch(function() {});
       })();
