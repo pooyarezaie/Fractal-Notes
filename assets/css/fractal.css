@@ -29,6 +29,13 @@
     --line-strong: #d5cfe6;
 }
 
+/* Reserve the viewport scrollbar's gutter permanently, so the scrollbar
+   appearing/disappearing (e.g. a <details> box opening pushes the page past
+   the viewport) never shifts the layout sideways. */
+html {
+    scrollbar-gutter: stable;
+}
+
 body {
     font-family: "Vazirmatn", sans-serif;
     line-height: 1.9;
