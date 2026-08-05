@@ -1137,6 +1137,13 @@ details.exercise > :last-child {
     padding-bottom: 4px;
 }
 
+/* Staged disclosure: a .reveal-step stays hidden until the previous step
+   has been opened once. The lock class is added by JS, so without JS every
+   step is simply visible. */
+details.reveal-step.reveal-locked {
+    display: none;
+}
+
 .fig-caption {
     text-align: center;
     color: var(--ink-soft);
