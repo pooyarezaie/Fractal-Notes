@@ -498,6 +498,15 @@ table td {
     unicode-bidi: isolate;
 }
 
+/* KaTeX emits every formula twice: hidden MathML for assistive tech, plus the
+   visual .katex-html. KaTeX hides the MathML with clip (not display:none), so it
+   stays in the selection layer and copying a paragraph pastes each formula twice.
+   user-select:none drops it from the selection without touching the a11y tree. */
+.katex .katex-mathml {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 /* Scrollable display math – KaTeX (faster than MathJax, less first-load jank) */
 .katex-display {
     display: block;
