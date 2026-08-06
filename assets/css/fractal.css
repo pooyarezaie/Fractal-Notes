@@ -180,7 +180,12 @@ main img {
     padding: 20px 14px 20px 14px;
     position: sticky;
     top: 0;
-    max-height: 100vh;
+    /* Stay short of the viewport bottom by more than the footer's height
+       (~90px incl. its top margin). A full-100vh sticky box reaches the
+       bottom of .layout during the last ~90px of scrolling and gets clamped
+       there — so any page-height change (opening a <details> answer) made it
+       visibly jump. Never touching the bottom means never clamping. */
+    max-height: calc(100vh - 160px);
     overflow-y: auto;
     border-left: 1px solid var(--line);
 }
