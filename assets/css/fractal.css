@@ -1133,6 +1133,13 @@ details.exercise > :not(summary) {
     margin-left: 16px;
 }
 
+/* Keep figure captions centered inside a collapsible box: the side margins
+   above would otherwise cancel .fig-caption's auto centering. */
+details.exercise > .fig-caption {
+    margin-right: auto;
+    margin-left: auto;
+}
+
 details.exercise > :last-child {
     padding-bottom: 4px;
 }
