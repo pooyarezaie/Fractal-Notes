@@ -4,6 +4,10 @@ description: "تحلیل مسئلهٔ رنگ‌آمیزی یال‌های بیس
 image: "/assets/img/logo.png"
 date: 2026-02-13
 last_modified_at: 2026-02-13
+# Draft: not finished, not listed in _data/site_index.yml. Keeps it out of
+# sitemap.xml and adds noindex, so Google doesn't index a half-written note.
+# Remove this line when the note is ready and gets registered in site_index.yml.
+sitemap: false
 ---
 
 # وقتی یک مسئله ترسناک، ناگهان خطی می‌شود

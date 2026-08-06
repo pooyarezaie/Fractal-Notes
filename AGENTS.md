@@ -130,8 +130,14 @@ This is the most common task. Follow every step or the note won't appear/render.
    Item titles are **prefix-free** (`"مسئله‌ی قرص‌ها"`, not `"تقارن؛ مسئله‌ی قرص‌ها"`) —
    the group heading already says the topic. The front-matter `title` may keep the
    prefix; it feeds `<title>`/SEO, where the extra context helps.
+   Paths here carry no trailing slash, but pages are served at `/topic-dir/name/`
+   (`permalink: pretty`), so every template appends one when it builds an href.
+   Follow that when adding a link: `{{ item.path | append: '/' | relative_url }}`.
+
    **A note not listed here is invisible on the site** (though the URL still works
-   once built). Example of an existing unlisted draft:
+   once built). An unlisted draft is still built and would otherwise appear in
+   `sitemap.xml`, so give it `sitemap: false` in its front matter until it is ready —
+   that also makes the layout emit `noindex`. Example of an existing unlisted draft:
    `problem-solving/recasting/putnam-icosahedron-problem.md`.
 
    To start a brand-new group, add a top-level entry with `title` + `items`.

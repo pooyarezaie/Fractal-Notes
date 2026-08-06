@@ -49,6 +49,12 @@ social:
 # assets/css/style.scss fights our own stylesheet for the same output path.
 theme:
 
+# Notes live at /topic/name/ rather than /topic/name.html, so the URL a page is
+# linked by, the one it declares canonical, and the one in sitemap.xml are all the
+# same string. Without this, jekyll-seo-tag and jekyll-sitemap emit the .html form
+# while every link in the templates points at the extensionless one.
+permalink: pretty
+
 markdown: kramdown
 kramdown:
   math_engine: mathjax

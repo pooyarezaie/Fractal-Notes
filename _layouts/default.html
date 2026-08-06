@@ -135,7 +135,8 @@
     <div class="site-body">
       <aside class="side-nav" id="side-nav" aria-label="فهرست مطالب">
         <button type="button" class="side-nav-close" id="side-nav-close" aria-label="بستن فهرست">×</button>
-        {%- assign cur_path = page.url | replace: '.html', '' | remove_first: '/' -%}
+        {%- comment -%} page.url is /topic/name/ ; site_index paths are topic/name {%- endcomment -%}
+        {%- assign cur_path = page.url | remove_first: '/' -%}
         <nav class="side-nav-inner">
           <span class="side-nav-title">برگه‌ها</span>
           <ul class="side-nav-groups">
@@ -149,7 +150,8 @@
               {% endif %}
               <ul class="side-nav-list">
                 {% for item in group.items %}
-                <li><a href="{{ item.path | relative_url }}"{% if cur_path == item.path %} class="active"{% endif %}>{% if group.series %}<span class="lesson-num">{% include fa-number.html n=forloop.index %}</span>{% endif %}{{ item.title }}</a></li>
+                {%- assign item_home = item.path | append: '/' -%}
+                <li><a href="{{ item_home | relative_url }}"{% if cur_path == item_home %} class="active"{% endif %}>{% if group.series %}<span class="lesson-num">{% include fa-number.html n=forloop.index %}</span>{% endif %}{{ item.title }}</a></li>
                 {% endfor %}
               </ul>
             </li>
