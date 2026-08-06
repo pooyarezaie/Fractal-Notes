@@ -40,11 +40,11 @@ image: /assets/img/logo.png
 {%- endif %}
 <ol class="home-series-list">
 {%- for item in group.items %}
-<li><a href="{{ item.path | relative_url }}"><span class="home-num">{% include fa-number.html n=forloop.index %}</span><span class="home-series-name">{{ item.title }}</span></a></li>
+<li><a href="{{ item.path | append: '/' | relative_url }}"><span class="home-num">{% include fa-number.html n=forloop.index %}</span><span class="home-series-name">{{ item.title }}</span></a></li>
 {%- endfor %}
 </ol>
 <p class="home-series-actions">
-<a class="home-cta" href="{{ group.items[0].path | relative_url }}">از برگهٔ یکم شروع کنید <span aria-hidden="true">←</span></a>
+<a class="home-cta" href="{{ group.items[0].path | append: '/' | relative_url }}">از برگهٔ یکم شروع کنید <span aria-hidden="true">←</span></a>
 {%- if group.path %}
 <a class="home-quiet-link" href="{{ group.path | append: '/' | relative_url }}">دربارهٔ این مجموعه</a>
 {%- endif %}
@@ -63,7 +63,7 @@ image: /assets/img/logo.png
 {%- endif %}
 <ul class="home-card-list">
 {%- for item in group.items %}
-<li><a href="{{ item.path | relative_url }}">{{ item.title }}</a></li>
+<li><a href="{{ item.path | append: '/' | relative_url }}">{{ item.title }}</a></li>
 {%- endfor %}
 </ul>
 </section>

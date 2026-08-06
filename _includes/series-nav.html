@@ -9,12 +9,14 @@
   Persian UI wording deliberately avoids «دوره»/«درس»: the reader just sees
   numbered برگه‌ها. The series machinery stays; only the labels are neutral.
 {%- endcomment -%}
-{%- assign cur_path = page.url | replace: '.html', '' | remove_first: '/' -%}
+{%- comment -%} page.url is /topic/name/ ; site_index paths are topic/name {%- endcomment -%}
+{%- assign cur_path = page.url | remove_first: '/' -%}
 {%- assign found = false -%}
 {%- for group in site.data.site_index -%}
   {%- if group.series -%}
     {%- for item in group.items -%}
-      {%- if item.path == cur_path -%}
+      {%- assign item_home = item.path | append: '/' -%}
+      {%- if item_home == cur_path -%}
         {%- assign found = true -%}
         {%- assign s_group = group -%}
         {%- assign s_pos = forloop.index -%}
@@ -43,7 +45,7 @@
     {%- if s_pos > 1 -%}
     {%- assign prev_i = s_pos | minus: 2 -%}
     {%- assign prev_item = s_group.items[prev_i] -%}
-    <a class="series-nav-link series-nav-prev" href="{{ prev_item.path | relative_url }}" rel="prev">
+    <a class="series-nav-link series-nav-prev" href="{{ prev_item.path | append: '/' | relative_url }}" rel="prev">
       <span class="series-nav-dir"><span class="series-nav-arrow" aria-hidden="true">→</span> برگهٔ پیشین</span>
       <span class="series-nav-name">{{ prev_item.title }}</span>
     </a>
@@ -52,7 +54,7 @@
     {%- endif -%}
     {%- if s_pos < s_total -%}
     {%- assign next_item = s_group.items[s_pos] -%}
-    <a class="series-nav-link series-nav-next" href="{{ next_item.path | relative_url }}" rel="next">
+    <a class="series-nav-link series-nav-next" href="{{ next_item.path | append: '/' | relative_url }}" rel="next">
       <span class="series-nav-dir">برگهٔ بعدی <span class="series-nav-arrow" aria-hidden="true">←</span></span>
       <span class="series-nav-name">{{ next_item.title }}</span>
     </a>

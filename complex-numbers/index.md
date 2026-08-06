@@ -45,7 +45,7 @@ last_modified_at: 2026-08-03
 
 <ol class="course-toc">
 {% for item in course.items %}<li class="course-toc-item">
-<a class="course-toc-link" href="{{ item.path | relative_url }}">
+<a class="course-toc-link" href="{{ item.path | append: '/' | relative_url }}">
 <span class="course-toc-num">{% include fa-number.html n=forloop.index %}</span>
 <span class="course-toc-body">
 <span class="course-toc-title">{{ item.title }}</span>
@@ -55,4 +55,4 @@ last_modified_at: 2026-08-03
 </li>
 {% endfor %}</ol>
 
-<p class="course-start"><a href="{{ course.items[0].path | relative_url }}">از برگهٔ یکم شروع کنید <span aria-hidden="true">←</span></a></p>
+<p class="course-start"><a href="{{ course.items[0].path | append: '/' | relative_url }}">از برگهٔ یکم شروع کنید <span aria-hidden="true">←</span></a></p>

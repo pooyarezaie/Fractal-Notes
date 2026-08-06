@@ -6,7 +6,7 @@ permalink: /feed.xml
 {%- assign notes = "" | split: "" -%}
 {%- for group in site.data.site_index -%}
   {%- for item in group.items -%}
-    {%- assign target = "/" | append: item.path | append: ".html" -%}
+    {%- assign target = "/" | append: item.path | append: "/" -%}
     {%- for p in site.pages -%}
       {%- if p.url == target -%}
         {%- assign notes = notes | push: p -%}

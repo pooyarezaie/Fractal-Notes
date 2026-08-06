@@ -55,8 +55,17 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
 
 
 ### SEO
+- **URLs**: `permalink: pretty` in `_config.yml`, so `complex-numbers/nth-roots.md`
+  is served at `/complex-numbers/nth-roots/`. This keeps three things identical: the
+  URL the templates link, the one `jekyll-seo-tag` declares canonical, and the one in
+  `sitemap.xml`. Because `_data/site_index.yml` paths carry no trailing slash, every
+  template appends one (`item.path | append: '/' | relative_url`) — drop that and each
+  internal link becomes a redirect.
 - **Meta/OG tags**: `jekyll-seo-tag` (title, description, canonical, Open Graph,
   Twitter cards) + `jekyll-sitemap`. `robots.txt` points at `/sitemap.xml`.
+- **Unfinished notes**: set `sitemap: false` in the front matter. It keeps the note
+  out of `sitemap.xml` and makes the layout emit `noindex, nofollow`, so a draft that
+  is already committed can't be indexed before it is registered in `site_index.yml`.
 - **Dates**: every note carries `date:` (publish) and `last_modified_at:` front
   matter. This makes `jekyll-seo-tag` emit `og:type=article` + a `BlogPosting`
   JSON-LD with real dates, and feeds the layout's own `Article` JSON-LD
