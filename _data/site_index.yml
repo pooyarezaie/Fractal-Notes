@@ -71,6 +71,8 @@
   items:
     - title: "دوقلوهای جداناشدنی: i و −i"
       path: "logic-and-symmetry/twins-i-and-minus-i"
+    - title: "گروه گالوا: تقارن‌های یک معادله"
+      path: "logic-and-symmetry/galois-symmetries-of-an-equation"
 
 - title: "تقارن"
   summary: "تقارن فقط زیباییِ شکل‌ها نیست؛ ابزار حل است — گاهی باید آن را در مسئله دید، و گاهی، عجیب‌تر، باید خودمان بسازیمش."
