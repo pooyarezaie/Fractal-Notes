@@ -4,6 +4,7 @@ description: "مسئلهٔ یافتن مثلثی با سه یالِ صفر در 
 image: "/assets/img/logo.png"
 date: 2025-12-14
 last_modified_at: 2026-08-03
+redirect_from: "/induction/zero-triangle-graph-problem.html"
 ---
 
 # مسئلهٔ گراف کامل با برچسب‌های دودویی  

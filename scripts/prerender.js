@@ -36,7 +36,14 @@ function collectHtmlUnder(dirRel) {
     const full = path.join(SITE_DIR, rel);
     if (e.isDirectory()) {
       out.push(...collectHtmlUnder(rel));
-    } else if (e.isFile() && e.name.endsWith('.html')) {
+    } else if (e.isFile() && e.name === 'index.html') {
+      // Only index.html. With `permalink: pretty` every real page is a
+      // directory's index.html; the other .html files here are the legacy
+      // redirect stubs jekyll-redirect-from emits for each note's `redirect_from`
+      // front matter. Prerendering one would follow its meta refresh and
+      // overwrite the stub with a copy of the target page — turning a redirect
+      // into duplicate content.
+      //
       // Always request the literal file path. The local server runs with
       // cleanUrls:false, so asking for a directory ("/complex-numbers/") gets a
       // generated directory listing instead of its index.html — which would then

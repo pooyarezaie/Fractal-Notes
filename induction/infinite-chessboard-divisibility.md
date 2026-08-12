@@ -4,6 +4,7 @@ description: "مسئله‌ای المپیادی دربارهٔ چیدن اعد�
 image: "/assets/img/logo.png"
 date: 2026-01-03
 last_modified_at: 2026-02-13
+redirect_from: "/induction/infinite-chessboard-divisibility.html"
 ---
 
 # مسئله: اعداد طبیعی روی صفحهٔ شطرنجی نامتناهی

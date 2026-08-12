@@ -4,6 +4,7 @@ description: "برگهٔ پایانی مسیر اعداد مختلط: تکرار
 image: "/assets/img/complex_mandelbrot_black.png"
 date: 2026-08-01
 last_modified_at: 2026-08-05
+redirect_from: "/complex-numbers/julia-mandelbrot.html"
 ---
 
 # از $z^2 + c$ تا ژولیا و ماندلبرو

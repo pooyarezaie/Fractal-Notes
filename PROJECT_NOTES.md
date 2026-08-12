@@ -61,8 +61,20 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
   `sitemap.xml`. Because `_data/site_index.yml` paths carry no trailing slash, every
   template appends one (`item.path | append: '/' | relative_url`) — drop that and each
   internal link becomes a redirect.
+- **Legacy `.html` URLs**: notes were served at `/topic/name.html` until Aug 2026.
+  GitHub Pages has no server-side 301, so every note predating that move carries
+  `redirect_from: "/topic/name.html"` and `jekyll-redirect-from` emits a stub there
+  with a canonical link plus a meta refresh — which Google reads as a permanent
+  redirect. New notes never had a `.html` URL and need no `redirect_from`. The stubs
+  are the only non-`index.html` files under a note directory, which is exactly how
+  `scripts/prerender.js` tells them apart: it prerenders `index.html` only, because
+  loading a stub would follow its refresh and overwrite it with a copy of the target.
 - **Meta/OG tags**: `jekyll-seo-tag` (title, description, canonical, Open Graph,
   Twitter cards) + `jekyll-sitemap`. `robots.txt` points at `/sitemap.xml`.
+  `site.description` in `_config.yml` is deliberately short: `jekyll-seo-tag` builds
+  the home page `<title>` as `"{{ site.title }} | {{ site.description }}"`, and Google
+  truncates around 60 characters. The long, keyword-rich blurb lives in `index.md`'s
+  front matter, serving as the home page's meta description.
 - **Unfinished notes**: set `sitemap: false` in the front matter. It keeps the note
   out of `sitemap.xml` and makes the layout emit `noindex, nofollow`, so a draft that
   is already committed can't be indexed before it is registered in `site_index.yml`.

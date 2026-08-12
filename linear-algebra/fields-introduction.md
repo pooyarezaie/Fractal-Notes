@@ -4,6 +4,7 @@ description: "مقدمه‌ای شهودی بر مفهوم میدان در جب�
 image: "/assets/img/logo.png"
 date: 2026-01-04
 last_modified_at: 2026-02-13
+redirect_from: "/linear-algebra/fields-introduction.html"
 ---
 
 # میدان‌ها: فراتر از یک دستگاه عددی خاص

@@ -4,6 +4,7 @@ description: "مسئلهٔ چراغ‌ها و کلیدها که با مدل‌س
 image: "/assets/img/logo.png"
 date: 2025-12-10
 last_modified_at: 2026-02-13
+redirect_from: "/problem-solving/recasting/lighting-building-problem.html"
 ---
 
 # مسئلهٔ چراغ‌ها و کلیدها 

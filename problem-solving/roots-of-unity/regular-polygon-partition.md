@@ -3,6 +3,8 @@ title: "ریشه‌های واحد؛ مسئلهٔ افراز چندضلعی من
 description: "اثبات این قضیه که در هر افراز رأس‌های یک چندضلعی منتظم به چندضلعی‌های منتظم، دو چندضلعی هم‌نهشت پیدا می‌شود — با جمع توان‌ها روی ریشه‌های واحد."
 image: "/assets/img/polygon_partition_12gon_black.png"
 date: 2026-08-05
+last_modified_at: 2026-08-05
+redirect_from: "/problem-solving/roots-of-unity/regular-polygon-partition.html"
 ---
 
 # افرازِ یک چندضلعیِ منتظم

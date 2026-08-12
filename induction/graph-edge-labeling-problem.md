@@ -4,6 +4,7 @@ description: "بررسی گراف کامل با برچسب‌های ۱ تا n ر
 image: "/assets/img/logo.png"
 date: 2025-12-18
 last_modified_at: 2026-02-13
+redirect_from: "/induction/graph-edge-labeling-problem.html"
 ---
 
 # مسئلهٔ برچسب‌گذاری یال‌های گراف کامل

@@ -151,6 +151,11 @@ This is the most common task. Follow every step or the note won't appear/render.
    delay). Files added under an already-listed directory are picked up
    automatically.
 
+   Do **not** add `redirect_from` to a new note. That front matter exists only on
+   notes written before Aug 2026, when the site served `/topic/name.html`; it
+   emits a stub at the old URL so the move doesn't 404. A new note has no old URL
+   to redirect from. See the SEO section of `PROJECT_NOTES.md`.
+
 6. **Verify locally:** `make dev`, open `http://localhost:4000`, confirm the note
    appears under the right group, the math renders, and RTL/images look right.
 

@@ -4,6 +4,7 @@ description: "بررسی یک دستگاه معادلات متقارن که با
 image: "/assets/img/logo.png"
 date: 2025-11-19
 last_modified_at: 2026-02-13
+redirect_from: "/problem-solving/symmetry/systems-of-equations.html"
 ---
 
 # تقارن در حل دستگاه‌های معادلات

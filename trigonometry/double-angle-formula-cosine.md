@@ -4,6 +4,7 @@ description: "استخراج فرمول‌های کسینوس دوبرابر ب�
 image: "/assets/img/logo.png"
 date: 2025-12-25
 last_modified_at: 2026-02-13
+redirect_from: "/trigonometry/double-angle-formula-cosine.html"
 ---
 
 # نسبت‌های مثلثاتی دوبرابر یک زاویه

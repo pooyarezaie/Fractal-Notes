@@ -4,6 +4,7 @@ description: "حل مسئلهٔ ششم المپیاد جهانی ریاضی ۱۹
 image: "/assets/img/imo1995_filter_two_cases_black.png"
 date: 2026-08-04
 last_modified_at: 2026-08-06
+redirect_from: "/problem-solving/roots-of-unity/imo-1995-subset-sums.html"
 ---
 
 # فیلترِ ریشه‌های واحد و مسئلهٔ ششم المپیاد ۱۹۹۵

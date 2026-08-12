@@ -4,6 +4,7 @@ description: "مزدوج به‌عنوان بازتاب در آینهٔ محور
 image: "/assets/img/complex_conjugate_reflection_black.png"
 date: 2026-08-01
 last_modified_at: 2026-08-05
+redirect_from: "/complex-numbers/conjugate-and-division.html"
 ---
 
 # مزدوج، قدر مطلق و تقسیم

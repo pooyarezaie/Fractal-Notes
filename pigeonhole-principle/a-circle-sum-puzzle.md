@@ -4,6 +4,7 @@ description: "مسئله‌ای از اصل لانهٔ کبوتر و جمع‌ه
 image: "/assets/img/logo.png"
 date: 2025-12-20
 last_modified_at: 2026-02-13
+redirect_from: "/pigeonhole-principle/a-circle-sum-puzzle.html"
 ---
 
 # مسئلهٔ اعداد روی دایره

@@ -4,6 +4,7 @@ description: "به‌کارگیری حساب مختلط در هندسهٔ صفح
 image: "/assets/img/complex_circle_locus_black.png"
 date: 2026-08-01
 last_modified_at: 2026-08-03
+redirect_from: "/complex-numbers/transformations-and-loci.html"
 ---
 
 # تبدیل‌ها، فاصله و مکان‌های هندسی

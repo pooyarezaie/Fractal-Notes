@@ -4,6 +4,7 @@ description: "مسئله‌ای ترکیبیاتی–هندسی دربارهٔ �
 image: "/assets/img/logo.png"
 date: 2026-01-03
 last_modified_at: 2026-02-10
+redirect_from: "/problems/triangle-area-linear-sum.html"
 ---
 
 # مسئله: مساحت مثلث‌ها به‌صورت جمع خطی

@@ -1,5 +1,9 @@
 title: "یادداشت‌های فرکتالی"
-description: "یادداشت‌های کوتاه، شهودی و گاهی عمیق دربارهٔ ریاضی به زبان فارسی؛ از اعداد مختلط و استقرا تا اصل لانهٔ کبوتر، تقارن، مثلثات و ایده‌های حل مسئله."
+# Kept short on purpose: jekyll-seo-tag builds the home page's <title> as
+# "{{ site.title }} | {{ site.description }}", and Google truncates around 60
+# characters. The long, keyword-rich version lives in index.md's front matter,
+# where it serves as the home page's meta description instead.
+description: "ریاضی به زبان فارسی؛ کوتاه و شهودی"
 url: "https://fractalnotes.com"
 baseurl: ""
 repository: pooyarezaie/Fractal-Notes
@@ -35,7 +39,9 @@ exclude:
 
 twitter:
   username: "FractalNotes"
-  card: "summary"
+  # The notes' figures are wide charts and diagrams; "summary" would crop them
+  # into an unreadable square thumbnail.
+  card: "summary_large_image"
 
 social:
   name: "Fractal Notes"
@@ -62,6 +68,13 @@ kramdown:
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  # Notes moved from /topic/name.html to /topic/name/ (see `permalink` above).
+  # GitHub Pages serves static files only, so the old URLs cannot 301; instead
+  # every note that predates the move carries `redirect_from` in its front
+  # matter, and this emits a stub there with a canonical link and a meta
+  # refresh. Google reads that as a permanent redirect and carries the old
+  # URL's history over. New notes never lived at a .html URL and need nothing.
+  - jekyll-redirect-from
 
 defaults:
   -

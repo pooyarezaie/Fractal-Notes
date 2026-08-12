@@ -4,6 +4,7 @@ description: "معرفی هندسی اعداد مختلط به‌عنوان بر
 image: "/assets/img/complex_z_vector_black.png"
 date: 2025-11-14
 last_modified_at: 2026-08-05
+redirect_from: "/complex-numbers/introduction.html"
 ---
 
 # آشنایی کوتاه با اعداد مختلط  

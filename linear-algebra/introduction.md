@@ -4,6 +4,7 @@ description: "یادداشتی انگیزشی برای جبر خطی که با �
 image: "/assets/img/logo.png"
 date: 2025-12-28
 last_modified_at: 2026-02-10
+redirect_from: "/linear-algebra/introduction.html"
 ---
 
 # مقدمه‌ای بر جبر خطی

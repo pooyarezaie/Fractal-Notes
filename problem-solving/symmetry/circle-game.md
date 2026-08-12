@@ -4,6 +4,7 @@ description: "بازی گذاشتن سکه روی میز دایره‌ای که 
 image: "/assets/img/logo.png"
 date: 2025-11-23
 last_modified_at: 2026-02-13
+redirect_from: "/problem-solving/symmetry/circle-game.html"
 ---
 
 # تقارن در بازی‌ها: نخستین نگاه

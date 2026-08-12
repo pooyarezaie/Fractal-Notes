@@ -4,6 +4,7 @@ description: "حل کامل معادلهٔ z به توان n مساوی w با �
 image: "/assets/img/complex_nth_roots_general_black.png"
 date: 2026-08-01
 last_modified_at: 2026-08-02
+redirect_from: "/complex-numbers/nth-roots.html"
 ---
 
 # ریشه‌های یک عدد دلخواه

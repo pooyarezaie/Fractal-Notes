@@ -4,6 +4,7 @@ description: "توان‌های اعداد مختلط به‌مثابه دورا
 image: "/assets/img/complex_roots_of_unity_black.png"
 date: 2026-07-31
 last_modified_at: 2026-08-05
+redirect_from: "/complex-numbers/roots-of-unity.html"
 ---
 
 # توان‌ها و ریشه‌های واحد

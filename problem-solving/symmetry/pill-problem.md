@@ -4,6 +4,7 @@ description: "یک مسئلهٔ کلاسیک قرص و دارو که با افز
 image: "/assets/img/logo.png"
 date: 2025-11-17
 last_modified_at: 2026-02-13
+redirect_from: "/problem-solving/symmetry/pill-problem.html"
 ---
 
 # تقارن؛ نوری که مسئله را ساده‌تر می‌کند

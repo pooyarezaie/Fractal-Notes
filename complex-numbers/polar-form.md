@@ -4,6 +4,7 @@ description: "تبدیل میان نمایش دکارتی و قطبی عدد م�
 image: "/assets/img/complex_polar_form_black.png"
 date: 2026-08-01
 last_modified_at: 2026-08-02
+redirect_from: "/complex-numbers/polar-form.html"
 ---
 
 # اندازه، آرگومان و صورت قطبی

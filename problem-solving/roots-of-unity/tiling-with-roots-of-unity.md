@@ -4,6 +4,7 @@ description: "به‌کارگیری ریشه‌های واحد در مسئله�
 image: "/assets/img/tiling_tromino_8x8_hole_black.png"
 date: 2026-08-04
 last_modified_at: 2026-08-05
+redirect_from: "/problem-solving/roots-of-unity/tiling-with-roots-of-unity.html"
 ---
 
 # کاشی‌کاری و ریشه‌های واحد

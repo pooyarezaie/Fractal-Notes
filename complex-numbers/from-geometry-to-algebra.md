@@ -4,6 +4,7 @@ description: "پلی میان نمایش جبری x + yi و تعریف هندس�
 image: "/assets/img/complex_distributive_rotation_black.png"
 date: 2026-07-31
 last_modified_at: 2026-08-05
+redirect_from: "/complex-numbers/from-geometry-to-algebra.html"
 ---
 
 # از هندسه تا جبر

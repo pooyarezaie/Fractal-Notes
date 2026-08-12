@@ -4,6 +4,7 @@ description: "مسئلهٔ ساخت تاس‌های غیراستاندارد ب�
 image: "/assets/img/logo.png"
 date: 2025-11-29
 last_modified_at: 2026-02-13
+redirect_from: "/problem-solving/recasting/dice-problem.html"
 ---
 
 # مسئلهٔ مجموع دو تاس
