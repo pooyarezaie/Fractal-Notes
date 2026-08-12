@@ -128,8 +128,19 @@ This is the most common task. Follow every step or the note won't appear/render.
          path: "topic-dir/kebab-case-name"         # NO leading slash, NO .md
    ```
    Item titles are **prefix-free** (`"مسئله‌ی قرص‌ها"`, not `"تقارن؛ مسئله‌ی قرص‌ها"`) —
-   the group heading already says the topic. The front-matter `title` may keep the
-   prefix; it feeds `<title>`/SEO, where the extra context helps.
+   the group heading already says the topic.
+
+   The front-matter `title` is a **separate, search-facing string**: nothing on the
+   page renders it. Every visible label — sidebar, home page list, series prev/next,
+   landing-page contents — comes from `item.title` here, and the `<h1>` is literal
+   markdown in the note body. So write the front-matter `title` for the reader who
+   is searching, not the one already on the site: **lead with the term that makes
+   this note distinct** (`"فرمول دموآور و ریشه‌های واحد"`), and let the topic word
+   fall naturally inside the phrase (`"مزدوج و تقسیم اعداد مختلط؛ قدر مطلق"`) rather
+   than standing as a fixed prefix. A shared `"موضوع؛ …"` prefix across a group makes
+   its notes compete with each other and with the group's own landing page for one
+   term. Keep the whole thing under ~38 characters: `jekyll-seo-tag` appends
+   `" | یادداشت‌های فرکتالی"` (21), and Google truncates around 60.
    Paths here carry no trailing slash, but pages are served at `/topic-dir/name/`
    (`permalink: pretty`), so every template appends one when it builds an href.
    Follow that when adding a link: `{{ item.path | append: '/' | relative_url }}`.
