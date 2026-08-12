@@ -11,6 +11,22 @@
     {%- endif -%}
 
     {%- assign page_url_abs = site.url | append: page.url -%}
+    {%- comment -%}
+      A note inside a series sits under that series' landing page, so the
+      breadcrumb reads site → series → note. Without the middle step Google sees
+      eight unrelated pages instead of one mini-course, and the landing page
+      collects none of their standing. Skip it on the landing page itself, which
+      is already position 2.
+    {%- endcomment -%}
+    {%- assign series_crumb = nil -%}
+    {%- for group in site.data.site_index -%}
+      {%- if group.series and group.path -%}
+        {%- assign group_home = "/" | append: group.path | append: "/" -%}
+        {%- if page.url contains group_home and page.url != group_home -%}
+          {%- assign series_crumb = group -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -26,8 +42,11 @@
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "{{ site.title | escape }}", "item": "{{ site.url }}/" }
+            {%- if series_crumb -%}
+            ,{ "@type": "ListItem", "position": 2, "name": "{{ series_crumb.title | escape }}", "item": "{{ site.url }}/{{ series_crumb.path }}/" }
+            {%- endif -%}
             {%- if page.url != '/' and page.url != '' -%}
-            ,{ "@type": "ListItem", "position": 2, "name": "{{ page.title | default: page.name | escape }}", "item": "{{ page_url_abs }}" }
+            ,{ "@type": "ListItem", "position": {% if series_crumb %}3{% else %}2{% endif %}, "name": "{{ page.title | default: page.name | escape }}", "item": "{{ page_url_abs }}" }
             {%- endif -%}
           ]
         }

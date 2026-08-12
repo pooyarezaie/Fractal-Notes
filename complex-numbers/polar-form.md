@@ -120,7 +120,7 @@ $$
 u_\alpha\, u_\beta = \cos(\alpha+\beta) + i\,\sin(\alpha+\beta)
 $$
 
-**راه جبری** (با [قاعدهٔ ضربِ برگهٔ پیشین](/complex-numbers/from-geometry-to-algebra)):
+**راه جبری** (با [قاعدهٔ ضربِ برگهٔ پیشین](/complex-numbers/from-geometry-to-algebra/)):
 
 $$
 u_\alpha\, u_\beta = (\cos\alpha\cos\beta - \sin\alpha\sin\beta) + i\,(\sin\alpha\cos\beta + \cos\alpha\sin\beta)
@@ -136,7 +136,7 @@ $$
 \sin(\alpha+\beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta
 $$
 
-اتحادهای جمعِ زاویه‌ها — که حفظ‌کردنشان همیشه دردسر دارد — این‌جا خودشان از دلِ ضرب مختلط بیرون آمدند. (اگر $\alpha = \beta$ بگذارید، اتحاد دوبرابرِ زاویه به‌دست می‌آید؛ همان که در [یادداشت مثلثات](/trigonometry/double-angle-formula-cosine) از راهی دیگر به آن رسیدیم.)
+اتحادهای جمعِ زاویه‌ها — که حفظ‌کردنشان همیشه دردسر دارد — این‌جا خودشان از دلِ ضرب مختلط بیرون آمدند. (اگر $\alpha = \beta$ بگذارید، اتحاد دوبرابرِ زاویه به‌دست می‌آید؛ همان که در [یادداشت مثلثات](/trigonometry/double-angle-formula-cosine/) از راهی دیگر به آن رسیدیم.)
 
 ---
 
