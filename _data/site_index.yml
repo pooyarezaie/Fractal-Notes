@@ -66,6 +66,12 @@
     - title: "مسئلهٔ افراز چندضلعی منتظم"
       path: "problem-solving/roots-of-unity/regular-polygon-partition"
 
+- title: "منطق و تقارن"
+  summary: "کدام ویژگی‌ها را می‌توان در زبانِ ریاضی بیان کرد؟ پاسخ گرهی نهانی با تقارن دارد — آنچه گفتنی است، زیر تقارن ناورداست."
+  items:
+    - title: "دوقلوهای جداناشدنی: i و −i"
+      path: "logic-and-symmetry/twins-i-and-minus-i"
+
 - title: "تقارن"
   summary: "تقارن فقط زیباییِ شکل‌ها نیست؛ ابزار حل است — گاهی باید آن را در مسئله دید، و گاهی، عجیب‌تر، باید خودمان بسازیمش."
   items:
