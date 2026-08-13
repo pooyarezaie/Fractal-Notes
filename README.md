@@ -47,7 +47,7 @@ make dev            # Jekyll with livereload at http://localhost:4000
 The repo uses **GitHub Actions** to build and deploy:
 
 1. **Jekyll** builds the site into `_site`.
-2. A **prerender** step runs a headless browser (Playwright) on each page so KaTeX and inline JS (tables, nav, lightbox) are already applied in the HTML—no first-load delay.
+2. A **prerender** step runs a headless browser (Playwright) on each page so KaTeX and inline JS (tables, nav, lightbox) are already applied in the HTML—no first-load delay. It is incremental: only pages the commit actually changed are re-rendered (see below).
 3. The resulting `_site` is deployed to GitHub Pages.
 
 **Required:** In the repo **Settings → Pages**, set **Source** to **GitHub Actions**.
@@ -77,6 +77,17 @@ make build-prerender
 ```
 
 Only pages under the **directories** listed in **`scripts/prerender-whitelist.json`** are prerendered. Use `""` for the site root (homepage only) and directory paths like `"complex-numbers"` or `"problem-solving/symmetry"` to include every HTML page under that path. New markdown files under a whitelisted directory are prerendered automatically; add a new directory to the list to include a new section.
+
+### Incremental prerender
+
+The prerender is **incremental**: each page's result is cached in `.prerender-cache/` (gitignored) under a hash of everything that can change it — the page's built HTML, the stylesheet, the site's JS, and the prerender script itself. A page whose hash is already cached is restored from disk instead of being driven through the browser, so editing one note re-renders one page (~2s instead of ~45s for the whole site). Editing `_layouts/`, `_data/site_index.yml`, or `assets/css/fractal.css` correctly invalidates every page it affects.
+
+```bash
+make prerender      # incremental (default)
+make prerender-all  # ignore the cache and re-render every page
+```
+
+CI keeps the same cache between runs via `actions/cache`, and skips the Playwright Chromium download altogether when no page needs re-rendering.
 
 ## Docker (Prerendered + Nginx)
 

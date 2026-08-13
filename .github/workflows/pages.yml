@@ -44,7 +44,28 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
+      # Prerendered HTML from previous runs, keyed by page content. Restoring the
+      # newest one lets the prerender step reuse every page the build did not
+      # change. The key is unique per commit so each run saves a fresh entry;
+      # restore-keys falls back to the most recent one.
+      - name: Restore prerender cache
+        uses: actions/cache@v4
+        with:
+          path: .prerender-cache
+          key: prerender-${{ github.sha }}
+          restore-keys: prerender-
+
+      # Chromium costs ~30s to install and is useless when the cache already
+      # covers every page — a commit that touches only docs, CI or an
+      # un-whitelisted file, or one that restores an earlier state.
+      - name: Check what needs prerendering
+        id: plan
+        env:
+          PRERENDER_DRY_RUN: "1"
+        run: npm run prerender
+
       - name: Install Playwright browsers
+        if: steps.plan.outputs.pending != '0'
         run: npx playwright install --with-deps chromium
 
       - name: Prerender (KaTeX + JS)

@@ -61,7 +61,8 @@ _data/site_index.yml         ★ SINGLE SOURCE OF TRUTH for the note list / menu
 _layouts/default.html        The only layout (head, KaTeX loader, nav, SEO JSON-LD).
 _includes/series-nav.html    Course breadcrumb + previous/next lesson links.
 _includes/fa-number.html     Integer (0–99) → Persian-Indic digits.
-scripts/prerender.js         Playwright prerender script.
+scripts/prerender.js         Playwright prerender script (incremental; caches
+                             each page in .prerender-cache/ keyed by content).
 scripts/prerender-whitelist.json  Directories that get prerendered.
 assets/
   css/fractal.css            All styling (RTL, typography, image/table handling).
@@ -355,7 +356,8 @@ Run `make help` for the full list. Most-used:
 make install-deps     # Ruby gems + Node/Playwright (first-time setup)
 make dev              # Local Jekyll server + livereload → localhost:4000
 make build            # Build static site into _site/
-make build-prerender  # Full pipeline: build + Playwright prerender
+make build-prerender  # Full pipeline: build + Playwright prerender (incremental)
+make prerender-all    # Re-render every page, ignoring the cache
 make serve            # Serve the prerendered _site to test it
 make check-prerender  # Verify the LIVE site is serving prerendered HTML
 make docker-up        # Build + run the Nginx image → localhost:8080
