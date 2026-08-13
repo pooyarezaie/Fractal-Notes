@@ -114,6 +114,7 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
 ## Build and deploy
 
 - **GitHub Pages**: GitHub Actions runs Jekyll build → Playwright prerender → deploy `_site`. Set Pages source to **GitHub Actions** in repo Settings.
+- **Incremental prerender**: `scripts/prerender.js` caches each page's prerendered HTML in `.prerender-cache/`, keyed by a hash of the built HTML plus a fingerprint of the CSS, JS and the script itself; cached pages are restored from disk instead of re-rendered. Two details make it correct: the `?v={{ site.time }}` stamp on the stylesheet is normalised out before hashing and patched back in on restore (otherwise nothing would ever hit the cache), and CSS is part of the fingerprint because the inline `wrapTables()` compares table widths against `<main>` — a stylesheet change can move a real DOM node. A third detail keeps the step idempotent: prerendering rewrites each page in place, so a second run over the same `_site` would otherwise read its own output back as fresh build output and re-render everything — `manifest.json` in the cache records what each page's output hashed to, and those pages are recognised as already done. CI restores the cache with `actions/cache` and skips the Chromium install when nothing is pending. `make prerender-all` bypasses the cache.
 - **Docker**: Multi-stage image (Jekyll → Node/Playwright prerender → Nginx). Serves the same prerendered HTML/CSS. `make docker-build` then `make docker-up`; site at http://localhost:8080.
 
 ## Development Workflow

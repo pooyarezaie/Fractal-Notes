@@ -3,7 +3,7 @@ SHELL := /bin/sh
 SITE_URL ?= https://fractalnotes.com
 CHECK_PAGE ?= /complex-numbers/introduction
 
-.PHONY: help install install-node install-deps dev build prerender build-prerender serve check-prerender docker-build docker-up docker-down docker-logs
+.PHONY: help install install-node install-deps dev build prerender prerender-all build-prerender serve check-prerender docker-build docker-up docker-down docker-logs
 
 help:
 	@echo "Dependencies:"
@@ -15,6 +15,7 @@ help:
 	@echo "  make dev           # Run local Jekyll dev server"
 	@echo "  make build         # Build static site to _site"
 	@echo "  make prerender     # Prerender _site (KaTeX + JS); run after build"
+	@echo "  make prerender-all # Same, ignoring the cache (re-render every page)"
 	@echo "  make build-prerender  # Build then prerender (full pipeline)"
 	@echo "  make serve         # Serve _site at http://localhost:4000 (test prerendered)"
 	@echo "  make check-prerender  # Check if live site serves prerendered HTML (curl + grep)"
@@ -42,6 +43,9 @@ build:
 
 prerender:
 	npm run prerender
+
+prerender-all:
+	PRERENDER_FORCE=1 npm run prerender
 
 build-prerender: build prerender
 
