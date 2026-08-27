@@ -48,7 +48,7 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
   (kicker, summary, numbered notes, "start here" button), then the remaining groups as a
   responsive grid of topic cards. All of it is generated from `_data/site_index.yml` — the
   topic and note counts included — so adding a note to that file is the only step needed.
-- Notes live as `.md` files inside topic directories: `complex-numbers/`, `induction/`, `trigonometry/`, `pigeonhole-principle/`, `linear-algebra/`, `problems/`, and `problem-solving/{symmetry,recasting}/`.
+- Notes live as `.md` files inside topic directories: `complex-numbers/`, `induction/`, `trigonometry/`, `pigeonhole-principle/`, `linear-algebra/`, `problems/`, and `problem-solving/{symmetry,recasting,roots-of-unity}/`.
 - **`_data/site_index.yml` is the single source of truth** for the note list and side menu. It is a list of **topic groups**, each with `title`, optional `path`/`series`/`summary`, and an ordered `items` list (title + path, no leading slash, no `.md`). A note must be listed there to be visible.
 - **Series (mini-courses):** a group with `series: true` gets numbered notes, a landing page at `<path>/index.md`, and automatic previous/next navigation rendered by `_includes/series-nav.html`. `complex-numbers/` is the reference example. The Persian wording stays neutral — numbered **برگه‌ها**, never «دوره» or «درس»; "series"/"mini-course" is internal vocabulary only.
 - `_includes/` holds two small partials: `series-nav.html` (course breadcrumb + prev/next) and `fa-number.html` (integer → Persian-Indic digits).
