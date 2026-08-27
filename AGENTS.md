@@ -64,6 +64,10 @@ _includes/fa-number.html     Integer (0–99) → Persian-Indic digits.
 scripts/prerender.js         Playwright prerender script (incremental; caches
                              each page in .prerender-cache/ keyed by content).
 scripts/prerender-whitelist.json  Directories that get prerendered.
+scripts/figures/*.js         One generator per illustrated note: SVG built in JS,
+                             screenshotted through Playwright to PNG in
+                             assets/img/. Persian labels need real Vazirmatn
+                             shaping and bidi — never matplotlib.
 assets/
   css/fractal.css            All styling (RTL, typography, image/table handling).
                              NOT style.css — that path collides with the github-pages
