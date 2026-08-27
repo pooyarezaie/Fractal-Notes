@@ -1,0 +1,33 @@
+{%- comment -%}
+  The note's colophon: one quiet line after the body naming who wrote it.
+  Deliberately at the end and deliberately small — the note is the point, the
+  byline is the credit. The machine-readable credit (JSON-LD, meta author,
+  feed) lives in the layout and feed.xml and is derived from the same data.
+
+  Joins several names Persian-style: «الف، ب و ج».
+{%- endcomment -%}
+{%- comment -%} Only real notes get a byline: pages registered as an item in
+  _data/site_index.yml. A series landing page (the course cover) is a title
+  and a table of contents, not a text with an author. {%- endcomment -%}
+{%- assign _cur = page.url | remove_first: '/' -%}
+{%- assign _is_note = false -%}
+{%- for _g in site.data.site_index -%}
+  {%- for _i in _g.items -%}
+    {%- assign _home = _i.path | append: '/' -%}
+    {%- if _home == _cur -%}{%- assign _is_note = true -%}{%- break -%}{%- endif -%}
+  {%- endfor -%}
+  {%- if _is_note -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
+{%- include note-authors.html -%}
+{%- if _is_note and note_authors.size > 0 -%}
+<footer class="note-byline">نوشتهٔ {% for a in note_authors -%}
+{%- if a.url -%}
+<a class="note-byline-name" href="{{ a.url }}" rel="author noopener" target="_blank" itemprop="author">{{ a.name }}</a>
+{%- elsif a.name -%}
+<span class="note-byline-name" itemprop="author">{{ a.name }}</span>
+{%- else -%}
+<span class="note-byline-name" itemprop="author">{{ a }}</span>
+{%- endif -%}
+{%- if forloop.rindex == 2 %} و {% elsif forloop.last == false %}، {% endif -%}
+{%- endfor %}</footer>
+{%- endif -%}

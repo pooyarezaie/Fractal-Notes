@@ -58,8 +58,12 @@ index.md                     Homepage. Hero, then each series as a card, then th
                              topic groups as a grid — all from site_index.yml.
 _config.yml                  Jekyll config (title, SEO, kramdown math, plugins).
 _data/site_index.yml         ★ SINGLE SOURCE OF TRUTH for the note list / menu.
+_data/authors.yml            Who writes the notes: key → name, url, twitter. A note's
+                             `author:` front matter must be a key from here.
 _layouts/default.html        The only layout (head, KaTeX loader, nav, SEO JSON-LD).
 _includes/series-nav.html    Course breadcrumb + previous/next lesson links.
+_includes/note-authors.html  Resolves a page's author key(s) against _data/authors.yml.
+_includes/note-byline.html   The «نوشتهٔ …» colophon line after a note's body.
 _includes/fa-number.html     Integer (0–99) → Persian-Indic digits.
 scripts/prerender.js         Playwright prerender script (incremental; caches
                              each page in .prerender-cache/ keyed by content).
@@ -117,8 +121,19 @@ This is the most common task. Follow every step or the note won't appear/render.
    image: "/assets/img/logo.png"   # optional; a relevant diagram is better
    date: 2026-08-05                # publish date (YYYY-MM-DD)
    last_modified_at: 2026-08-05    # bump on substantial edits
+   author: saman                   # only for contributed notes — see below
    ---
    ```
+
+   **Authors and credit.** Every note is credited to its author: a small
+   «نوشتهٔ …» line after the body, plus the same name in the page's JSON-LD,
+   `<meta name="author">` and the Atom feed. `author` is a key from
+   `_data/authors.yml`; `_config.yml` defaults it to `pooya`, so the site
+   owner's notes carry no `author` line at all and a contributor's note just
+   needs `author: <key>` (or `authors: [<key>, <key>]` for a joint note). A new
+   contributor gets an entry in `_data/authors.yml` first — `name` in Persian
+   as it should read in the byline, optional `url` for the name to link to.
+   Never write the byline into the note itself; it is rendered by the layout.
 
 3. **Write the body** following the note conventions in §5.
 

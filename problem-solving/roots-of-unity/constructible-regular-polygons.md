@@ -4,6 +4,7 @@ description: "کدام چندضلعی‌های منتظم را می‌توان �
 image: "/assets/img/complex_constructible_cover_band.png"
 date: 2026-08-23
 last_modified_at: 2026-08-23
+author: saman
 ---
 
 # چندضلعی‌های منتظمِ ساختنی

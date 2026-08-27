@@ -1,0 +1,20 @@
+# Who writes the notes. A note names its author with `author: <key>` in its
+# front matter (or `authors: [<key>, <key>]` for a joint note); the key must
+# exist here. `_config.yml` defaults every page to `pooya`, so only contributed
+# notes need the line at all.
+#
+#   name     Persian, as it should read in the byline «نوشتهٔ …»
+#   url      optional — where the name links (profile, homepage); omit for none
+#   twitter  handle for the Twitter card's creator. jekyll-seo-tag falls back
+#            to the *name* when this is missing, which would emit a garbage
+#            "@سامان …" handle — so authors without one carry the site's.
+
+pooya:
+  name: "پویا رضایی"
+  url: "https://x.com/FractalNotes"
+  twitter: "FractalNotes"
+
+saman:
+  name: "سامان فرحت"
+  url: "https://github.com/Samanfrht"
+  twitter: "FractalNotes"

@@ -149,3 +149,8 @@ Under the following terms:
 - **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 
 See the [LICENSE](LICENSE) file for the full license text.
+
+Each note is credited to its author: a byline after the body and the same name
+in the page's structured data and the feed. Contributors get an entry in
+`_data/authors.yml` and set `author: <key>` in their note's front matter; notes
+without the key belong to the site owner. See [AGENTS.md](AGENTS.md) §4.

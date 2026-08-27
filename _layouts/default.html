@@ -18,6 +18,7 @@
       collects none of their standing. Skip it on the landing page itself, which
       is already position 2.
     {%- endcomment -%}
+    {%- include note-authors.html -%}
     {%- assign series_crumb = nil -%}
     {%- for group in site.data.site_index -%}
       {%- if group.series and group.path -%}
@@ -65,7 +66,11 @@
           "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
           "dateModified": "{{ page.last_modified_at | default: page.date | date: '%Y-%m-%d' }}",
           {%- endif %}
-          "author": { "@type": "Person", "name": {{ site.author.name | jsonify }}, "url": "{{ site.url }}/" },
+          "author": [
+            {%- for a in note_authors -%}
+            { "@type": "Person", "name": {{ a.name | default: a | jsonify }}{% if a.url %}, "url": {{ a.url | jsonify }}{% endif %} }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ],
           "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "logo": { "@type": "ImageObject", "url": "{{ site.url }}{{ site.logo }}" } }
         }
         {%- endif -%}
@@ -184,6 +189,7 @@
         <article itemscope itemtype="https://schema.org/Article">
           {%- include series-nav.html position="top" -%}
           {{ content }}
+          {%- include note-byline.html -%}
           {%- include series-nav.html position="bottom" -%}
         </article>
         {%- else -%}
@@ -201,6 +207,7 @@
         <a href="https://x.com/FractalNotes" class="social-link" target="_blank" rel="noopener">
           صفحهٔ X (توییتر) «Fractal Notes»
         </a>
+        <p class="site-footer-license">برگه‌ها زیر پروانهٔ <a href="https://creativecommons.org/licenses/by/4.0/deed.fa" target="_blank" rel="license noopener">CC BY 4.0</a> منتشر می‌شوند؛ بازنشر آزاد است، به شرطِ نام بردن از نویسنده و پیوند به این‌جا.</p>
       </div>
     </footer>
 
