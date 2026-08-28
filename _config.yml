@@ -85,4 +85,4 @@ defaults:
       image: "/assets/img/logo_small.png"
       # Key into _data/authors.yml. Contributed notes override it with their
       # own `author:` (or `authors: [..]`) in front matter.
-      author: pooya
+      author: pooyarezaie

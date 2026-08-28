@@ -131,7 +131,7 @@ This is the most common task. Follow every step or the note won't appear/render.
    **Authors and credit.** Every note is credited to its author: a small
    «نوشتهٔ …» line after the body, plus the same name in the page's JSON-LD,
    `<meta name="author">` and the Atom feed. `author` is a key from
-   `_data/authors.yml`; `_config.yml` defaults it to `pooya`, so the site
+   `_data/authors.yml`; `_config.yml` defaults it to `pooyarezaie`, so the site
    owner's notes carry no `author` line at all and a contributor's note just
    needs `author: <key>` (or `authors: [<key>, <key>]` for a joint note). The
    byline links to the author's own page, `/authors/<key>/`, which lists

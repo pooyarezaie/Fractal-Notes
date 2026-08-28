@@ -2,7 +2,7 @@
 # front matter (or `authors: [<key>, <key>]` for a joint note); the key must
 # exist here *and* have a page at authors/<key>.md — that page is where the
 # byline links and where the author's notes are listed. `_config.yml` defaults
-# every page to `pooya`, so only contributed notes need the line at all.
+# every page to `pooyarezaie`, so only contributed notes need the line at all.
 #
 #   name     Persian, as it should read in the byline «نوشتهٔ …»
 #   github   optional GitHub username — shown on the author page
@@ -12,7 +12,7 @@
 #            emit a garbage "@سامان …", so authors without a personal handle
 #            carry the site's account here. Not shown anywhere.
 
-pooya:
+pooyarezaie:
   name: "پویا رضایی"
   github: "pooyarezaie"
   twitter: "FractalNotes"
