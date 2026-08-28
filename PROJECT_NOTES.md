@@ -22,9 +22,11 @@
   violet of the Sierpiński logo; change that one token to re-tint the whole site.
 - **Active-learning components**: `fractal.css` also styles `.pause` (guess-first
   boxes), `details.exercise` (collapsible answers), `.fig-caption`, and `.lab`
-  (canvas widgets). The lab logic lives in self-hosted `assets/js/complex-labs.js`
-  (multiply / roots / orbit widgets, selected via `data-lab`); it re-initializes
-  on every page load because the prerender bakes DOM but not canvas pixels.
+  (canvas / inline-SVG widgets). The lab logic lives in self-hosted
+  `assets/js/complex-labs.js` (multiply / roots / orbit) and
+  `assets/js/statistics-labs.js` (frames), selected via `data-lab`; both
+  re-initialize on every page load because the prerender bakes DOM but not
+  canvas pixels — the SVG lab rebuilds its own nodes (`.lab-built`) from scratch.
   Markup conventions are documented in `AGENTS.md` §6.
 - **Font**: Vazirmatn (Persian font), **self-hosted** at `assets/fonts/Vazirmatn-wght.woff2` (preloaded; SW-cached)
 - **Direction**: RTL (right-to-left). Never use `letter-spacing` on Persian text — the
