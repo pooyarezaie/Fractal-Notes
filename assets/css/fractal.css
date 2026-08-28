@@ -1058,83 +1058,129 @@ a.note-byline-name:hover {
     text-decoration-color: var(--accent);
 }
 
-/* Author page: a name, the profile links, and the notes — nothing else. */
-.author-head {
-    margin-bottom: 8px;
+/* Author page. A profile header in the home hero's voice — monogram, kicker,
+   name, a count — then the author's notes as the same topic cards the home
+   page uses (.home-card), so the page reads as "their slice of the site". */
+.author-hero {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 14px 0 26px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+}
+
+/* The first letter of the name, in place of a photograph. */
+.author-monogram {
+    flex-shrink: 0;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1;
+    padding-bottom: 6px; /* optical centre: Persian letters sit low in the em box */
+    color: var(--accent-deep);
+    background: linear-gradient(160deg, var(--accent-tint-strong), var(--accent-tint) 70%);
+    border: 1px solid var(--line-strong);
+}
+
+.author-hero-text {
+    min-width: 0;
+}
+
+.author-kicker {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-faint);
 }
 
 .author-name {
-    margin-top: 0.4em;
-    margin-bottom: 0.2em;
+    margin: 0;
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.5;
+    color: var(--accent-deep);
+}
+
+.author-stat {
+    margin: 2px 0 0 0;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+}
+
+.author-stat-n {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.author-stat-dot {
+    color: var(--line-strong);
+    padding: 0 2px;
 }
 
 .author-links {
-    margin: 0;
-    font-size: 14px;
-    color: var(--ink-faint);
     display: flex;
     gap: 8px;
+    margin: 12px 0 0 0;
+}
+
+.author-link {
+    display: inline-flex;
     align-items: center;
-}
-
-.author-links a {
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--paper);
     color: var(--ink-soft);
-    text-decoration: underline;
-    text-decoration-color: var(--line-strong);
-    text-underline-offset: 3px;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
-.author-links a:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
-}
-
-.author-links-sep {
-    color: var(--line-strong);
-}
-
-.author-group-title {
-    font-size: 15px;
-    font-weight: 500;
-    color: var(--ink-faint);
-    margin: 1.6em 0 0.2em;
-}
-
-.author-group-title a {
-    color: inherit;
-}
-
-.author-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.author-list li {
-    margin: 0;
-    padding: 0;
-}
-
-.author-list a {
-    display: block;
-    padding: 6px 10px;
-    margin-inline: -10px;
-    border-radius: 8px;
-    font-weight: 500;
-    line-height: 1.7;
-    color: var(--accent);
-    transition: background-color 0.15s ease, color 0.15s ease;
-}
-
-.author-list a:hover,
-.author-list a:focus-visible {
+.author-link:hover,
+.author-link:focus-visible {
     text-decoration: none;
+    border-color: var(--accent);
     background: var(--accent-tint);
-    color: var(--accent-deep);
+    color: var(--accent);
+}
+
+.author-section-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+/* auto-fit, not auto-fill: an author with a single topic gets one full-width
+   card instead of a lone card and two empty columns. */
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
 }
 
 .author-empty {
     color: var(--ink-faint);
+}
+
+@media (max-width: 600px) {
+    .author-hero {
+        gap: 16px;
+        padding-bottom: 20px;
+    }
+
+    .author-monogram {
+        width: 64px;
+        height: 64px;
+        font-size: 30px;
+    }
 }
 
 /* Note page: previous / next lesson */
