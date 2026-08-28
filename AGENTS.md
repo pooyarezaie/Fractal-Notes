@@ -338,11 +338,14 @@ Every series برگه follows this pattern (see any `complex-numbers/*.md`):
   can-do list (skills, not topics).
 - Figures get a one-line caption right after the image block:
   `<p class="fig-caption">…</p>`. Diagrams label their axes Re/Im.
-- Interactive labs are `.lab` divs (`data-lab="multiply" | "roots" | "orbit"`)
-  powered by self-hosted `assets/js/complex-labs.js` + one
-  `<script defer>` tag per page. The prerender bakes post-JS DOM and canvas
-  pixels are not serialized, so lab code must re-initialize on every load
-  and must not persist state in DOM attributes.
+- Interactive labs are `.lab` divs powered by a self-hosted script + one
+  `<script defer>` tag per page: `assets/js/complex-labs.js`
+  (`data-lab="multiply" | "roots" | "orbit"`, canvas) and
+  `assets/js/statistics-labs.js` (`data-lab="frames"`, inline SVG with
+  `.lab-tabs` pill toggles). The prerender bakes post-JS DOM and canvas
+  pixels are not serialized, so lab code must re-initialize on every load,
+  must not persist state in DOM attributes, and must rebuild anything it
+  injected (the SVG lab tags its nodes `.lab-built` and removes them first).
 Remember the column-0 rule for all this raw HTML (§5), and that complexity
 has a cost — keep every box short.
 
