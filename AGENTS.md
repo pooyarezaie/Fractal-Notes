@@ -124,7 +124,7 @@ This is the most common task. Follow every step or the note won't appear/render.
    image: "/assets/img/logo.png"   # optional; a relevant diagram is better
    date: 2026-08-05                # publish date (YYYY-MM-DD)
    last_modified_at: 2026-08-05    # bump on substantial edits
-   author: saman                   # only for contributed notes — see below
+   author: samanfarhat             # only for contributed notes — see below
    ---
    ```
 
@@ -138,7 +138,7 @@ This is the most common task. Follow every step or the note won't appear/render.
    everything they wrote — generated, never edited by hand. A new contributor
    needs two things: an entry in `_data/authors.yml` (`name` in Persian as it
    should read in the byline; optional `github` / `x` usernames) and a page
-   `authors/<key>.md` copied from `authors/saman.md` with the key and name
+   `authors/<key>.md` copied from `authors/samanfarhat.md` with the key and name
    swapped. Never write the byline into the note itself; the layout renders it.
 
 3. **Write the body** following the note conventions in §5.
