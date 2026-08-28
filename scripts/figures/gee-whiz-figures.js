@@ -213,10 +213,95 @@ function figNarratives() {
   return svg(W, H, s);
 }
 
+// ---------------------------------------------------------------- figure 4
+// Huff's Columbia Gas ad: cost of living (+60 %) and cost of gas (−4 %) over
+// ten years, as index numbers. Once in the ad's frame (axis from 90), once
+// with the axis from zero.
+function figGasAd() {
+  const W = 760, H = 420;
+  const living = [100, 104, 109, 113, 120, 128, 135, 142, 150, 156, 160];
+  const gas = [100, 101, 100, 99, 99, 98, 97, 97, 96, 96, 96];
+
+  let s = '';
+  s += T(720, 38, 'هزینه‌ی زندگی و هزینه‌ی گاز در ده سال، به‌صورت شاخص (سال نخست = ۱۰۰)', { size: 17.5, weight: 700, color: INK });
+  s += T(720, 62, 'راست: قاب تبلیغ، محور از ۹۰. چپ: همان دو خط، محور از صفر.', { size: 15 });
+
+  function panel(x0, x1, top, bottom, ymin, ymax, ticks, label) {
+    let p = '';
+    const n = living.length;
+    const X = i => x0 + (i / (n - 1)) * (x1 - x0);
+    const Y = v => bottom - ((v - ymin) / (ymax - ymin)) * (bottom - top);
+    p += `<rect x="${x0}" y="${top}" width="${x1 - x0}" height="${bottom - top}" fill="${TINT}" fill-opacity="0.55" stroke="${GRID}"/>`;
+    for (const t of ticks) {
+      p += line(x0, Y(t), x1, Y(t), GRID, 1);
+      p += T(x0 - 7, Y(t) + 5, fa(t), { align: 'left', size: 13, color: SOFT });
+    }
+    p += line(x0, top, x0, bottom, INK, 1.4);
+    p += line(x0, bottom, x1, bottom, INK, 1.4);
+    const draw = (arr, c) => {
+      const pts = arr.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' L ');
+      p += `<path d="M ${pts}" fill="none" stroke="${c}" stroke-width="2.6" stroke-linejoin="round"/>`;
+      arr.forEach((v, i) => { p += `<circle cx="${X(i)}" cy="${Y(v)}" r="2.4" fill="${c}"/>`; });
+    };
+    draw(living, ACCENT);
+    draw(gas, RED);
+    p += T(X(n - 1) - 8, Y(living[n - 1]) - 10, 'هزینه‌ی زندگی ۱۶۰', { align: 'right', size: 13, weight: 700, color: ACCENT });
+    p += T(X(n - 1) - 8, Y(gas[n - 1]) - 10, 'هزینه‌ی گاز ۹۶', { align: 'right', size: 13, weight: 700, color: RED, halo: true });
+    p += T((x0 + x1) / 2, top - 14, label, { align: 'center', size: 15, weight: 700, color: INK });
+    p += T((x0 + x1) / 2, bottom + 22, 'ده سال', { align: 'center', size: 13, color: FAINT });
+    return p;
+  }
+
+  s += panel(430, 720, 120, 360, 90, 170, [90, 110, 130, 150, 170], 'قاب تبلیغ: محور از ۹۰');
+  s += panel(70, 360, 120, 360, 0, 170, [0, 50, 150], 'همان داده: محور از صفر');
+  return svg(W, H, s);
+}
+
+// ---------------------------------------------------------------- figure 5
+// Huff's government-pay chart: 19.5 → 20.2 million dollars (< 4 %), once with
+// the axis cut just under the data («جهش کرد!»), once from zero.
+function figPay() {
+  const W = 760, H = 420;
+  const pay = [19.5, 19.55, 19.7, 19.8, 19.85, 20.0, 20.1, 20.2];
+
+  let s = '';
+  s += T(720, 38, 'حقوق کارکنان دولت: از ۱۹٫۵ به ۲۰٫۲ میلیون دلار — کم‌تر از چهار درصد', { size: 17.5, weight: 700, color: INK });
+  s += T(720, 62, 'یک داده، دو تیتر؛ فرق فقط در جایی است که محور عمودی آغاز می‌شود.', { size: 15 });
+
+  function panel(x0, x1, top, bottom, ymin, ymax, ticks, label, hot) {
+    let p = '';
+    const n = pay.length;
+    const X = i => x0 + (i / (n - 1)) * (x1 - x0);
+    const Y = v => bottom - ((v - ymin) / (ymax - ymin)) * (bottom - top);
+    p += `<rect x="${x0}" y="${top}" width="${x1 - x0}" height="${bottom - top}" fill="${TINT}" fill-opacity="0.55" stroke="${GRID}"/>`;
+    for (const t of ticks) {
+      p += line(x0, Y(t), x1, Y(t), GRID, 1);
+      p += T(x0 - 7, Y(t) + 5, fa(t), { align: 'left', size: 13, color: SOFT });
+    }
+    p += line(x0, top, x0, bottom, INK, 1.4);
+    p += line(x0, bottom, x1, bottom, INK, 1.4);
+    const c = hot ? RED : ACCENT;
+    const pts = pay.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' L ');
+    p += `<path d="M ${pts}" fill="none" stroke="${c}" stroke-width="2.6" stroke-linejoin="round"/>`;
+    pay.forEach((v, i) => { p += `<circle cx="${X(i)}" cy="${Y(v)}" r="2.6" fill="${c}"/>`; });
+    p += T(X(0) + 16, Y(pay[0]) - 16, '۱۹٫۵', { align: 'left', size: 13, weight: 700, color: c, halo: true });
+    p += T(X(n - 1) - 4, Y(pay[n - 1]) - 10, '۲۰٫۲', { align: 'right', size: 13, weight: 700, color: c, halo: true });
+    p += T((x0 + x1) / 2, top - 14, label, { align: 'center', size: 16, weight: 700, color: hot ? RED : INK });
+    p += T((x0 + x1) / 2, bottom + 22, 'میلیون دلار', { align: 'center', size: 13, color: FAINT });
+    return p;
+  }
+
+  s += panel(430, 720, 120, 360, 19.4, 20.3, [19.5, 20.0], 'حقوق کارکنان دولت جهش کرد!', true);
+  s += panel(70, 360, 120, 360, 0, 24, [0, 6, 12, 18, 24], 'حقوق کارکنان دولت تقریباً ثابت ماند.', false);
+  return svg(W, H, s);
+}
+
 const FIGS = [
   { name: 'statistics_gee_whiz_three_frames', svg: figFrames(), w: 760, h: 450 },
   { name: 'statistics_sanction_period_timelines', svg: figTimelines(), w: 760, h: 340 },
   { name: 'statistics_ab_test_three_narratives', svg: figNarratives(), w: 760, h: 450 },
+  { name: 'statistics_gas_ad_two_frames', svg: figGasAd(), w: 760, h: 420 },
+  { name: 'statistics_government_pay_two_headlines', svg: figPay(), w: 760, h: 420 },
 ];
 
 (async () => {
