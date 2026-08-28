@@ -1,11 +1,14 @@
 {%- comment -%}
   Resolve a page's author key(s) to entries of _data/authors.yml.
-  Sets `note_authors` (a list of author hashes) in the caller's scope.
+  Sets, in the caller's scope:
+    note_authors      list of author hashes (name, github, x, …)
+    note_author_keys  the matching keys, same order — an author's page lives
+                      at /authors/<key>/
+  A key missing from _data/authors.yml is pushed through as a bare string with
+  an empty key, so the byline still shows *something* instead of silently
+  dropping the credit.
 
-  Reads `authors` (a list of keys) first, then `author` (one key). A key that
-  is missing from _data/authors.yml is pushed through as a bare string so the
-  byline still shows *something* instead of silently dropping the credit.
-
+  Reads `authors` (a list of keys) first, then `author` (one key).
   Param: page = the page to resolve (defaults to the current page). feed.xml
   passes each note in turn.
   Internal variables are underscore-prefixed because Liquid includes share the
@@ -13,6 +16,7 @@
 {%- endcomment -%}
 {%- assign _p = include.page | default: page -%}
 {%- assign note_authors = "" | split: "" -%}
+{%- assign note_author_keys = "" | split: "" -%}
 {%- assign _keys = "" | split: "" -%}
 {%- if _p.authors -%}
   {%- assign _keys = _p.authors -%}
@@ -24,7 +28,9 @@
   {%- assign _a = site.data.authors[_key] -%}
   {%- if _a -%}
     {%- assign note_authors = note_authors | push: _a -%}
+    {%- assign note_author_keys = note_author_keys | push: _key -%}
   {%- elsif _key != "" -%}
     {%- assign note_authors = note_authors | push: _key -%}
+    {%- assign note_author_keys = note_author_keys | push: "" -%}
   {%- endif -%}
 {%- endfor -%}

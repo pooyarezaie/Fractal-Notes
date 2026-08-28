@@ -1058,6 +1058,85 @@ a.note-byline-name:hover {
     text-decoration-color: var(--accent);
 }
 
+/* Author page: a name, the profile links, and the notes — nothing else. */
+.author-head {
+    margin-bottom: 8px;
+}
+
+.author-name {
+    margin-top: 0.4em;
+    margin-bottom: 0.2em;
+}
+
+.author-links {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.author-links a {
+    color: var(--ink-soft);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+}
+
+.author-links a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+}
+
+.author-links-sep {
+    color: var(--line-strong);
+}
+
+.author-group-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink-faint);
+    margin: 1.6em 0 0.2em;
+}
+
+.author-group-title a {
+    color: inherit;
+}
+
+.author-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.author-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.author-list a {
+    display: block;
+    padding: 6px 10px;
+    margin-inline: -10px;
+    border-radius: 8px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: var(--accent);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.author-list a:hover,
+.author-list a:focus-visible {
+    text-decoration: none;
+    background: var(--accent-tint);
+    color: var(--accent-deep);
+}
+
+.author-empty {
+    color: var(--ink-faint);
+}
+
 /* Note page: previous / next lesson */
 .series-nav {
     margin-top: 40px;

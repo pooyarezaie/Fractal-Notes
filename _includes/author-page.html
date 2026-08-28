@@ -1,0 +1,52 @@
+{%- comment -%}
+  Body of an author's page (authors/<key>.md): the name, the profile links,
+  and every note they wrote, grouped by topic in site_index order. Nothing is
+  written by hand — a note appears here the moment its front matter names
+  this author.
+  Param: key = the author's key in _data/authors.yml
+{%- endcomment -%}
+{%- assign _key = include.key -%}
+{%- assign _a = site.data.authors[_key] -%}
+{%- assign _count = 0 -%}
+<header class="author-head">
+<h1 class="author-name">{{ _a.name }}</h1>
+{%- if _a.github or _a.x %}
+<p class="author-links">
+{%- if _a.github %}<a href="https://github.com/{{ _a.github }}" rel="me noopener" target="_blank">GitHub</a>{% endif -%}
+{%- if _a.github and _a.x %}<span class="author-links-sep" aria-hidden="true">·</span>{% endif -%}
+{%- if _a.x %}<a href="https://x.com/{{ _a.x }}" rel="me noopener" target="_blank">X</a>{% endif -%}
+</p>
+{%- endif %}
+</header>
+<section class="author-notes">
+{%- for _g in site.data.site_index -%}
+{%- assign _mine = "" | split: "" -%}
+{%- for _i in _g.items -%}
+  {%- assign _target = "/" | append: _i.path | append: "/" -%}
+  {%- for _pg in site.pages -%}
+    {%- if _pg.url == _target -%}
+      {%- assign _hit = false -%}
+      {%- if _pg.authors -%}
+        {%- if _pg.authors contains _key -%}{%- assign _hit = true -%}{%- endif -%}
+      {%- elsif _pg.author == _key -%}
+        {%- assign _hit = true -%}
+      {%- endif -%}
+      {%- if _hit -%}{%- assign _mine = _mine | push: _i -%}{%- endif -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- if _mine.size > 0 -%}
+{%- assign _count = _count | plus: _mine.size %}
+<h2 class="author-group-title">{% if _g.path %}<a href="{{ _g.path | append: '/' | relative_url }}">{{ _g.title }}</a>{% else %}{{ _g.title }}{% endif %}</h2>
+<ul class="author-list">
+{%- for _i in _mine %}
+<li><a href="{{ _i.path | append: '/' | relative_url }}">{{ _i.title }}</a></li>
+{%- endfor %}
+</ul>
+{%- endif -%}
+{%- endfor %}
+{%- if _count == 0 %}
+<p class="author-empty">هنوز برگه‌ای از این نویسنده منتشر نشده است.</p>
+{%- endif %}
+</section>

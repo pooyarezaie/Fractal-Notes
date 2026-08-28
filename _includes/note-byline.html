@@ -1,14 +1,17 @@
 {%- comment -%}
-  The note's colophon: one quiet line after the body naming who wrote it.
-  Deliberately at the end and deliberately small — the note is the point, the
-  byline is the credit. The machine-readable credit (JSON-LD, meta author,
-  feed) lives in the layout and feed.xml and is derived from the same data.
+  The note's colophon: one quiet line after the body naming who wrote it,
+  each name linking to the author's own page (/authors/<key>/), which lists
+  everything they wrote. Deliberately at the end and deliberately small — the
+  note is the point, the byline is the credit. The machine-readable credit
+  (JSON-LD, meta author, feed) lives in the layout and feed.xml and is
+  derived from the same data.
+
+  Only real notes get a byline: pages registered as an item in
+  _data/site_index.yml. A series landing page (the course cover) is a title
+  and a table of contents, not a text with an author.
 
   Joins several names Persian-style: «الف، ب و ج».
 {%- endcomment -%}
-{%- comment -%} Only real notes get a byline: pages registered as an item in
-  _data/site_index.yml. A series landing page (the course cover) is a title
-  and a table of contents, not a text with an author. {%- endcomment -%}
 {%- assign _cur = page.url | remove_first: '/' -%}
 {%- assign _is_note = false -%}
 {%- for _g in site.data.site_index -%}
@@ -21,10 +24,9 @@
 {%- include note-authors.html -%}
 {%- if _is_note and note_authors.size > 0 -%}
 <footer class="note-byline">نوشتهٔ {% for a in note_authors -%}
-{%- if a.url -%}
-<a class="note-byline-name" href="{{ a.url }}" rel="author noopener" target="_blank" itemprop="author">{{ a.name }}</a>
-{%- elsif a.name -%}
-<span class="note-byline-name" itemprop="author">{{ a.name }}</span>
+{%- assign _key = note_author_keys[forloop.index0] -%}
+{%- if _key != "" -%}
+<a class="note-byline-name" href="{{ '/authors/' | append: _key | append: '/' | relative_url }}" rel="author" itemprop="author">{{ a.name }}</a>
 {%- else -%}
 <span class="note-byline-name" itemprop="author">{{ a }}</span>
 {%- endif -%}

@@ -150,7 +150,9 @@ Under the following terms:
 
 See the [LICENSE](LICENSE) file for the full license text.
 
-Each note is credited to its author: a byline after the body and the same name
-in the page's structured data and the feed. Contributors get an entry in
-`_data/authors.yml` and set `author: <key>` in their note's front matter; notes
-without the key belong to the site owner. See [AGENTS.md](AGENTS.md) §4.
+Each note is credited to its author: a byline after the body linking to the
+author's page (`/authors/<key>/`, listing everything they wrote), and the same
+name in the page's structured data and the feed. Contributors get an entry in
+`_data/authors.yml` plus a page `authors/<key>.md`, and set `author: <key>` in
+their note's front matter; notes without the key belong to the site owner. See
+[AGENTS.md](AGENTS.md) §4.

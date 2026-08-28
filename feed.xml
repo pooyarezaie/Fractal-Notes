@@ -37,7 +37,8 @@ permalink: /feed.xml
     <summary>{{ note.description | xml_escape }}</summary>
     {%- include note-authors.html page=note -%}
     {%- for a in note_authors %}
-    <author><name>{{ a.name | default: a | xml_escape }}</name>{% if a.url %}<uri>{{ a.url | xml_escape }}</uri>{% endif %}</author>
+    {%- assign _k = note_author_keys[forloop.index0] %}
+    <author><name>{{ a.name | default: a | xml_escape }}</name>{% if _k != "" %}<uri>{{ site.url }}/authors/{{ _k }}/</uri>{% endif %}</author>
     {%- endfor %}
   </entry>
   {%- endfor %}
