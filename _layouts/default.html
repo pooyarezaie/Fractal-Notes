@@ -18,6 +18,7 @@
       collects none of their standing. Skip it on the landing page itself, which
       is already position 2.
     {%- endcomment -%}
+    {%- include note-authors.html -%}
     {%- assign series_crumb = nil -%}
     {%- for group in site.data.site_index -%}
       {%- if group.series and group.path -%}
@@ -50,7 +51,26 @@
             {%- endif -%}
           ]
         }
-        {%- if page.url != '/' and page.url != '' and page.title -%}
+        {%- if page.author_key -%}
+        {%- assign _pa = site.data.authors[page.author_key] -%}
+        ,{
+          "@type": "ProfilePage",
+          "url": "{{ page_url_abs }}",
+          "inLanguage": "fa",
+          "mainEntity": {
+            "@type": "Person",
+            "name": {{ _pa.name | jsonify }},
+            "url": "{{ page_url_abs }}"
+            {%- if _pa.github or _pa.x -%}
+            , "sameAs": [
+              {%- if _pa.github -%}"https://github.com/{{ _pa.github }}"{%- endif -%}
+              {%- if _pa.github and _pa.x -%},{%- endif -%}
+              {%- if _pa.x -%}"https://x.com/{{ _pa.x }}"{%- endif -%}
+            ]
+            {%- endif %}
+          }
+        }
+        {%- elsif page.url != '/' and page.url != '' and page.title -%}
         ,{
           "@type": "Article",
           "headline": {{ page.title | jsonify }},
@@ -65,7 +85,19 @@
           "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
           "dateModified": "{{ page.last_modified_at | default: page.date | date: '%Y-%m-%d' }}",
           {%- endif %}
-          "author": { "@type": "Person", "name": {{ site.author.name | jsonify }}, "url": "{{ site.url }}/" },
+          "author": [
+            {%- for a in note_authors -%}
+            {%- assign _k = note_author_keys[forloop.index0] -%}
+            { "@type": "Person", "name": {{ a.name | default: a | jsonify }}{% if _k != "" %}, "url": "{{ site.url }}/authors/{{ _k }}/"{% endif %}
+              {%- if a.github or a.x -%}
+              , "sameAs": [
+                {%- if a.github -%}"https://github.com/{{ a.github }}"{%- endif -%}
+                {%- if a.github and a.x -%},{%- endif -%}
+                {%- if a.x -%}"https://x.com/{{ a.x }}"{%- endif -%}
+              ]
+              {%- endif %} }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ],
           "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }}, "logo": { "@type": "ImageObject", "url": "{{ site.url }}{{ site.logo }}" } }
         }
         {%- endif -%}
@@ -180,10 +212,15 @@
       </aside>
       <div class="side-nav-overlay" id="side-nav-overlay" aria-hidden="true"></div>
       <main class="container">
-        {%- if page.url != '/' and page.url != '' and page.title -%}
+        {%- if page.author_key -%}
+        <div class="author-page">
+          {{ content }}
+        </div>
+        {%- elsif page.url != '/' and page.url != '' and page.title -%}
         <article itemscope itemtype="https://schema.org/Article">
           {%- include series-nav.html position="top" -%}
           {{ content }}
+          {%- include note-byline.html -%}
           {%- include series-nav.html position="bottom" -%}
         </article>
         {%- else -%}
@@ -201,6 +238,7 @@
         <a href="https://x.com/FractalNotes" class="social-link" target="_blank" rel="noopener">
           صفحهٔ X (توییتر) «Fractal Notes»
         </a>
+        <p class="site-footer-license">برگه‌ها زیر پروانهٔ <a href="https://creativecommons.org/licenses/by/4.0/deed.fa" target="_blank" rel="license noopener">CC BY 4.0</a> منتشر می‌شوند؛ بازنشر آزاد است، به شرطِ نام بردن از نویسنده و پیوند به این‌جا.</p>
       </div>
     </footer>
 

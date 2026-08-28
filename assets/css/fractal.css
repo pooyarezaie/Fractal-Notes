@@ -153,8 +153,31 @@ main img {
     font-size: 14px;
     color: #555555;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
+}
+
+/* One line on the reuse terms, under the social links. Every note already
+   names its author (see .note-byline); this is the rule that makes that name
+   travel with the text. */
+.site-footer-license {
+    flex-basis: 100%;
+    margin: 2px 0 0;
+    font-size: 13px;
+    color: var(--ink-faint);
+}
+
+.site-footer-license a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+}
+
+.site-footer-license a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
 }
 
 .site-footer-label {
@@ -1009,11 +1032,170 @@ main .scroll-wrapper table {
     margin-top: 0.35em;
 }
 
+/* Note page: the colophon line after the body — «نوشتهٔ …».
+   Small and grey on purpose: the note is the point, this is the credit. */
+.note-byline {
+    margin-top: 36px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--ink-faint);
+}
+
+.note-byline-name {
+    color: var(--ink-soft);
+    font-weight: 500;
+}
+
+a.note-byline-name {
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-underline-offset: 3px;
+}
+
+a.note-byline-name:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+}
+
+/* Author page. A profile header in the home hero's voice — monogram, kicker,
+   name, a count — then the author's notes as the same topic cards the home
+   page uses (.home-card), so the page reads as "their slice of the site". */
+.author-hero {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 14px 0 26px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--line);
+}
+
+/* The first letter of the name, in place of a photograph. */
+.author-monogram {
+    flex-shrink: 0;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1;
+    padding-bottom: 6px; /* optical centre: Persian letters sit low in the em box */
+    color: var(--accent-deep);
+    background: linear-gradient(160deg, var(--accent-tint-strong), var(--accent-tint) 70%);
+    border: 1px solid var(--line-strong);
+}
+
+.author-hero-text {
+    min-width: 0;
+}
+
+.author-kicker {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-faint);
+}
+
+.author-name {
+    margin: 0;
+    font-size: clamp(1.7rem, 5vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.5;
+    color: var(--accent-deep);
+}
+
+.author-stat {
+    margin: 2px 0 0 0;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+}
+
+.author-stat-n {
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.author-stat-dot {
+    color: var(--line-strong);
+    padding: 0 2px;
+}
+
+.author-links {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0 0 0;
+}
+
+.author-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--paper);
+    color: var(--ink-soft);
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.author-link:hover,
+.author-link:focus-visible {
+    text-decoration: none;
+    border-color: var(--accent);
+    background: var(--accent-tint);
+    color: var(--accent);
+}
+
+.author-section-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+/* auto-fit, not auto-fill: an author with a single topic gets one full-width
+   card instead of a lone card and two empty columns. */
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.author-empty {
+    color: var(--ink-faint);
+}
+
+@media (max-width: 600px) {
+    .author-hero {
+        gap: 16px;
+        padding-bottom: 20px;
+    }
+
+    .author-monogram {
+        width: 64px;
+        height: 64px;
+        font-size: 30px;
+    }
+}
+
 /* Note page: previous / next lesson */
 .series-nav {
     margin-top: 40px;
     padding-top: 20px;
     border-top: 1px solid var(--line);
+}
+
+/* The byline already drew a rule above itself; don't draw a second one
+   twenty pixels lower. */
+.note-byline + .series-nav {
+    margin-top: 22px;
+    padding-top: 0;
+    border-top: 0;
 }
 
 .series-nav-head {

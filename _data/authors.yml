@@ -1,0 +1,23 @@
+# Who writes the notes. A note names its author with `author: <key>` in its
+# front matter (or `authors: [<key>, <key>]` for a joint note); the key must
+# exist here *and* have a page at authors/<key>.md — that page is where the
+# byline links and where the author's notes are listed. `_config.yml` defaults
+# every page to `pooyarezaie`, so only contributed notes need the line at all.
+#
+#   name     Persian, as it should read in the byline «نوشتهٔ …»
+#   github   optional GitHub username — shown on the author page
+#   x        optional X (Twitter) username — shown on the author page
+#   twitter  internal: the handle jekyll-seo-tag puts in the Twitter card's
+#            creator. It falls back to the *name* when missing, which would
+#            emit a garbage "@سامان …", so authors without a personal handle
+#            carry the site's account here. Not shown anywhere.
+
+pooyarezaie:
+  name: "پویا رضایی"
+  github: "pooyarezaie"
+  twitter: "FractalNotes"
+
+samanfarhat:
+  name: "سامان فرحت"
+  github: "Samanfrht"
+  twitter: "FractalNotes"

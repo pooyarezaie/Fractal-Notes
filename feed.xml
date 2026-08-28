@@ -35,6 +35,11 @@ permalink: /feed.xml
     <published>{{ note.date | date_to_xmlschema }}</published>
     <updated>{{ note.last_modified_at | default: note.date | date_to_xmlschema }}</updated>
     <summary>{{ note.description | xml_escape }}</summary>
+    {%- include note-authors.html page=note -%}
+    {%- for a in note_authors %}
+    {%- assign _k = note_author_keys[forloop.index0] %}
+    <author><name>{{ a.name | default: a | xml_escape }}</name>{% if _k != "" %}<uri>{{ site.url }}/authors/{{ _k }}/</uri>{% endif %}</author>
+    {%- endfor %}
   </entry>
   {%- endfor %}
 </feed>

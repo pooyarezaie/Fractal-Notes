@@ -58,12 +58,23 @@ index.md                     Homepage. Hero, then each series as a card, then th
                              topic groups as a grid — all from site_index.yml.
 _config.yml                  Jekyll config (title, SEO, kramdown math, plugins).
 _data/site_index.yml         ★ SINGLE SOURCE OF TRUTH for the note list / menu.
+_data/authors.yml            Who writes the notes: key → name, github, x. A note's
+                             `author:` front matter must be a key from here.
+authors/<key>.md             One page per author (name, links, their notes); the
+                             byline links here. Body is a one-line include.
 _layouts/default.html        The only layout (head, KaTeX loader, nav, SEO JSON-LD).
 _includes/series-nav.html    Course breadcrumb + previous/next lesson links.
+_includes/note-authors.html  Resolves a page's author key(s) against _data/authors.yml.
+_includes/note-byline.html   The «نوشتهٔ …» colophon line after a note's body.
+_includes/author-page.html   Body of authors/<key>.md — lists the author's notes.
 _includes/fa-number.html     Integer (0–99) → Persian-Indic digits.
 scripts/prerender.js         Playwright prerender script (incremental; caches
                              each page in .prerender-cache/ keyed by content).
 scripts/prerender-whitelist.json  Directories that get prerendered.
+scripts/figures/*.js         One generator per illustrated note: SVG built in JS,
+                             screenshotted through Playwright to PNG in
+                             assets/img/. Persian labels need real Vazirmatn
+                             shaping and bidi — never matplotlib.
 assets/
   css/fractal.css            All styling (RTL, typography, image/table handling).
                              NOT style.css — that path collides with the github-pages
@@ -113,8 +124,22 @@ This is the most common task. Follow every step or the note won't appear/render.
    image: "/assets/img/logo.png"   # optional; a relevant diagram is better
    date: 2026-08-05                # publish date (YYYY-MM-DD)
    last_modified_at: 2026-08-05    # bump on substantial edits
+   author: samanfarhat             # only for contributed notes — see below
    ---
    ```
+
+   **Authors and credit.** Every note is credited to its author: a small
+   «نوشتهٔ …» line after the body, plus the same name in the page's JSON-LD,
+   `<meta name="author">` and the Atom feed. `author` is a key from
+   `_data/authors.yml`; `_config.yml` defaults it to `pooyarezaie`, so the site
+   owner's notes carry no `author` line at all and a contributor's note just
+   needs `author: <key>` (or `authors: [<key>, <key>]` for a joint note). The
+   byline links to the author's own page, `/authors/<key>/`, which lists
+   everything they wrote — generated, never edited by hand. A new contributor
+   needs two things: an entry in `_data/authors.yml` (`name` in Persian as it
+   should read in the byline; optional `github` / `x` usernames) and a page
+   `authors/<key>.md` copied from `authors/samanfarhat.md` with the key and name
+   swapped. Never write the byline into the note itself; the layout renders it.
 
 3. **Write the body** following the note conventions in §5.
 

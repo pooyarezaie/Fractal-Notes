@@ -1,0 +1,71 @@
+{%- comment -%}
+  Body of an author's page (authors/<key>.md): a profile header — monogram,
+  «نویسنده» kicker, the name, how many notes in how many topics, icon links to
+  GitHub / X — then every note they wrote as topic cards in the home page's
+  card vocabulary. Nothing is written by hand — a note appears here the moment
+  its front matter names this author.
+  Param: key = the author's key in _data/authors.yml
+{%- endcomment -%}
+{%- assign _key = include.key -%}
+{%- assign _a = site.data.authors[_key] -%}
+{%- comment -%} Collect the author's notes per topic group first, so the header can count them. {%- endcomment -%}
+{%- assign _groups = "" | split: "" -%}
+{%- assign _lists = "" | split: "" -%}
+{%- assign _count = 0 -%}
+{%- for _g in site.data.site_index -%}
+  {%- assign _mine = "" | split: "" -%}
+  {%- for _i in _g.items -%}
+    {%- assign _target = "/" | append: _i.path | append: "/" -%}
+    {%- for _pg in site.pages -%}
+      {%- if _pg.url == _target -%}
+        {%- assign _hit = false -%}
+        {%- if _pg.authors -%}
+          {%- if _pg.authors contains _key -%}{%- assign _hit = true -%}{%- endif -%}
+        {%- elsif _pg.author == _key -%}
+          {%- assign _hit = true -%}
+        {%- endif -%}
+        {%- if _hit -%}{%- assign _mine = _mine | push: _i -%}{%- endif -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endfor -%}
+  {%- if _mine.size > 0 -%}
+    {%- assign _groups = _groups | push: _g -%}
+    {%- assign _lists = _lists | push: _mine -%}
+    {%- assign _count = _count | plus: _mine.size -%}
+  {%- endif -%}
+{%- endfor -%}
+<header class="author-hero">
+<div class="author-monogram" aria-hidden="true">{{ _a.name | slice: 0, 1 }}</div>
+<div class="author-hero-text">
+<p class="author-kicker">نویسنده</p>
+<h1 class="author-name">{{ _a.name }}</h1>
+<p class="author-stat"><span class="author-stat-n">{% include fa-number.html n=_count %}</span> برگه{% if _groups.size > 1 %} <span class="author-stat-dot" aria-hidden="true">·</span> <span class="author-stat-n">{% include fa-number.html n=_groups.size %}</span> موضوع{% endif %}</p>
+{%- if _a.github or _a.x %}
+<p class="author-links">
+{%- if _a.github %}<a class="author-link" href="https://github.com/{{ _a.github }}" rel="me noopener" target="_blank" aria-label="گیت‌هاب" title="گیت‌هاب"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>{% endif -%}
+{%- if _a.x %}<a class="author-link" href="https://x.com/{{ _a.x }}" rel="me noopener" target="_blank" aria-label="ایکس (توییتر)" title="ایکس (توییتر)"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg></a>{% endif -%}
+</p>
+{%- endif %}
+</div>
+</header>
+{%- if _count > 0 %}
+<section class="author-notes">
+<h2 class="author-section-title">برگه‌ها</h2>
+<div class="author-grid">
+{%- for _g in _groups -%}
+{%- assign _mine = _lists[forloop.index0] %}
+<section class="home-card">
+<h3 class="home-card-title">{% if _g.path %}<a href="{{ _g.path | append: '/' | relative_url }}">{{ _g.title }}</a>{% else %}{{ _g.title }}{% endif %}<span class="home-card-count">{% include fa-number.html n=_mine.size %} برگه</span></h3>
+<ul class="home-card-list">
+{%- for _i in _mine %}
+<li><a href="{{ _i.path | append: '/' | relative_url }}">{{ _i.title }}</a></li>
+{%- endfor %}
+</ul>
+</section>
+{%- endfor %}
+</div>
+</section>
+{%- else %}
+<p class="author-empty">هنوز برگه‌ای از این نویسنده منتشر نشده است.</p>
+{%- endif %}
