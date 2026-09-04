@@ -526,8 +526,179 @@ function figSummary() {
   return svg(W, H, s);
 }
 
+
+// ---------------------------------------------------------------- warm-up 1
+// Euclid I.1: an equilateral triangle on a given segment. Two arcs of radius
+// AB, one from each end, meet at the apex.
+function figWarmTriangle() {
+  const W = 760, H = 380;
+  const L = 210, ax = 275, ay = 312, bx = ax + L, by = ay;
+  const A = [ax, ay], B = [bx, by];
+  const C = [ax + L / 2, ay - L * Math.sqrt(3) / 2];
+
+  let s = head('مثلث متساوی‌الاضلاع روی یک پاره‌خط',
+    'نخستین قضیهٔ «اصول»: دو کمان به شعاعِ AB، یکی از هر سر، در رأس سوم به هم می‌رسند.');
+
+  // the two compass traces (only the part a compass would actually leave)
+  s += arc(ax, ay, L, d2r(20), d2r(100), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += arc(bx, by, L, d2r(80), d2r(160), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  // the triangle
+  s += `<polygon points="${polyPath([A, B, C])}" fill="${TINT}" fill-opacity="0.85" stroke="${ACCENT}" stroke-width="2"/>`;
+  s += line(ax, ay, bx, by, INK, 2.2);
+  [A, B].forEach(([x, y]) => s += circ(x, y, 5, { fill: INK }));
+  s += circ(C[0], C[1], 5.5, { fill: RED });
+  s += M(ax - 18, ay + 8, 'A', { size: 17, color: INK, weight: 700 });
+  s += M(bx + 18, by + 8, 'B', { size: 17, color: INK, weight: 700 });
+  s += M(C[0], C[1] - 16, 'C', { size: 17, color: RED, weight: 700 });
+  // step labels beside the arcs
+  s += T(ax - 34, ay - 120, 'کمان به مرکز A، به شعاع AB', { align: 'right', size: 13.5, color: FAINT });
+  s += T(bx + 34, by - 120, 'کمان به مرکز B، به شعاع AB', { align: 'left', size: 13.5, color: FAINT });
+  s += T(730, 352, 'C از برخورد دو کمان پیدا شد؛ AC و BC هر دو به اندازهٔ دهانهٔ پرگار، یعنی AB، هستند.', { size: 14, color: SOFT });
+  return svg(W, H, s);
+}
+
+// ---------------------------------------------------------------- warm-up 2
+// The hexagon: a chord equal to the radius, stepped six times around the
+// circle. Every other vertex is the triangle again.
+function figWarmHexagon() {
+  const W = 760, H = 400;
+  const cx = 380, cy = 226, r = 128;
+  const pts = polyPoints(cx, cy, r, 6);
+
+  let s = head('شش‌ضلعی: دهانهٔ پرگار به اندازهٔ شعاع',
+    'همان دهانه را شش بار دورِ دایره می‌زنیم؛ یک‌درمیانِ رأس‌ها، مثلث است.');
+
+  s += circ(cx, cy, r, { stroke: INK, w: 1.6 });
+  // triangle on alternate vertices, then the hexagon outline
+  const tri = [pts[0], pts[2], pts[4]];
+  s += `<polygon points="${polyPath(tri)}" fill="${TINT}" fill-opacity="0.9" stroke="${ACCENT}" stroke-width="2"/>`;
+  s += `<polygon points="${polyPath(pts)}" fill="none" stroke="${INK}" stroke-width="1.5"/>`;
+  // the radius the compass copies
+  s += line(cx, cy, pts[0][0], pts[0][1], ACCENT, 1.6, '4 3');
+  s += circ(cx, cy, 3.2, { fill: INK });
+  s += M(cx - 10, cy + 20, 'O', { align: 'right', size: 15, color: INK });
+  // six compass traces: centred on vertex k, radius r, cutting the circle at vertex k+1
+  pts.forEach(([x, y], k) => {
+    const t = Math.PI / 3 * k;
+    s += arc(x, y, r, t + d2r(108), t + d2r(132), { stroke: SOFT, w: 1.3, dash: '5 4' });
+  });
+  pts.forEach(([x, y], k) => {
+    s += circ(x, y, 5.5, { fill: k % 2 === 0 ? ACCENT : '#ffffff', stroke: k % 2 === 0 ? ACCENT : INK, w: 1.8 });
+  });
+  s += M(pts[0][0] + 18, pts[0][1] + 6, 'A', { align: 'left', size: 16, color: INK, weight: 700 });
+  s += T(730, 378, 'وترِ برابر با شعاع، زاویهٔ مرکزیِ ۶۰ درجه می‌گیرد — چون مثلثِ O و دو رأسِ کناری متساوی‌الاضلاع است.', { size: 14, color: SOFT });
+  return svg(W, H, s);
+}
+
+// ---------------------------------------------------------------- warm-up 3
+// The square from a diameter and its perpendicular bisector; bisecting an arc
+// doubles the number of sides.
+function figWarmSquare() {
+  const W = 760, H = 420;
+  const cx = 380, cy = 240, r = 124;
+  const A = [cx - r, cy], B = [cx + r, cy], C = [cx, cy - r], D = [cx, cy + r];
+  const R = r * 1.45; // compass opening for the perpendicular bisector
+
+  let s = head('مربع: یک قطر و عمودمنصفش — و بعد، نصف‌کردنِ کمان',
+    'دو کمانِ هم‌شعاع از دو سرِ قطر، خطِ عمود را می‌دهند؛ هر نصف‌کردنِ کمان، تعدادِ ضلع‌ها را دو برابر می‌کند.');
+
+  s += circ(cx, cy, r, { stroke: INK, w: 1.6 });
+  s += line(A[0], A[1], B[0], B[1], INK, 1.5);
+  // arcs for the perpendicular bisector of AB
+  const [px, py] = [cx, cy - Math.sqrt(R * R - r * r)];
+  const [qx, qy] = [cx, cy + Math.sqrt(R * R - r * r)];
+  const tA = Math.acos(r / R), tB = Math.PI - tA;
+  s += arc(A[0], A[1], R, tA - d2r(14), tA + d2r(14), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += arc(A[0], A[1], R, -tA - d2r(14), -tA + d2r(14), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += arc(B[0], B[1], R, tB - d2r(14), tB + d2r(14), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += arc(B[0], B[1], R, -tB - d2r(14), -tB + d2r(14), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += line(px, py, qx, qy, ACCENT, 1.5, '4 3');
+  // the square
+  s += `<polygon points="${polyPath([A, C, B, D])}" fill="${TINT}" fill-opacity="0.9" stroke="${ACCENT}" stroke-width="2"/>`;
+  // bisect the arc CB: arcs from C and B, the bisector passes through O, hits the circle at E
+  const E = P(cx, cy, r, Math.PI / 4);
+  const Rc = r * 1.05;
+  const chord = Math.hypot(B[0] - C[0], B[1] - C[1]);
+  const h = Math.sqrt(Rc * Rc - (chord / 2) * (chord / 2));
+  const mid = [(B[0] + C[0]) / 2, (B[1] + C[1]) / 2];
+  const u = [(B[0] - C[0]) / chord, (B[1] - C[1]) / chord]; // unit along CB
+  const nrm = [u[1], -u[0]]; // toward the centre side? we want the outer intersection near E
+  const X1 = [mid[0] + nrm[0] * h, mid[1] + nrm[1] * h];
+  const X2 = [mid[0] - nrm[0] * h, mid[1] - nrm[1] * h];
+  const outer = Math.hypot(X1[0] - cx, X1[1] - cy) > Math.hypot(X2[0] - cx, X2[1] - cy) ? X1 : X2;
+  const inner = outer === X1 ? X2 : X1;
+  const aC = Math.atan2(-(outer[1] - C[1]), outer[0] - C[0]);
+  const aB = Math.atan2(-(outer[1] - B[1]), outer[0] - B[0]);
+  s += arc(C[0], C[1], Rc, aC - d2r(12), aC + d2r(12), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += arc(B[0], B[1], Rc, aB - d2r(12), aB + d2r(12), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  s += line(cx, cy, outer[0] + (outer[0] - cx) * 0.06, outer[1] + (outer[1] - cy) * 0.06, RED, 1.4, '4 3');
+  // the octagon, faint
+  const oct = polyPoints(cx, cy, r, 8);
+  s += `<polygon points="${polyPath(oct)}" fill="none" stroke="${RED}" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.8"/>`;
+  [A, B, C, D].forEach(([x, y]) => s += circ(x, y, 5.5, { fill: ACCENT }));
+  s += circ(E[0], E[1], 5.5, { fill: RED });
+  s += circ(cx, cy, 3.2, { fill: INK });
+  s += M(A[0] - 18, A[1] + 6, 'A', { size: 16, color: INK, weight: 700 });
+  s += M(B[0] + 18, B[1] + 6, 'B', { size: 16, color: INK, weight: 700 });
+  s += M(C[0] - 16, C[1] - 2, 'C', { align: 'right', size: 16, color: INK, weight: 700 });
+  s += M(D[0] - 16, D[1] + 12, 'D', { align: 'right', size: 16, color: INK, weight: 700 });
+  s += M(E[0] + 16, E[1] - 8, 'E', { align: 'left', size: 16, color: RED, weight: 700 });
+  s += M(cx - 10, cy + 20, 'O', { align: 'right', size: 14, color: INK });
+  s += T(730, 396, 'E وسطِ کمانِ CB است؛ با همین حرکت، مربع هشت‌ضلعی می‌شود، هشت‌ضلعی شانزده‌ضلعی، و همین‌طور تا هر توانِ ۲.', { size: 14, color: SOFT });
+  return svg(W, H, s);
+}
+
+// ---------------------------------------------------------------- warm-up 4
+// The pentagon from one auxiliary arc: with M the midpoint of the radius OA
+// and the arc of centre M through B, the chord BN is the side of the pentagon.
+function figWarmPentagon() {
+  const W = 760, H = 440;
+  const cx = 380, cy = 248, r = 130;
+  const A = [cx + r, cy], B = [cx, cy - r];
+  const Mp = [cx + r / 2, cy];
+  const RM = Math.hypot(B[0] - Mp[0], B[1] - Mp[1]); // = r*sqrt5/2
+  const N = [Mp[0] - RM, cy];
+  const side = Math.hypot(N[0] - B[0], N[1] - B[1]); // = 2 r sin 36°
+
+  let s = head('پنج‌ضلعی: یک کمانِ کمکی، ضلع را می‌دهد',
+    'M وسطِ شعاع OA است. کمانی به مرکز M از B تا قطر بزنید؛ وترِ BN دقیقاً ضلعِ پنج‌ضلعی است.');
+
+  s += circ(cx, cy, r, { stroke: INK, w: 1.6 });
+  s += line(cx - r - 40, cy, cx + r + 40, cy, RULE, 1.2);
+  s += line(cx, cy - r - 30, cx, cy + r + 30, RULE, 1.2);
+  // the side, stepped around
+  const pts = polyPoints(cx, cy, r, 5, Math.PI / 2);
+  s += `<polygon points="${polyPath(pts)}" fill="${TINT}" fill-opacity="0.9" stroke="${ACCENT}" stroke-width="2"/>`;
+  pts.forEach(([x, y], k) => {
+    if (k === 4) return;
+    const t = Math.atan2(-(pts[k + 1][1] - y), pts[k + 1][0] - x);
+    s += arc(x, y, side, t - d2r(9), t + d2r(9), { stroke: FAINT, w: 1.3, dash: '5 4' });
+  });
+  // the auxiliary arc, on top of the fill
+  const t0 = Math.atan2(-(B[1] - Mp[1]), B[0] - Mp[0]);
+  s += arc(Mp[0], Mp[1], RM, t0, Math.PI, { stroke: SOFT, w: 1.4, dash: '5 4' });
+  s += line(Mp[0], Mp[1], B[0], B[1], SOFT, 1.2, '3 3');
+  s += line(B[0], B[1], N[0], N[1], RED, 2);
+  [A, Mp, N].forEach(([x, y]) => s += circ(x, y, 5, { fill: INK }));
+  pts.forEach(([x, y]) => s += circ(x, y, 5.5, { fill: ACCENT }));
+  s += circ(B[0], B[1], 5.5, { fill: RED });
+  s += circ(N[0], N[1], 5.5, { fill: RED });
+  s += circ(cx, cy, 3.2, { fill: INK });
+  s += M(A[0] + 16, A[1] + 22, 'A', { size: 16, color: INK, weight: 700 });
+  s += M(B[0] + 16, B[1] - 8, 'B', { align: 'left', size: 16, color: RED, weight: 700 });
+  s += M(Mp[0], Mp[1] + 24, 'M', { size: 16, color: INK, weight: 700 });
+  s += M(N[0] - 4, N[1] + 24, 'N', { size: 16, color: RED, weight: 700 });
+  s += M(cx + 12, cy + 20, 'O', { align: 'left', size: 14, color: INK });
+  s += T(730, 414, 'طولِ MB برابر <tspan direction="ltr" unicode-bidi="isolate">√5 / 2</tspan> شعاع است؛ این ریشهٔ دوم را پرگار می‌سازد، و پنج‌ضلعی دقیقاً به همین عدد نیاز دارد.', { size: 14, color: SOFT });
+  return svg(W, H, s);
+}
+
 const FIGS = [
   { name: 'complex_constructible_cover_band', svg: figCoverBand(), w: 760, h: 172 },
+  { name: 'complex_constructible_warm_triangle', svg: figWarmTriangle(), w: 760, h: 380 },
+  { name: 'complex_constructible_warm_hexagon', svg: figWarmHexagon(), w: 760, h: 400 },
+  { name: 'complex_constructible_warm_square', svg: figWarmSquare(), w: 760, h: 420 },
+  { name: 'complex_constructible_warm_pentagon', svg: figWarmPentagon(), w: 760, h: 440 },
   { name: 'complex_constructible_roots_of_unity', svg: figRootsOfUnity(), w: 760, h: 470 },
   { name: 'complex_constructible_cos_to_zeta', svg: figCosToZeta(), w: 760, h: 420 },
   { name: 'complex_constructible_intersections', svg: figIntersections(), w: 760, h: 360 },
@@ -543,7 +714,9 @@ const FIGS = [
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ deviceScaleFactor: 2 });
+  const only = process.argv.slice(2);
   for (const f of FIGS) {
+    if (only.length && !only.includes(f.name)) continue;
     const html = `<!doctype html><html><head><meta charset="utf-8"><style>
       @font-face { font-family: "Vazirmatn"; src: url("${FONT}") format("woff2"); font-weight: 100 900; }
       * { margin:0; padding:0; } body { background:#fff; }
