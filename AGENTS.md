@@ -398,6 +398,13 @@ Deployment is automatic: pushing to `main` triggers GitHub Actions
 
 ## 8. Guardrails for agents
 
+- **Optional videos:** `scripts/videos/complex_numbers/` adapts the first
+  complex-numbers sheet using the original `3b1b/manim` engine. Follow its README
+  for isolated installation and preview/final renders. Keep animation, captions,
+  chapters and narration synchronized through `cues.json`; keep generated media
+  in its gitignored `output/`. This is build tooling under Jekyll's `scripts/`
+  exclusion, not a content directory or a change to the normal publishing pipeline.
+
 - **Prefer content work.** The default task is writing/editing notes. Touch
   `_layouts/`, `assets/css/`, `scripts/`, `Dockerfile`, or CI only when the task
   is explicitly about infrastructure.

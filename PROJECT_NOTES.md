@@ -101,6 +101,13 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
   overrides `site.url` outside `JEKYLL_ENV=production`; deploys are unaffected.
 
 ### Dependencies
+
+- **Optional video tooling**: `scripts/videos/complex_numbers/` contains a Manim
+  animation of the first complex-numbers sheet. Its pinned upstream engine,
+  isolated Python environment, cue timeline, and render commands are documented
+  in that directory's README. It exports MP4, Persian SRT, chapters and a recording
+  script into a gitignored `output/` folder. This tooling lives under the existing
+  Jekyll `scripts/` exclusion and does not change the site build or deploy pipeline.
 - **Ruby**: `github-pages` gem (includes Jekyll and all necessary plugins)
 - **Node (for prerender)**: Playwright (Chromium), `serve-handler`; used by GitHub Actions and Docker build
 
