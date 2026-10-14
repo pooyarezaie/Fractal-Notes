@@ -1,0 +1,13 @@
+directories:
+  base: ""
+  subdirs:
+    output: "output"
+  cache: "output/cache"
+camera:
+  background_color: "#10141f"
+  fps: 30
+text:
+  font: "DejaVu Sans"
+scene:
+  show_animation_progress: False
+  leave_progress_bars: False

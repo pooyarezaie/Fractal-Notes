@@ -114,6 +114,12 @@ For all available commands (build, prerender, Docker, etc.), run **`make help`**
 
 ## Project docs
 
+The optional first-sheet complex-numbers animation lives in
+[`scripts/videos/complex_numbers/`](scripts/videos/complex_numbers/README.md).
+It uses 3Blue1Brown's original Manim engine in a separate Python environment;
+its guide covers preview/final rendering, Persian captions, and recording
+narration. Video tooling and outputs are excluded from the published site.
+
 - **[AGENTS.md](AGENTS.md)** — guide for AI assistants: repository map, the
   step-by-step workflow for adding a note, and the writing/style conventions.
   It's also the quickest orientation for a new human contributor.

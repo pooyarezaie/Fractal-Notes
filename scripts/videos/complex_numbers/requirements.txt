@@ -1,0 +1,6 @@
+# Grant Sanderson's original engine, pinned to the revision used for this film.
+manimgl @ git+https://github.com/3b1b/manim.git@fafa083a4fb274bba9cabde0b6e2f50ba6da0622
+Brotli>=1.1,<2
+# The pinned upstream imports VideoMobject at startup but omits PyAV from
+# its install dependencies. It is needed even though this film embeds no clips.
+av>=16,<19
