@@ -156,3 +156,13 @@ name in the page's structured data and the feed. Contributors get an entry in
 `_data/authors.yml` plus a page `authors/<key>.md`, and set `author: <key>` in
 their note's front matter; notes without the key belong to the site owner. See
 [AGENTS.md](AGENTS.md) §4.
+
+## Accessibility checks
+
+After `make build-prerender`, run `npm run lint` (JavaScript syntax checks) and
+`npm run test:a11y` (axe WCAG 2.2 AA tags plus keyboard, focus, reflow and lab
+regressions). Chromium must be installed with `npx playwright install chromium`.
+Use `A11Y_REPORT=/tmp/accessibility-results.json npm run test:a11y` to save results.
+The pull-request accessibility workflow builds and tests without deploying.
+See `scripts/accessibility-audit.md` for scope, findings and manual-check limits;
+passing automated checks does not establish WCAG conformance.

@@ -132,40 +132,11 @@
     <script defer src="{{ '/assets/katex/katex.min.js' | relative_url }}"></script>
     <script defer src="{{ '/assets/katex/auto-render.min.js' | relative_url }}"
             onload="renderMathInElement(document.body, { delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}, {left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}] }); if (window.initScrollAndWrap) window.initScrollAndWrap();"></script>
-    <script>
-      (function() {
-        function wrapScrollable(el, className) {
-          if (el.closest('.scroll-wrapper')) return;
-          var wrapper = document.createElement('div');
-          wrapper.className = className || 'scroll-wrapper';
-          el.parentNode.insertBefore(wrapper, el);
-          wrapper.appendChild(el);
-        }
-        function wrapTables() {
-          var main = document.querySelector('main');
-          if (!main) return;
-          var mainWidth = main.getBoundingClientRect().width;
-          main.querySelectorAll('table').forEach(function(el) {
-            if (el.scrollWidth > mainWidth) wrapScrollable(el, 'scroll-wrapper');
-          });
-        }
-        function scrollMathToStart() {
-          document.querySelectorAll('.katex-display').forEach(function(el) {
-            if (el.scrollWidth > el.clientWidth) el.scrollLeft = 0;
-          });
-        }
-        function init() {
-          wrapTables();
-          scrollMathToStart();
-          setTimeout(scrollMathToStart, 300);
-          setTimeout(scrollMathToStart, 1200);
-        }
-        window.initScrollAndWrap = init;
-      })();
-    </script>
+    <script defer src="{{ '/assets/js/accessibility.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   </head>
 
   <body>
+    <a class="skip-link" href="#main-content">رفتن به محتوای اصلی</a>
     <header class="site-header">
       <div class="site-header-inner">
         <button type="button" class="nav-toggle" id="nav-toggle" aria-label="باز کردن فهرست مطالب" aria-expanded="false" aria-controls="side-nav">
@@ -188,21 +159,21 @@
         <button type="button" class="side-nav-close" id="side-nav-close" aria-label="بستن فهرست">×</button>
         {%- comment -%} page.url is /topic/name/ ; site_index paths are topic/name {%- endcomment -%}
         {%- assign cur_path = page.url | remove_first: '/' -%}
-        <nav class="side-nav-inner">
+        <nav class="side-nav-inner" aria-label="فهرست برگه‌ها">
           <span class="side-nav-title">برگه‌ها</span>
           <ul class="side-nav-groups">
             {% for group in site.data.site_index %}
             <li class="side-nav-group">
               {% if group.path %}
               {%- assign group_home = group.path | append: '/' -%}
-              <a class="side-nav-group-title{% if cur_path == group_home %} active{% endif %}" href="{{ group_home | relative_url }}">{{ group.title }}</a>
+              <a class="side-nav-group-title{% if cur_path == group_home %} active{% endif %}"{% if cur_path == group_home %} aria-current="page"{% endif %} href="{{ group_home | relative_url }}">{{ group.title }}</a>
               {% else %}
               <span class="side-nav-group-title">{{ group.title }}</span>
               {% endif %}
               <ul class="side-nav-list">
                 {% for item in group.items %}
                 {%- assign item_home = item.path | append: '/' -%}
-                <li><a href="{{ item_home | relative_url }}"{% if cur_path == item_home %} class="active"{% endif %}>{% if group.series %}<span class="lesson-num">{% include fa-number.html n=forloop.index %}</span>{% endif %}{{ item.title }}</a></li>
+                <li><a href="{{ item_home | relative_url }}"{% if cur_path == item_home %} class="active" aria-current="page"{% endif %}>{% if group.series %}<span class="lesson-num">{% include fa-number.html n=forloop.index %}</span>{% endif %}{{ item.title }}</a></li>
                 {% endfor %}
               </ul>
             </li>
@@ -211,7 +182,7 @@
         </nav>
       </aside>
       <div class="side-nav-overlay" id="side-nav-overlay" aria-hidden="true"></div>
-      <main class="container">
+      <main class="container" id="main-content" tabindex="-1">
         {%- if page.author_key -%}
         <div class="author-page">
           {{ content }}
@@ -243,78 +214,6 @@
     </footer>
 
     <script>
-      (function() {
-        var activeOverlay = null;
-
-        function closeOverlay() {
-          if (!activeOverlay) return;
-          activeOverlay.remove();
-          activeOverlay = null;
-        }
-
-        function openOverlay(src, alt) {
-          closeOverlay();
-
-          var backdrop = document.createElement('div');
-          backdrop.className = 'image-lightbox-backdrop';
-
-          var img = document.createElement('img');
-          img.className = 'image-lightbox-img';
-          img.src = src;
-          img.alt = alt || '';
-
-          backdrop.appendChild(img);
-          document.body.appendChild(backdrop);
-          activeOverlay = backdrop;
-
-          backdrop.addEventListener('click', function() {
-            closeOverlay();
-          });
-        }
-
-        document.addEventListener('click', function(event) {
-          if (!event.target) return;
-          var target = event.target;
-          if (target.tagName === 'IMG' && target.closest('main')) {
-            event.preventDefault();
-            openOverlay(target.currentSrc || target.src, target.alt);
-          }
-        });
-
-        document.addEventListener('keydown', function(event) {
-          if (event.key === 'Escape' || event.key === 'Esc') {
-            closeOverlay();
-          }
-        });
-      })();
-
-      (function() {
-        var toggle = document.getElementById('nav-toggle');
-        var sideNav = document.getElementById('side-nav');
-        var closeBtn = document.getElementById('side-nav-close');
-        var overlay = document.getElementById('side-nav-overlay');
-
-        function openNav() {
-          if (!sideNav) return;
-          sideNav.classList.add('side-nav-open');
-          if (overlay) overlay.setAttribute('aria-hidden', 'false');
-          if (toggle) toggle.setAttribute('aria-expanded', 'true');
-          document.body.classList.add('side-nav-active');
-        }
-
-        function closeNav() {
-          if (!sideNav) return;
-          sideNav.classList.remove('side-nav-open');
-          if (overlay) overlay.setAttribute('aria-hidden', 'true');
-          if (toggle) toggle.setAttribute('aria-expanded', 'false');
-          document.body.classList.remove('side-nav-active');
-        }
-
-        if (toggle) toggle.addEventListener('click', openNav);
-        if (closeBtn) closeBtn.addEventListener('click', closeNav);
-        if (overlay) overlay.addEventListener('click', closeNav);
-      })();
-
       (function() {
         var steps = document.querySelectorAll('details.reveal-step');
         Array.prototype.forEach.call(steps, function(step) {

@@ -127,3 +127,13 @@ visitor keeps the stylesheet they cached on their first visit — indefinitely. 
 3. Test locally with `bundle exec jekyll serve` (or `make dev`)
 4. Full pipeline (with prerender): `make build-prerender` then `make serve` to test
 5. Push to GitHub (auto-deploys via GitHub Pages when source is GitHub Actions)
+
+## Accessibility checks
+
+After `make build-prerender`, run `npm run lint` (JavaScript syntax checks) and
+`npm run test:a11y` (axe WCAG 2.2 AA tags plus keyboard, focus, reflow and lab
+regressions). Chromium must be installed with `npx playwright install chromium`.
+Use `A11Y_REPORT=/tmp/accessibility-results.json npm run test:a11y` to save results.
+The pull-request accessibility workflow builds and tests without deploying.
+See `scripts/accessibility-audit.md` for scope, findings and manual-check limits;
+passing automated checks does not establish WCAG conformance.

@@ -423,3 +423,13 @@ Deployment is automatic: pushing to `main` triggers GitHub Actions
 - **This is a personal learning project.** When the author is "learning something
   together" with you, the goal is a clear, correct, delightful note — accuracy of
   the math matters more than speed.
+
+## Accessibility checks
+
+After `make build-prerender`, run `npm run lint` (JavaScript syntax checks) and
+`npm run test:a11y` (axe WCAG 2.2 AA tags plus keyboard, focus, reflow and lab
+regressions). Chromium must be installed with `npx playwright install chromium`.
+Use `A11Y_REPORT=/tmp/accessibility-results.json npm run test:a11y` to save results.
+The pull-request accessibility workflow builds and tests without deploying.
+See `scripts/accessibility-audit.md` for scope, findings and manual-check limits;
+passing automated checks does not establish WCAG conformance.

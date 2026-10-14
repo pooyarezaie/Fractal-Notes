@@ -14,6 +14,7 @@
   'use strict';
 
   var bound = (typeof WeakSet !== 'undefined') ? new WeakSet() : null;
+  var guideColor = getComputedStyle(document.documentElement).getPropertyValue('--ink-faint').trim();
 
   /* ---------------------------------------------------------- plumbing */
 
@@ -49,13 +50,13 @@
   function drawAxes(v, skipClear) {
     var ctx = v.ctx;
     if (!skipClear) ctx.clearRect(0, 0, v.w, v.h);
-    ctx.strokeStyle = '#d5cfe6';
+    ctx.strokeStyle = guideColor;
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(0, v.h / 2); ctx.lineTo(v.w, v.h / 2);
     ctx.moveTo(v.w / 2, 0); ctx.lineTo(v.w / 2, v.h);
     ctx.stroke();
-    ctx.fillStyle = '#6f6a86';
+    ctx.fillStyle = guideColor;
     ctx.font = '13px sans-serif';
     ctx.fillText('Re', v.w - 22, v.h / 2 - 6);
     ctx.fillText('Im', v.w / 2 + 6, 14);
@@ -70,7 +71,7 @@
     var pr = v.toPx({ re: r, im: 0 })[0] - c[0];
     ctx.save();
     if (dashed) ctx.setLineDash([5, 5]);
-    ctx.strokeStyle = color || '#d5cfe6';
+    ctx.strokeStyle = color || guideColor;
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.arc(c[0], c[1], pr, 0, 2 * Math.PI);
@@ -155,6 +156,64 @@
     canvas.addEventListener('pointercancel', function () { dragging = null; });
   }
 
+  // Explicit fields and +/- buttons provide keyboard and single-click alternatives
+  // to dragging. Rebuild controls because prerender serializes the previous DOM.
+  var coordinateId = 0;
+  function coordinateControls(root, points, onChange) {
+    root.querySelectorAll('.lab-coordinate-controls').forEach(function (node) { node.remove(); });
+    var inputs = [];
+    points.forEach(function (point) {
+      var fieldset = document.createElement('fieldset');
+      fieldset.className = 'lab-coordinate-controls';
+      var legend = document.createElement('legend');
+      legend.textContent = point.label;
+      legend.dir = 'ltr';
+      fieldset.appendChild(legend);
+      ['re', 'im'].forEach(function (axis) {
+        var name = axis === 're' ? 'بخش حقیقی' : 'بخش موهومی';
+        var row = document.createElement('div');
+        row.className = 'lab-coordinate-row';
+        var label = document.createElement('label');
+        var input = document.createElement('input');
+        input.id = 'lab-coordinate-' + (++coordinateId);
+        input.type = 'number';
+        input.step = '0.1';
+        label.htmlFor = input.id;
+        label.textContent = name + ' ' + point.label;
+        input.addEventListener('input', function () {
+          if (Number.isFinite(input.valueAsNumber)) {
+            point.set(axis, input.valueAsNumber);
+            onChange();
+          }
+        });
+        row.append(label, input);
+        [-1, 1].forEach(function (delta) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.textContent = delta < 0 ? '−' : '+';
+          button.setAttribute('aria-label', (delta < 0 ? 'کاهش ' : 'افزایش ') + name + ' ' + point.label);
+          button.addEventListener('click', function () {
+            point.set(axis, Math.round((point.get()[axis] + delta * 0.1) * 100) / 100);
+            onChange();
+          });
+          row.appendChild(button);
+        });
+        fieldset.appendChild(row);
+        inputs.push({ input: input, point: point, axis: axis });
+      });
+      root.insertBefore(fieldset, root.querySelector('.lab-readout'));
+    });
+    var readout = root.querySelector('.lab-readout');
+    if (readout) { readout.setAttribute('lang', 'en'); readout.setAttribute('role', 'status'); }
+    var canvas = root.querySelector('canvas');
+    canvas.setAttribute('role', 'img');
+    return function () {
+      inputs.forEach(function (item) {
+        if (document.activeElement !== item.input) item.input.value = fmt(item.point.get()[item.axis]);
+      });
+    };
+  }
+
   /* ---------------------------------------------------------- multiply lab */
 
   function initMultiply(root) {
@@ -163,8 +222,13 @@
     var z1 = { re: 1.5, im: 0.9 };
     var z2 = { re: 0.4, im: 1.1 };
     var v;
+    var syncControls = coordinateControls(root, [
+      { label: 'z₁', get: function () { return z1; }, set: function (axis, value) { z1[axis] = value; } },
+      { label: 'z₂', get: function () { return z2; }, set: function (axis, value) { z2[axis] = value; } }
+    ], draw);
 
     function draw() {
+      syncControls();
       v = setupCanvas(canvas, 3.4);
       drawAxes(v);
       circle(v, 1, true);
@@ -207,8 +271,12 @@
     var nLabel = root.querySelector('.lab-n');
     var w = { re: 1.4, im: 1.6 };
     var v;
+    var syncControls = coordinateControls(root, [
+      { label: 'w', get: function () { return w; }, set: function (axis, value) { w[axis] = value; } }
+    ], draw);
 
     function draw() {
+      syncControls();
       v = setupCanvas(canvas, 2.7);
       drawAxes(v);
       circle(v, 1, true);
@@ -216,7 +284,7 @@
       if (nLabel) nLabel.textContent = String(n);
       var R = cabs(w), phi = carg(w);
       var r = Math.pow(R, 1 / n);
-      circle(v, r, false, '#b9b2d1');
+      circle(v, r, false, guideColor);
       var ctx = v.ctx;
       // polygon through the roots
       ctx.strokeStyle = '#4a3184';
@@ -267,6 +335,10 @@
     var v;
     var backdrop = null; // offscreen canvas
     var backdropKey = '';
+    var syncControls = coordinateControls(root, [
+      { label: 'c', get: function () { return c; }, set: function (axis, value) { c[axis] = value; } },
+      { label: 'z₀ (ژولیا)', get: function () { return z0; }, set: function (axis, value) { z0[axis] = value; } }
+    ], draw);
 
     function mode() {
       var m = 'm';
@@ -315,6 +387,7 @@
     }
 
     function draw() {
+      syncControls();
       v = setupCanvas(canvas, 2.2);
       computeBackdrop();
       v.ctx.clearRect(0, 0, v.w, v.h);
@@ -370,7 +443,7 @@
       }
     }
 
-    canvas.addEventListener('pointerdown', function (ev) {
+    canvas.addEventListener('click', function (ev) {
       var xy = eventPos(canvas, ev);
       var p = v.toWorld(xy[0], xy[1]);
       if (mode() === 'j') z0 = p; else c = p;

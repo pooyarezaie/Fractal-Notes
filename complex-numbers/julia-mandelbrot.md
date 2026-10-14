@@ -98,7 +98,7 @@ $0 \mapsto -1 \mapsto 0 \mapsto -1 \mapsto \dots$ — مدار در یک چرخ�
 <p class="lab-readout" aria-live="polite" aria-atomic="true"></p>
 <noscript><p class="lab-hint">برای این آزمایش تعاملی، جاوااسکریپت لازم است.</p></noscript>
 </div>
-<script defer src="/assets/js/complex-labs.js"></script>
+<script defer src="{{ '/assets/js/complex-labs.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 و پیوندی ژرف این دو بازی را به هم می‌دوزد — حقیقتی که این‌جا فقط گزارشش می‌کنیم: اگر $c$ درونِ مجموعهٔ ماندلبرو باشد، ژولیای آن یک‌پارچه است؛ و به محض آن‌که $c$ بیرون برود، ژولیای آن می‌شکند و به غباری از نقطه‌های ازهم‌گسیخته بدل می‌شود. ماندلبرو، فهرستِ همهٔ ژولیاهای سالم است.
 

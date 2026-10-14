@@ -25,7 +25,7 @@ last_modified_at: 2026-08-28
 <p class="lab-hint">آزمایشگاه: دکمه‌ها را بزنید و همان دوازده عدد را در سه قاب ببینید. هیچ عددی عوض نمی‌شود؛ فقط محور و قاب.</p>
 <noscript><p class="lab-hint">برای این آزمایش تعاملی، جاوااسکریپت لازم است.</p></noscript>
 </div>
-<script defer src="/assets/js/statistics-labs.js"></script>
+<script defer src="{{ '/assets/js/statistics-labs.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <p class="fig-caption">داده‌ها یکی‌اند؛ قاب نمودار سه داستان متفاوت ساخته است.</p>
 
 <div class="pause" markdown="1">

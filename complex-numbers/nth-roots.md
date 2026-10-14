@@ -77,7 +77,7 @@ $$
 <p class="lab-readout" aria-live="polite" aria-atomic="true"></p>
 <noscript><p class="lab-hint">برای این آزمایش تعاملی، جاوااسکریپت لازم است.</p></noscript>
 </div>
-<script defer src="/assets/js/complex-labs.js"></script>
+<script defer src="{{ '/assets/js/complex-labs.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 ---
 
