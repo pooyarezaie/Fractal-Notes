@@ -1,0 +1,226 @@
+{
+  "base": "isolated local Jekyll/prerender build",
+  "axe": "4.11.0",
+  "playwright": "1.58.2",
+  "scans": [
+    {
+      "route": "/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 44
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/introduction/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 40
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/nth-roots/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 71
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/julia-mandelbrot/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 65
+        }
+      ]
+    },
+    {
+      "route": "/how-to-lie-with-statistics/the-gee-whiz-graph/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "route": "/art-of-problem-solving/how-do-we-know-it-is-solved/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "route": "/authors/pooyarezaie/",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 5
+        }
+      ]
+    },
+    {
+      "route": "/404.html",
+      "width": 1280,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 19
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 56
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/introduction/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 41
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/nth-roots/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 72
+        }
+      ]
+    },
+    {
+      "route": "/complex-numbers/julia-mandelbrot/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 57
+        }
+      ]
+    },
+    {
+      "route": "/how-to-lie-with-statistics/the-gee-whiz-graph/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "route": "/art-of-problem-solving/how-do-we-know-it-is-solved/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 3
+        }
+      ]
+    },
+    {
+      "route": "/authors/pooyarezaie/",
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": 2
+        }
+      ]
+    },
+    {
+      "route": "/404.html",
+      "width": 320,
+      "violations": [],
+      "incomplete": []
+    }
+  ],
+  "interactions": [
+    "Persian page language, RTL prose and isolated LTR math",
+    "First Tab reveals skip link; Enter focuses main",
+    "Closed mobile menu is inert; open menu contains keyboard focus",
+    "Menu breakpoint changes restore access and do not leave hidden focus",
+    "Figure enlargement opens with keyboard, traps focus and restores it",
+    "Wide equations scroll using arrow keys and retain MathML",
+    "Exercise answers open and close with keyboard",
+    "multiply: labeled fields and single-click buttons update the lab",
+    "roots: labeled fields and single-click buttons update the lab",
+    "orbit: labeled fields and single-click buttons update the lab",
+    "Statistics controls expose selection and honor reduced motion",
+    "200% text resize and 320 CSS pixel reflow retain content"
+  ],
+  "baseline": {
+    "url": "https://fractalnotes.com",
+    "scans": 18,
+    "scansWithViolations": 12,
+    "violationTypes": [
+      "link-in-text-block",
+      "scrollable-region-focusable"
+    ]
+  },
+  "manualBrowserVerified": false,
+  "remoteCommitVerified": false,
+  "remoteCIVerified": false
+}

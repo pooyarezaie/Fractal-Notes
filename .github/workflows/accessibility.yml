@@ -1,0 +1,40 @@
+name: Accessibility checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  accessibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run lint
+      - run: make build-prerender
+        env:
+          JEKYLL_ENV: production
+      - run: npm run test:a11y
+        env:
+          A11Y_REPORT: accessibility-results.json
+          A11Y_SCREENSHOTS: accessibility-screenshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: accessibility-results
+          path: |
+            accessibility-results.json
+            accessibility-screenshots/

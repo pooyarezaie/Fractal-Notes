@@ -27,6 +27,7 @@
     --bg: #fcfbfe;
     --line: #e6e3ef;
     --line-strong: #d5cfe6;
+    --control-line: var(--ink-faint);
 }
 
 /* Reserve the viewport scrollbar's gutter permanently, so the scrollbar
@@ -63,35 +64,60 @@ img {
     height: auto;
 }
 
-/* Image zoom / lightbox */
-main img {
-    cursor: zoom-in;
-}
-
-.image-lightbox-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(15, 23, 42, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    box-sizing: border-box;
-    padding: 16px;
-}
-
-.image-lightbox-img {
+/* Figure enlargement uses a keyboard-operable button and native modal dialog. */
+.image-zoom {
+    display: inline-block;
     max-width: 100%;
-    max-height: 100%;
-    display: block;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+    vertical-align: middle;
 }
+.image-zoom img { display: block; }
+.image-lightbox {
+    max-width: calc(100vw - 32px);
+    max-height: calc(100dvh - 32px);
+    box-sizing: border-box;
+    padding: 58px 16px 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: var(--paper);
+    color: var(--ink);
+}
+.image-lightbox::backdrop { background: rgba(15, 23, 42, 0.85); }
+.image-lightbox-img {
+    display: block;
+    max-height: calc(100dvh - 110px);
+    object-fit: contain;
+}
+.image-lightbox-close {
+    position: absolute;
+    inset-block-start: 8px;
+    inset-inline-end: 8px;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+    border: 1px solid var(--control-line);
+    border-radius: 8px;
+    color: var(--ink);
+    background: var(--paper);
+    cursor: pointer;
+}
+body.side-nav-active, body.image-lightbox-active { overflow: hidden; }
+
+.skip-link {
+    position: fixed;
+    inset-block-start: 8px;
+    inset-inline-start: 8px;
+    z-index: 2000;
+    padding: 10px 16px;
+    color: var(--paper);
+    background: var(--accent);
+    transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+.skip-link:focus-visible { outline-color: var(--ink); }
 
 /* Header / logo */
 .site-header {
@@ -355,12 +381,15 @@ a.side-nav-group-title.active {
         border-left: 1px solid var(--line);
         z-index: 1001;
         transform: translateX(100%);
+        visibility: hidden;
+        box-sizing: border-box;
         transition: transform 0.2s ease;
         padding: 16px;
         box-shadow: -4px 0 20px rgba(0, 0, 0, 0.08);
     }
 
     .side-nav-open {
+        visibility: visible;
         transform: translateX(0);
     }
 
@@ -532,6 +561,7 @@ table td {
 
 /* Scrollable display math – KaTeX (faster than MathJax, less first-load jank) */
 .katex-display {
+    box-sizing: border-box;
     display: block;
     overflow-x: auto;
     overflow-y: hidden;
@@ -932,7 +962,7 @@ main .scroll-wrapper table {
 
 @media (prefers-reduced-motion: reduce) {
     * {
-        transition-duration: 0.01ms !important;
+        transition-duration: 0s !important;
         animation-duration: 0.01ms !important;
     }
 }
@@ -1021,7 +1051,7 @@ main .scroll-wrapper table {
     flex-wrap: wrap;
     gap: 6px;
     font-size: 13.5px;
-    color: #777;
+    color: var(--ink-faint);
 }
 
 .series-crumb-sep {
@@ -1239,7 +1269,7 @@ a.note-byline-name:hover {
 
 .series-nav-dir {
     font-size: 13px;
-    color: #777;
+    color: var(--ink-faint);
 }
 
 .series-nav-arrow {
@@ -1459,4 +1489,60 @@ details.reveal-step.reveal-locked {
 
 .lab .lab-readout.fa {
     direction: rtl;
+}
+
+/* Text links need a cue beyond color. Card and navigation links keep their own
+   grouping; inline prose links retain an underline in every interaction state. */
+main p a, main li > a:not([class]), .site-footer-license a {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+main .scroll-table { direction: rtl; text-align: right; }
+.author-grid { grid-template-columns: repeat(auto-fit, minmax(min(255px, 100%), 1fr)); }
+
+.lab-coordinate-controls {
+    min-width: 0;
+    margin: 12px 0;
+    border: 1px solid var(--control-line);
+    border-radius: 8px;
+}
+.lab-coordinate-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+.lab-coordinate-row label { flex: 1 1 100%; }
+.lab-coordinate-row input {
+    min-width: 0;
+    width: 6em;
+    flex: 1 1 5em;
+    box-sizing: border-box;
+    direction: ltr;
+    font: inherit;
+    min-height: 44px;
+    border: 1px solid var(--control-line);
+    border-radius: 4px;
+    background: var(--paper);
+    color: var(--ink);
+}
+.lab-coordinate-row button {
+    min-width: 44px;
+    min-height: 44px;
+    font: inherit;
+    border: 1px solid var(--control-line);
+    border-radius: 4px;
+    background: var(--paper);
+    color: var(--accent);
+    cursor: pointer;
+}
+.lab .lab-controls input[type="range"] { min-height: 24px; }
+.lab .lab-tabs button { min-height: 32px; border-color: var(--control-line); }
+
+@media (prefers-reduced-motion: reduce) {
+    .side-nav, .side-nav-overlay, .home-series-list a,
+    .course-toc-link, .series-nav-link, .author-link, .lab .lab-tabs button {
+        transition: none;
+    }
 }

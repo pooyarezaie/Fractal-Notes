@@ -108,7 +108,12 @@
     var cur = { ymin: MODES[0].ymin, ymax: MODES[0].ymax, w: MODES[0].w, h: MODES[0].h, op: [1, 0, 0] };
     var mode = 0;
     var anim = null;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var reduce = motion.matches;
+    motion.addEventListener('change', function () {
+      reduce = motion.matches;
+      if (reduce && anim) setMode(mode);
+    });
 
     function render(s) {
       var left = CX - s.w / 2, top = CY - s.h / 2, right = left + s.w, bottom = top + s.h;

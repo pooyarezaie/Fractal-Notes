@@ -4,9 +4,12 @@
   "description": "Prerender Jekyll _site with Playwright (KaTeX + JS) for instant first paint.",
   "scripts": {
     "prerender": "node scripts/prerender.js",
-    "serve": "npx serve _site -l 4000"
+    "serve": "npx serve _site -l 4000",
+    "test:a11y": "node scripts/accessibility.test.js",
+    "lint": "node scripts/check-js.js"
   },
   "devDependencies": {
+    "axe-core": "4.11.0",
     "playwright": "^1.49.0",
     "serve": "^14.2.4",
     "serve-handler": "^6.1.5"
